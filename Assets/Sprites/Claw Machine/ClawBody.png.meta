@@ -134,7 +134,7 @@ TextureImporter:
         width: 39
         height: 25
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
@@ -147,11 +147,55 @@ TextureImporter:
       indices: 
       edges: []
       weights: []
+    - serializedVersion: 2
+      name: ClawBody_1
+      rect:
+        serializedVersion: 2
+        x: 3
+        y: 1
+        width: 22
+        height: 29
+      alignment: 9
+      pivot: {x: 0.7, y: 0.85}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 597dc06472afb014b8e9d322aeb928f9
+      internalID: 1346750683
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ClawBody_2
+      rect:
+        serializedVersion: 2
+        x: 35
+        y: 1
+        width: 22
+        height: 29
+      alignment: 9
+      pivot: {x: 0.3, y: 0.85}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 128ffff5d40eb7b469053c68ba0e740c
+      internalID: 1151454549
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
     outline: []
     customData: 
     physicsShape: []
     bones: []
-    spriteID: 
+    spriteID: d42bf9dc56b5a004ebbe8118398a719a
     internalID: 0
     vertices: []
     indices: 
@@ -162,6 +206,8 @@ TextureImporter:
       entries: []
     nameFileIdTable:
       ClawBody_0: 4519657590093106463
+      ClawBody_1: 1346750683
+      ClawBody_2: 1151454549
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
