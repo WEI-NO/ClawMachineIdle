@@ -15,7 +15,7 @@ public class BaseClaw : MonoBehaviour
     private void Awake()
     {
         rb = GetComponent<Rigidbody2D>();
-
+        armController = GetComponentInChildren<ClawArmController>();
         OnAwake();
     }
     private void OnEnable()
@@ -56,6 +56,9 @@ public class BaseClaw : MonoBehaviour
     public float springStrength = 5f;  // Higher = more responsive
     public float damping = 2f;            // Higher = less wobble
     public Vector3 lastPosition;
+
+    [Header("Arm Properties")]
+    public ClawArmController armController;
 
     [Header("Movements")]
     public Vector2 origin;
