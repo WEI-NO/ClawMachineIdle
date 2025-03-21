@@ -3,6 +3,9 @@ using UnityEngine;
 
 public class ClawArmController : MonoBehaviour
 {
+    private const float OpenStatePercentage = 1.0f;
+    private const float CloseStatePercentage = 0.0f;
+
     [Header("Arm Properties")]
     public Transform leftArm;
     public Transform rightArm;
@@ -33,11 +36,11 @@ public class ClawArmController : MonoBehaviour
     // Desc:
     //          Sets the target progress of the arms,
     //          0.0f to 1.0f : 0.0 is closed, 1.0f is fully opened
-    public void SetTargetProgress(float percentage, float strength)
+    public void SetTargetProgress(ArmState state, float strength)
     {
         // Modify strength
         currentStrength = strength;
-        targetPercentage = percentage;
+        targetPercentage = state == ArmState.Open ? OpenStatePercentage : CloseStatePercentage;
     }
 
     // == Arm Progress Update ==

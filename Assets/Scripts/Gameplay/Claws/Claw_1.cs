@@ -12,18 +12,17 @@ public class Claw_1 : BaseClaw
     {
         transform.position = new Vector3(transform.position.x, initialY, transform.position.z);
 
+        #region Temporary Controls (PC)
         if (Input.GetKeyDown(KeyCode.Q))
         {
-            armController.SetTargetProgress(1.0f, 5.0f);
+            armController.SetTargetProgress(ArmState.Open, armOpenStrength);
         }
-
         if (Input.GetKeyDown(KeyCode.E))
         {
-            armController.SetTargetProgress(0, 10.0f);
+            armController.SetTargetProgress(ArmState.Close, armCloseStrength);
         }
 
-
-            if (Input.GetKey(KeyCode.A))
+        if (Input.GetKey(KeyCode.A))
         {
             XInput(false);
         }
@@ -31,6 +30,8 @@ public class Claw_1 : BaseClaw
         { 
             XInput(true); 
         }
+
+        #endregion temporary controls
     }
 
     #region Movements

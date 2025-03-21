@@ -3,6 +3,10 @@ using UnityEngine;
 [RequireComponent (typeof(Rigidbody2D))]
 public class BaseClaw : MonoBehaviour
 {
+    // Controls the magnitude of the x input (-1.0f - 1.0f by default)
+    public const float MaxPositiveInput = 1.0f;
+    public const float MaxNegativeInput = -1.0f;
+
     #region Base Class
     protected virtual void OnAwake() { }
     protected virtual void OnEnabled() { }
@@ -28,6 +32,7 @@ public class BaseClaw : MonoBehaviour
     }
     private void Update()
     {
+        xInputActive = false;
         XInputDissipate();
         OnUpdate();
     }
@@ -50,20 +55,22 @@ public class BaseClaw : MonoBehaviour
     [Header("Components")]
     public Rigidbody2D rb;
 
-    [Header("Claw Properties")]
-    private float rotationVelocity = 0f;
-    public float rotationStrength = 100.0f;
-    public float springStrength = 5f;  // Higher = more responsive
-    public float damping = 2f;            // Higher = less wobble
-    public Vector3 lastPosition;
-
     [Header("Arm Properties")]
     public ClawArmController armController;
+    public float armOpenStrength = 5.0f;
+    public float armCloseStrength = 5.0f;
+
+    [Header("Dangle Properties")]
+    public float maxDangleAngle = 50.0f;
+    public float dangleStrength = 10.0f;
+    public float dangleDissipateStrength = 50.0f; // When x input is 0, it uses a different strength
+    private float targetDangleAngle;
 
     [Header("Movements")]
     public Vector2 origin;
     public Vector2 xBoundary = new Vector2(-1, 1);
     public float xInput;
+    public bool xInputActive;
     public float xInputDissipateRate = 2.0f;
     public float xInputSensitivity = 1.0f;
     public float moveSpeed = 5.0f;
@@ -78,8 +85,9 @@ public class BaseClaw : MonoBehaviour
     //          magnitude : magnitude of the movement (for joystick control)
     public void XInput(bool right, float magnitude = 1)
     {
+        xInputActive = true;
         xInput += magnitude * xInputSensitivity * Time.deltaTime * (right ? 1.0f : -1.0f);
-        xInput = Mathf.Clamp(xInput, -1.0f, 1.0f);
+        xInput = Mathf.Clamp(xInput, MaxNegativeInput, MaxPositiveInput);
     }
 
     // == X Input Dissipate ==
@@ -118,25 +126,16 @@ public class BaseClaw : MonoBehaviour
     //          Simulates dangling effects
     private void DangleUpdate()
     {
-        // Convert current Z rotation to a signed angle (-180 to 180)
-        float currentAngle = transform.eulerAngles.z;
-        if (currentAngle > 180f) currentAngle -= 360f;  // Convert to -180 to 180 range
+        float moveProgress = Mathf.Abs(xInput) / MaxPositiveInput; // Division is neglectable if MaxInput is always 1.0f
+        float direction = xInput < 0 ? -1.0f : xInput > 0 ? 1.0f : 0.0f; // input > 0 = 1.0f, input < 0 = -1.0f, otherwise = 0.0f
 
-        // Calculate target angle based on movement
-        float targetAngle = Mathf.Clamp((transform.position.x - lastPosition.x) * (-1.0f * rotationStrength), -90f, 90f);
-        // Apply spring force
-        float force = (targetAngle - currentAngle) * springStrength;
-        rotationVelocity += force * Time.fixedDeltaTime;
+        float newTargetDangleAngle = moveProgress * maxDangleAngle * direction;
+        if (!xInputActive) newTargetDangleAngle = 0.0f; // Force target angle to 0 if no input is held.
 
-        // Apply damping to prevent infinite wobbling
-        rotationVelocity *= Mathf.Exp(-damping * Time.fixedDeltaTime);
+        float alpha = (xInputActive ? dangleStrength : dangleDissipateStrength) * Time.fixedDeltaTime;
+        targetDangleAngle = Mathf.Lerp(targetDangleAngle, newTargetDangleAngle, alpha);
 
-        // Apply the new rotation
-        float newAngle = currentAngle + rotationVelocity;
-        transform.rotation = Quaternion.Euler(0, 0, newAngle);
-
-        // Store the last position for velocity calculations
-        lastPosition = transform.position;
+        transform.localEulerAngles = new Vector3(0, 0, targetDangleAngle) * -1.0f; // Multiply by -1.0f to reverse 
     }
 
     #endregion movement
