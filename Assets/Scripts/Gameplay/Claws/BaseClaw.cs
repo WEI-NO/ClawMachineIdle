@@ -6,6 +6,8 @@ public class BaseClaw : MonoBehaviour
     // Controls the magnitude of the x input (-1.0f - 1.0f by default)
     public const float MaxPositiveInput = 1.0f;
     public const float MaxNegativeInput = -1.0f;
+    // Movement epsilon value
+    public const float MovementEpsilon = 0.0001f;
 
     #region Base Class
     protected virtual void OnAwake() { }
@@ -70,10 +72,13 @@ public class BaseClaw : MonoBehaviour
     public Vector2 origin;
     public Vector2 xBoundary = new Vector2(-1, 1);
     public float xInput;
-    public bool xInputActive;
     public float xInputDissipateRate = 2.0f;
     public float xInputSensitivity = 1.0f;
     public float moveSpeed = 5.0f;
+    private Vector2 lastPosition;
+    [Header("Developement View - Movements")]
+    public bool xInputActive;
+    public bool clawIsMoving = false;
 
     #region Input
 
@@ -119,6 +124,9 @@ public class BaseClaw : MonoBehaviour
 
         // Apply clamped position
         rb.position = clampedPosition;
+
+        clawIsMoving = (rb.position - lastPosition).sqrMagnitude > MovementEpsilon;
+        lastPosition = rb.position;
     }
 
     // == Dangle Update ==
@@ -130,7 +138,8 @@ public class BaseClaw : MonoBehaviour
         float direction = xInput < 0 ? -1.0f : xInput > 0 ? 1.0f : 0.0f; // input > 0 = 1.0f, input < 0 = -1.0f, otherwise = 0.0f
 
         float newTargetDangleAngle = moveProgress * maxDangleAngle * direction;
-        if (!xInputActive) newTargetDangleAngle = 0.0f; // Force target angle to 0 if no input is held.
+        if (!xInputActive || !clawIsMoving) 
+            newTargetDangleAngle = 0.0f; // Force target angle to 0 if no input is held OR not moving
 
         float alpha = (xInputActive ? dangleStrength : dangleDissipateStrength) * Time.fixedDeltaTime;
         targetDangleAngle = Mathf.Lerp(targetDangleAngle, newTargetDangleAngle, alpha);
