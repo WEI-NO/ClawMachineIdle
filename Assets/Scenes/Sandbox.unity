@@ -283,7 +283,7 @@ Transform:
   m_GameObject: {fileID: 548756951}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -1.51, y: 3.855, z: 0}
+  m_LocalPosition: {x: -1.51, y: 4, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -303,19 +303,25 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   rb: {fileID: 0}
+  origin: {x: 0, y: 4}
   armController: {fileID: 0}
   armOpenStrength: 5
   armCloseStrength: 5
   maxDangleAngle: 25
   dangleStrength: 10
   dangleDissipateStrength: 7.5
-  origin: {x: 0, y: 0}
-  xBoundary: {x: -1.5, y: 1.5}
   xInput: 0
-  xInputActive: 0
   xInputDissipateRate: 2
   xInputSensitivity: 10
+  xInputActive: 0
+  xBoundary: {x: -1.5, y: 1.5}
   moveSpeed: 100
+  clawIsMoving: 0
+  dropLength: 6
+  dropDuration: 2
+  dropRetreatDelay: 0.5
+  armExpandPercentage: 0.05
+  armCloseDelay: 0.1
 --- !u!50 &548756954
 Rigidbody2D:
   serializedVersion: 5

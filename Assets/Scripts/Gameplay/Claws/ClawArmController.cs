@@ -15,6 +15,8 @@ public class ClawArmController : MonoBehaviour
     private float currentStrength;
     private float targetPercentage;
 
+    private ArmState currentState;
+
     private void Start()
     {
         if (leftArm == null || rightArm == null)
@@ -22,6 +24,8 @@ public class ClawArmController : MonoBehaviour
             Debug.LogWarning($"{gameObject.name}: Either left or right arm is unassigned/null");
             Destroy(this);
         }
+
+        SetTargetProgress(ArmState.Close, 5.0f, force:true);
     }
 
     private void FixedUpdate()
@@ -36,11 +40,14 @@ public class ClawArmController : MonoBehaviour
     // Desc:
     //          Sets the target progress of the arms,
     //          0.0f to 1.0f : 0.0 is closed, 1.0f is fully opened
-    public void SetTargetProgress(ArmState state, float strength)
+    public void SetTargetProgress(ArmState state, float strength, bool force = false)
     {
+        if (currentState == state && !force) return;
+
         // Modify strength
         currentStrength = strength;
         targetPercentage = state == ArmState.Open ? OpenStatePercentage : CloseStatePercentage;
+        currentState = state;
     }
 
     // == Arm Progress Update ==

@@ -2,16 +2,13 @@ using UnityEngine;
 
 public class Claw_1 : BaseClaw
 {
-    float initialY;
     protected override void OnStart()
     {
-        initialY = transform.position.y;
+
     }
 
     protected override void OnUpdate()
     {
-        transform.position = new Vector3(transform.position.x, initialY, transform.position.z);
-
         #region Temporary Controls (PC)
         if (Input.GetKeyDown(KeyCode.Q))
         {
@@ -29,6 +26,11 @@ public class Claw_1 : BaseClaw
         if (Input.GetKey(KeyCode.D))
         { 
             XInput(true); 
+        }
+
+        if (Input.GetKeyDown(KeyCode.Space))
+        {
+            StartGrabSequence();
         }
 
         #endregion temporary controls
