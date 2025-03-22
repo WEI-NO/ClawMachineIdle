@@ -1,10 +1,13 @@
 fileFormatVersion: 2
-guid: 427fb0624c550794882e3658551feab6
+guid: 9a2caf48dc4675e499bf901b7bfbfad2
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: 4519657590093106463
-    second: ClawBody_0
+      213: -5344359744104623075
+    second: EggPrizes_0
+  - first:
+      213: 9080076636406384814
+    second: EggPrizes_1
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -75,7 +78,7 @@ TextureImporter:
     maxTextureSize: 2048
     resizeAlgorithm: 0
     textureFormat: -1
-    textureCompression: 2
+    textureCompression: 0
     compressionQuality: 50
     crunchedCompression: 0
     allowsAlphaSplitting: 0
@@ -126,90 +129,45 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: ClawBody_0
+      name: EggPrizes_0
       rect:
         serializedVersion: 2
-        x: 0
-        y: 37
-        width: 39
-        height: 25
+        x: 4
+        y: 34
+        width: 25
+        height: 29
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
       physicsShape: []
-      tessellationDetail: 0
+      tessellationDetail: -1
       bones: []
-      spriteID: f1dc5ebc1ac09be30800000000000000
-      internalID: 4519657590093106463
+      spriteID: d141fbcd02505d5b0800000000000000
+      internalID: -5344359744104623075
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: ClawBody_1
+      name: EggPrizes_1
       rect:
         serializedVersion: 2
-        x: 3
-        y: 1
-        width: 22
+        x: 36
+        y: 34
+        width: 25
         height: 29
-      alignment: 9
-      pivot: {x: 0.7, y: 0.85}
+      alignment: 0
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
-      physicsShape:
-      - - {x: 4, y: -9.5}
-        - {x: 10, y: -3.5}
-        - {x: 10, y: 8.5}
-        - {x: 5, y: 13.5}
-        - {x: 1, y: 10.5}
-        - {x: 3, y: 2.5}
-        - {x: 1, y: -3.5}
-        - {x: -7, y: -3.5}
-        - {x: -10, y: -6.5}
-        - {x: -10, y: -10.5}
-        - {x: -4, y: -13.5}
-      tessellationDetail: 0
+      physicsShape: []
+      tessellationDetail: -1
       bones: []
-      spriteID: 597dc06472afb014b8e9d322aeb928f9
-      internalID: 1346750683
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: ClawBody_2
-      rect:
-        serializedVersion: 2
-        x: 35
-        y: 1
-        width: 22
-        height: 29
-      alignment: 9
-      pivot: {x: 0.3, y: 0.85}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape:
-      - - {x: 10, y: -10.5}
-        - {x: 10, y: -6.5}
-        - {x: 7, y: -3.5}
-        - {x: -1, y: -3.5}
-        - {x: -3, y: 2.5}
-        - {x: -1, y: 10.5}
-        - {x: -6, y: 13.5}
-        - {x: -10, y: 8.5}
-        - {x: -10, y: -3.5}
-        - {x: -5, y: -9.5}
-        - {x: 3, y: -13.5}
-        - {x: 7, y: -13.5}
-      tessellationDetail: 0
-      bones: []
-      spriteID: 128ffff5d40eb7b469053c68ba0e740c
-      internalID: 1151454549
+      spriteID: ea8835ea799e20e70800000000000000
+      internalID: 9080076636406384814
       vertices: []
       indices: 
       edges: []
@@ -218,7 +176,7 @@ TextureImporter:
     customData: 
     physicsShape: []
     bones: []
-    spriteID: d42bf9dc56b5a004ebbe8118398a719a
+    spriteID: 
     internalID: 0
     vertices: []
     indices: 
@@ -228,9 +186,8 @@ TextureImporter:
     spriteCustomMetadata:
       entries: []
     nameFileIdTable:
-      ClawBody_0: 4519657590093106463
-      ClawBody_1: 1346750683
-      ClawBody_2: 1151454549
+      EggPrizes_0: -5344359744104623075
+      EggPrizes_1: 9080076636406384814
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
