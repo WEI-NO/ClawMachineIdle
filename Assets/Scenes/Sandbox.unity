@@ -1116,11 +1116,11 @@ MonoBehaviour:
   rb: {fileID: 0}
   origin: {x: 0, y: 4}
   armController: {fileID: 0}
-  armOpenStrength: 8
+  armOpenStrength: 5
   armCloseStrength: 5
-  maxDangleAngle: 25
+  maxDangleAngle: 50
   dangleStrength: 10
-  dangleDissipateStrength: 7.5
+  dangleDissipateStrength: 50
   xInput: 0
   xInputDissipateRate: 3
   xInputSensitivity: 10
@@ -1128,12 +1128,12 @@ MonoBehaviour:
   xBoundary: {x: -1.5, y: 1.5}
   moveSpeed: 100
   clawIsMoving: 0
-  maxDropLength: 7
+  maxDropLength: 4.5
   dropDuration: 1.2
   returnDuration: 0.8
   dropRetreatDelay: 0.5
-  armExpandPercentage: 0.05
-  armCloseDelay: 0.1
+  armExpandPercentage: 0.2
+  armCloseDelay: 0.8
   prizeLayer:
     serializedVersion: 2
     m_Bits: 64
