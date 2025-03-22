@@ -6,9 +6,13 @@ public class ClawArmController : MonoBehaviour
     private const float OpenStatePercentage = 1.0f;
     private const float CloseStatePercentage = 0.0f;
 
+    [Header("References")]
+    public BaseClaw parentClaw;
+
     [Header("Arm Properties")]
     public Transform leftArm;
     public Transform rightArm;
+    public Transform prizeHolder;
     public float minimumRotation = 0f;
     public float maximumRotation = 80f;
 
@@ -16,6 +20,14 @@ public class ClawArmController : MonoBehaviour
     private float targetPercentage;
 
     private ArmState currentState;
+
+    [Header("Prize Properties")]
+    public GameObject grabbedPrize = null;
+
+    private void Awake()
+    {
+        parentClaw = GetComponentInParent<BaseClaw>();
+    }
 
     private void Start()
     {
@@ -36,10 +48,14 @@ public class ClawArmController : MonoBehaviour
 
     #region Arm Controls
 
-    // == Set Target Progress ==
-    // Desc:
-    //          Sets the target progress of the arms,
-    //          0.0f to 1.0f : 0.0 is closed, 1.0f is fully opened
+    /// <summary>
+    /// 
+    ///     Sets the target state for the arms
+    /// </summary>
+    /// <param name="state"></param>
+    /// <param name="strength">How strong it performs the action</param>
+    /// <param name="force"></param>
+
     public void SetTargetProgress(ArmState state, float strength, bool force = false)
     {
         if (currentState == state && !force) return;
@@ -50,10 +66,10 @@ public class ClawArmController : MonoBehaviour
         currentState = state;
     }
 
-    // == Arm Progress Update ==
-    // Desc:
-    //          Updates the arms rotation to the target percentage.
-    //          Arm Index: 0 = left, 1 = right
+    /// <summary>
+    /// Updates the arm progress, called in FixedUpdate()
+    /// </summary>
+    /// <param name="armIndex"></param>
     private void ArmProgressUpdate(int armIndex)
     {
         if (armIndex < 0 || armIndex > 1) return;
@@ -73,4 +89,32 @@ public class ClawArmController : MonoBehaviour
     }
 
     #endregion arm controls
+
+    #region Prize Control
+
+    private void OnPrizeDetected(GameObject prize)
+    {
+        if (grabbedPrize != null) return;
+
+        grabbedPrize = prize;
+        grabbedPrize.transform.SetParent(prizeHolder);
+        var rb = grabbedPrize.GetComponent<Rigidbody2D>();
+        rb.gravityScale = 0.0f;
+
+        grabbedPrize.transform.position = prizeHolder.position;
+    }
+
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        if (collision.gameObject.layer == LayerMask.NameToLayer("Prizes")) // if it is a prize
+        {
+            if (grabbedPrize == null)
+            {
+                grabbedPrize = collision.gameObject;
+                OnPrizeDetected(grabbedPrize);
+            }
+        }
+    }
+
+    #endregion prize control
 }

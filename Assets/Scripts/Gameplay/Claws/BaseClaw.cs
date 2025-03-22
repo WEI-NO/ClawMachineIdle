@@ -39,6 +39,7 @@ public class BaseClaw : MonoBehaviour
     {
         xInputActive = false;
         XInputDissipate();
+        PrizeDetection(out float d);
         OnUpdate();
     }
     private void FixedUpdate()
@@ -95,20 +96,28 @@ public class BaseClaw : MonoBehaviour
     public bool clawIsMoving = false;
 
     [Header("Grab Properties")]
-    public float dropLength = 10.0f; // The length the claw drops
+    public float maxDropLength = 10.0f; // The length the claw drops
     public float dropDuration = 2.0f;
+    public float returnDuration = 1.0f;
     public float dropRetreatDelay = 0.5f; // Delay in seconds which the claw retreat to original position (After armCloseDelay)
     public float armExpandPercentage = 0.2f; // At what point in Grab Sequence do the arm expand
     public float armCloseDelay = 0.8f; // Delay in seconds which the arm closes
 
+    [Header("Prize Detection Properties")]
+    public LayerMask prizeLayer;
+    public Transform midRaycastPoint;
+    public float stopDistance;
+    public GameObject currentPrize;
+
+
     #region Input
 
-    // == X Input ==
-    // Desc:
-    //          Called from other script to control the x input.
-    // Params:
-    //          right : if move right if not left
-    //          magnitude : magnitude of the movement (for joystick control)
+    /// <summary>
+    /// Call to determine whether left or right input is held. 
+    /// With customizable strength/magnitude
+    /// </summary>
+    /// <param name="right">True: right, False: Left</param>
+    /// <param name="magnitude">Strength the input has</param>
     public void XInput(bool right, float magnitude = 1)
     {
         // When movement is locked
@@ -124,9 +133,9 @@ public class BaseClaw : MonoBehaviour
         xInput = Mathf.Clamp(xInput, MaxNegativeInput, MaxPositiveInput);
     }
 
-    // == X Input Dissipate ==
-    // Desc:
-    //          Makes sure XInput dissipates to 0
+    /// <summary>
+    /// Dissipates the xinput to 0.0f controlled by the xInputDissipateRate
+    /// </summary>
     private void XInputDissipate()
     {
         xInput = Mathf.MoveTowards(xInput, 0.0f, xInputDissipateRate * Time.deltaTime);
@@ -136,31 +145,30 @@ public class BaseClaw : MonoBehaviour
 
     #region Movement
 
-    // == Movement Update ==
-    // Desc:
-    //          Updates the x movement based on xInput
+    /// <summary>
+    /// Updates movement based n xInput. Called in FixedUpdate().
+    /// </summary>
     private void MovementUpdate()
     {
         // Calculate movement
         float xVelocity = xInput * moveSpeed * Time.fixedDeltaTime;
 
         // Apply movement
-        rb.linearVelocityX = xVelocity;
+        rb.linearVelocity = new Vector2(xVelocity, 0.0f);
 
         // Clamp position within boundaries
-        Vector2 clampedPosition = rb.position;
+        Vector2 clampedPosition = transform.position;
         clampedPosition.x = Mathf.Clamp(clampedPosition.x, origin.x + xBoundary.x, origin.x + xBoundary.y);
-
         // Apply clamped position
-        rb.position = clampedPosition;
+        transform.position = clampedPosition;
 
         clawIsMoving = (rb.position - lastPosition).sqrMagnitude > MovementEpsilon;
         lastPosition = rb.position;
     }
 
-    // == Dangle Update ==
-    // Desc:
-    //          Simulates dangling effects
+    /// <summary>
+    /// Simulates dangle effects and is based on the x movement of the claw. Called in FixedUpdate()
+    /// </summary>
     private void DangleUpdate()
     {
         float moveProgress = Mathf.Abs(xInput) / MaxPositiveInput; // Division is neglectable if MaxInput is always 1.0f
@@ -176,9 +184,10 @@ public class BaseClaw : MonoBehaviour
         transform.localEulerAngles = new Vector3(0, 0, targetDangleAngle) * -1.0f; // Multiply by -1.0f to reverse 
     }
 
-    // == Start Grab Sequence ==
-    // Desc:
-    //          Calls the grab sequence coroutine to handle dropping sequence.
+    /// <summary>
+    /// Starts the grab sequence coroutine.
+    /// Grab sequence is controlled by modifiable variables.
+    /// </summary>
     public void StartGrabSequence()
     {
         if (movementLocked) return;
@@ -186,10 +195,23 @@ public class BaseClaw : MonoBehaviour
         StartCoroutine(GrabSequence());
     }
 
+    /// <summary>
+    /// The grab sequence
+    /// </summary>
+    /// <returns></returns>
     private IEnumerator GrabSequence()
     {
         LockMovement(); // Lock Movement
         float elapsedTime = 0.0f;
+
+        float dropLength;
+        if (PrizeDetection(out float dist))
+        {
+            dropLength = dist - stopDistance;
+        } else
+        {
+            dropLength = maxDropLength;
+        }
         float targetYPosition = origin.y - dropLength;
         float startYPosition = transform.position.y;
 
@@ -220,9 +242,9 @@ public class BaseClaw : MonoBehaviour
 
 
         // Drop down
-        while (elapsedTime < dropDuration)
+        while (elapsedTime < returnDuration)
         {
-            float progress = elapsedTime / dropDuration;
+            float progress = elapsedTime / returnDuration;
             float currentTargetYPosition = Mathf.SmoothStep(startYPosition, targetYPosition, progress);
             transform.position = Vector3Extension.ValueSwap(transform.position, iVector3.y, currentTargetYPosition);
             elapsedTime += Time.deltaTime;
@@ -236,17 +258,18 @@ public class BaseClaw : MonoBehaviour
 
     #region State
 
-    // == Lock Movement ==
-    // Desc:
-    //          Locks the movement
+    /// <summary>
+    /// Locks the movment by incrementing the movement lock counter.
+    /// </summary>
     public void LockMovement()
     {
         movementLockCounter++;
     }
 
-    // == Unlock Movement ==
-    // Desc:
-    //          Unlocks the movement
+    /// <summary>
+    /// Unlocked the movement by decrementing the movement lock counter.
+    /// Ensures movement lock counter doesn't go below 0.
+    /// </summary>
     public void UnlockMovement()
     {
         movementLockCounter--;
@@ -258,4 +281,23 @@ public class BaseClaw : MonoBehaviour
     }
 
     #endregion state
+
+    #region Prize
+
+    public bool PrizeDetection(out float dist)
+    {
+        Vector2 raycastPoint = midRaycastPoint != null ? midRaycastPoint.position : transform.position;
+        RaycastHit2D hit = Physics2D.Raycast(raycastPoint, Vector2.down, Mathf.Infinity, prizeLayer);
+        if (hit.transform)
+        {
+            currentPrize = hit.transform.gameObject;
+            dist = Vector2.Distance(raycastPoint, hit.point);
+            return true;
+        }
+        currentPrize = null;
+        dist = 0.0f;
+        return false;
+    }
+
+    #endregion prize
 }
