@@ -1118,9 +1118,9 @@ MonoBehaviour:
   armController: {fileID: 0}
   armOpenStrength: 5
   armCloseStrength: 5
-  maxDangleAngle: 50
+  maxDangleAngle: 20
   dangleStrength: 10
-  dangleDissipateStrength: 50
+  dangleDissipateStrength: 10
   xInput: 0
   xInputDissipateRate: 3
   xInputSensitivity: 10
