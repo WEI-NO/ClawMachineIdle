@@ -22,7 +22,7 @@ public class ClawArmController : MonoBehaviour
     private ArmState currentState;
 
     [Header("Prize Properties")]
-    public GameObject grabbedPrize = null;
+    public BasePrize grabbedPrize = null;
 
     private void Awake()
     {
@@ -92,14 +92,13 @@ public class ClawArmController : MonoBehaviour
 
     #region Prize Control
 
-    private void OnPrizeDetected(GameObject prize)
+    private void OnPrizeDetected(BasePrize prize)
     {
         if (grabbedPrize != null) return;
 
         grabbedPrize = prize;
         grabbedPrize.transform.SetParent(prizeHolder);
-        var rb = grabbedPrize.GetComponent<Rigidbody2D>();
-        rb.gravityScale = 0.0f;
+        prize.ActivateGrabbedState();
 
         grabbedPrize.transform.position = prizeHolder.position;
     }
@@ -110,8 +109,8 @@ public class ClawArmController : MonoBehaviour
         {
             if (grabbedPrize == null)
             {
-                grabbedPrize = collision.gameObject;
-                OnPrizeDetected(grabbedPrize);
+                BasePrize prize = collision.GetComponent<BasePrize>();
+                OnPrizeDetected(prize);
             }
         }
     }
