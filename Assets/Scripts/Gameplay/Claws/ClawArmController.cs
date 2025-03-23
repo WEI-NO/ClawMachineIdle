@@ -1,3 +1,5 @@
+using System.Collections;
+using System.Runtime.CompilerServices;
 using UnityEditor.Callbacks;
 using UnityEngine;
 
@@ -23,10 +25,15 @@ public class ClawArmController : MonoBehaviour
 
     [Header("Prize Properties")]
     public BasePrize grabbedPrize = null;
+    public float prizeGrabDelay = 0.5f;
 
     private void Awake()
     {
         parentClaw = GetComponentInParent<BaseClaw>();
+        if (parentClaw)
+        {
+            parentClaw.OnClawUp += ClaimPrize;
+        }
     }
 
     private void Start()
@@ -92,26 +99,37 @@ public class ClawArmController : MonoBehaviour
 
     #region Prize Control
 
-    private void OnPrizeDetected(BasePrize prize)
+    private IEnumerator OnPrizeDetected(BasePrize prize)
     {
-        if (grabbedPrize != null) return;
+        if (grabbedPrize != null) yield break;
 
         grabbedPrize = prize;
-        grabbedPrize.transform.SetParent(prizeHolder);
         prize.ActivateGrabbedState();
-
-        grabbedPrize.transform.position = prizeHolder.position;
+        yield return new WaitForSeconds(prizeGrabDelay);
+        prize.SetTarget(parentClaw.midRaycastPoint);
+        grabbedPrize.transform.SetParent(prizeHolder);
+        targetPercentage = 0.2f;
+        
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
         if (collision.gameObject.layer == LayerMask.NameToLayer("Prizes")) // if it is a prize
         {
-            if (grabbedPrize == null)
+            if (grabbedPrize == null && parentClaw.currentPrize == collision.gameObject)
             {
                 BasePrize prize = collision.GetComponent<BasePrize>();
-                OnPrizeDetected(prize);
+                StartCoroutine(OnPrizeDetected(prize));
             }
+        }
+    }
+
+    private void ClaimPrize()
+    {
+        if (grabbedPrize)
+        {
+            Destroy(grabbedPrize.gameObject);
+            grabbedPrize = null;
         }
     }
 

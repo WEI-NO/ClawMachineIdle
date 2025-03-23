@@ -33,6 +33,7 @@ public class BasePrize : MonoBehaviour
     }
     private void FixedUpdate()
     {
+        FollowTargetUpdate();
         OnFixedUpdate();
     }
     private void OnDisable()
@@ -49,7 +50,19 @@ public class BasePrize : MonoBehaviour
     public Rigidbody2D rb;
     public Collider2D col;
 
+    [Header("Control")]
+    public Transform followTarget;
+    public float followStrength = 10.0f;
+
     #region Controls
+
+    private void FollowTargetUpdate()
+    {
+        if (followTarget)
+        {
+            transform.position = Vector3.Lerp(transform.position, followTarget.transform.position, Time.fixedDeltaTime * followStrength);
+        }
+    }
 
     public void ActivateGrabbedState()
     {
@@ -58,10 +71,15 @@ public class BasePrize : MonoBehaviour
             rb.gravityScale = 0.0f;
         }
 
-        if (col)
-        {
-            col.isTrigger = true;
-        }
+        //if (col)
+        //{
+        //    col.isTrigger = true;
+        //}
+    }
+
+    public void SetTarget(Transform target)
+    {
+        followTarget = target;
     }
 
     #endregion controls

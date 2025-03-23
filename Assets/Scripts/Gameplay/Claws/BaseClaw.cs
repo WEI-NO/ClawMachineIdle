@@ -2,6 +2,7 @@ using System.Collections;
 using UnityEngine;
 using CustomLibrary.Math.Vector;
 using CustomLibrary.Math;
+using System;
 
 [RequireComponent (typeof(Rigidbody2D))]
 public class BaseClaw : MonoBehaviour
@@ -57,6 +58,8 @@ public class BaseClaw : MonoBehaviour
         OnDestroyed();
     }
     #endregion base class
+
+    public Action OnClawUp; // Called at the end of grab sequence.
 
     [Header("Components")]
     public Rigidbody2D rb;
@@ -250,6 +253,8 @@ public class BaseClaw : MonoBehaviour
             elapsedTime += Time.deltaTime;
             yield return null;
         }
+
+        OnClawUp?.Invoke();
 
         UnlockMovement();
     }
