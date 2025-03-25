@@ -69,8 +69,8 @@ public class BasePrize : MonoBehaviour
         if (rb)
         {
             rb.gravityScale = 0.0f;
+            rb.mass = 100f;
         }
-
         //if (col)
         //{
         //    col.isTrigger = true;

@@ -38,7 +38,7 @@ public class BaseClaw : MonoBehaviour
     }
     private void Update()
     {
-        xInputActive = false;
+        xInputActive = Mathf.Abs(xInput) > 0;
         XInputDissipate();
         PrizeDetection(out float d);
         OnUpdate();
@@ -121,7 +121,7 @@ public class BaseClaw : MonoBehaviour
     /// </summary>
     /// <param name="right">True: right, False: Left</param>
     /// <param name="magnitude">Strength the input has</param>
-    public void XInput(bool right, float magnitude = 1)
+    public void XInput(bool right, float magnitude = 1, bool absolute = false)
     {
         // When movement is locked
         if (movementLocked)
@@ -130,9 +130,14 @@ public class BaseClaw : MonoBehaviour
             xInput = 0;
             return;
         }
-
-        xInputActive = true;
-        xInput += magnitude * xInputSensitivity * Time.deltaTime * (right ? 1.0f : -1.0f);
+        float input = magnitude * xInputSensitivity * Time.deltaTime * (right ? 1.0f : -1.0f);
+        if (absolute)
+        {
+            xInput = input;
+        } else
+        {
+            xInput += input;
+        }
         xInput = Mathf.Clamp(xInput, MaxNegativeInput, MaxPositiveInput);
     }
 

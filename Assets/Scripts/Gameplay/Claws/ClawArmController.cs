@@ -61,7 +61,7 @@ public class ClawArmController : MonoBehaviour
     /// </summary>
     /// <param name="state"></param>
     /// <param name="strength">How strong it performs the action</param>
-    /// <param name="force"></param>
+    /// <param name="force">Default to false: Set it to true to override if the currentState == state</param>
 
     public void SetTargetProgress(ArmState state, float strength, bool force = false)
     {
@@ -131,6 +131,7 @@ public class ClawArmController : MonoBehaviour
             Destroy(grabbedPrize.gameObject);
             grabbedPrize = null;
         }
+        SetTargetProgress(ArmState.Close, 5.0f);
     }
 
     #endregion prize control
