@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Runtime.CompilerServices;
+using Unity.Burst.Intrinsics;
 using UnityEditor.Callbacks;
 using UnityEngine;
 
@@ -32,7 +33,7 @@ public class ClawArmController : MonoBehaviour
         parentClaw = GetComponentInParent<BaseClaw>();
         if (parentClaw)
         {
-            parentClaw.OnClawUp += ClaimPrize;
+            //parentClaw.OnClawUp += ClaimPrize;
         }
     }
 
@@ -92,7 +93,8 @@ public class ClawArmController : MonoBehaviour
         float t = Time.fixedDeltaTime * currentStrength;
         float newzRot = Mathf.Lerp(zRot, targetzRot, t);
 
-        armTrans.localEulerAngles = new Vector3(armEulerAngles.x, armEulerAngles.y, newzRot);
+        armTrans.GetComponent<Rigidbody2D>().MoveRotation(newzRot);
+        //armTrans.localEulerAngles = new Vector3(armEulerAngles.x, armEulerAngles.y, newzRot);
     }
 
     #endregion arm controls
@@ -103,25 +105,25 @@ public class ClawArmController : MonoBehaviour
     {
         if (grabbedPrize != null) yield break;
 
-        grabbedPrize = prize;
-        prize.ActivateGrabbedState();
-        yield return new WaitForSeconds(prizeGrabDelay);
-        prize.SetTarget(parentClaw.midRaycastPoint);
-        grabbedPrize.transform.SetParent(prizeHolder);
-        targetPercentage = 0.2f;
+        //grabbedPrize = prize;
+        //prize.ActivateGrabbedState();
+        //yield return new WaitForSeconds(prizeGrabDelay);
+        //prize.SetTarget(parentClaw.midRaycastPoint);
+        //grabbedPrize.transform.SetParent(prizeHolder);
+        //targetPercentage = 0.2f;
         
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (collision.gameObject.layer == LayerMask.NameToLayer("Prizes")) // if it is a prize
-        {
-            if (grabbedPrize == null && parentClaw.currentPrize == collision.gameObject)
-            {
-                BasePrize prize = collision.GetComponent<BasePrize>();
-                StartCoroutine(OnPrizeDetected(prize));
-            }
-        }
+        //if (collision.gameObject.layer == LayerMask.NameToLayer("Prizes")) // if it is a prize
+        //{
+        //    if (grabbedPrize == null && parentClaw.currentPrize == collision.gameObject)
+        //    {
+        //        BasePrize prize = collision.GetComponent<BasePrize>();
+        //        StartCoroutine(OnPrizeDetected(prize));
+        //    }
+        //}
     }
 
     private void ClaimPrize()

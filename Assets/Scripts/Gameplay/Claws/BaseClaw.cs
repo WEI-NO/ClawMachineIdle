@@ -38,10 +38,10 @@ public class BaseClaw : MonoBehaviour
     }
     private void Update()
     {
+        //PrizeDetection(out float d);
+        OnUpdate();
         xInputActive = Mathf.Abs(xInput) > 0;
         XInputDissipate();
-        PrizeDetection(out float d);
-        OnUpdate();
     }
     private void FixedUpdate()
     {
@@ -110,7 +110,7 @@ public class BaseClaw : MonoBehaviour
     public LayerMask prizeLayer;
     public Transform midRaycastPoint;
     public float stopDistance;
-    public GameObject currentPrize;
+    //public GameObject currentPrize;
 
 
     #region Input
@@ -165,13 +165,18 @@ public class BaseClaw : MonoBehaviour
         rb.linearVelocity = new Vector2(xVelocity, 0.0f);
 
         // Clamp position within boundaries
-        Vector2 clampedPosition = transform.position;
-        clampedPosition.x = Mathf.Clamp(clampedPosition.x, origin.x + xBoundary.x, origin.x + xBoundary.y);
-        // Apply clamped position
-        transform.position = clampedPosition;
+        if (transform.position.x <= origin.x + xBoundary.x || transform.position.x >= origin.x + xBoundary.y)
+        {
+            Vector2 clampedPosition = transform.position;
+            clampedPosition.x = Mathf.Clamp(clampedPosition.x, origin.x + xBoundary.x, origin.x + xBoundary.y);
+            // Apply clamped position
+            transform.position = clampedPosition;
+            rb.linearVelocityX = 0.0f;
+        }
+
 
         clawIsMoving = (rb.position - lastPosition).sqrMagnitude > MovementEpsilon;
-        lastPosition = rb.position;
+        lastPosition = transform.position;
     }
 
     /// <summary>
@@ -296,15 +301,15 @@ public class BaseClaw : MonoBehaviour
 
     public bool PrizeDetection(out float dist)
     {
-        Vector2 raycastPoint = midRaycastPoint != null ? midRaycastPoint.position : transform.position;
-        RaycastHit2D hit = Physics2D.Raycast(raycastPoint, Vector2.down, Mathf.Infinity, prizeLayer);
-        if (hit.transform)
-        {
-            currentPrize = hit.transform.gameObject;
-            dist = Vector2.Distance(raycastPoint, hit.point);
-            return true;
-        }
-        currentPrize = null;
+        //Vector2 raycastPoint = midRaycastPoint != null ? midRaycastPoint.position : transform.position;
+        //RaycastHit2D hit = Physics2D.Raycast(raycastPoint, Vector2.down, Mathf.Infinity, prizeLayer);
+        //if (hit.transform)
+        //{
+        //    currentPrize = hit.transform.gameObject;
+        //    dist = Vector2.Distance(raycastPoint, hit.point);
+        //    return true;
+        //}
+        //currentPrize = null;
         dist = 0.0f;
         return false;
     }
