@@ -2,8 +2,8 @@ using UnityEngine;
 
 public class MovementStick : MonoBehaviour
 {
-    [Header("Function Properties")]
-    public BaseClaw currClaw;
+    //[Header("Function Properties")]
+    //public BaseClaw currClaw;
 
     [Header("Joystick")]
     public JoystickTouchController joystick;
@@ -26,7 +26,7 @@ public class MovementStick : MonoBehaviour
 
     public void UpdateClawInput(float progress)
     {
-        if (!currClaw) return;
-        currClaw.XInput(progress < 0, Mathf.Abs(progress), true);
+        //if (!currClaw) return;
+        //currClaw.XInput(progress < 0, Mathf.Abs(progress), true);
     }
 }
