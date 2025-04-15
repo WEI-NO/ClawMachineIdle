@@ -5,6 +5,7 @@ public class CraneStickController : MonoBehaviour
     public Rigidbody2D rb;
 
     public float moveSpeed;
+    public ClawObject claw;
 
     [Header("Input Properties")]
     public float xInputSensitivity = 1.0f;
@@ -17,6 +18,10 @@ public class CraneStickController : MonoBehaviour
     void Awake()
     {
         rb = GetComponent<Rigidbody2D>();
+    }
+
+    private void Start()
+    {
     }
 
     // Update is called once per frame
@@ -73,7 +78,14 @@ public class CraneStickController : MonoBehaviour
     {
         if (!rb) return;
 
-        xVelocity = xInput * moveSpeed;
+        if (claw && claw.inSequence)
+        {
+            xVelocity = 0.0f;
+        } else
+        {
+            xVelocity = xInput * moveSpeed;
+        }
+
         rb.linearVelocityX = xVelocity;
     }
 

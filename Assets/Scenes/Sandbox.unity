@@ -614,8 +614,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 416858464}
   serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 4.3, z: -0.0050188787}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 4.21, z: 0.004619035}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -719,6 +719,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   rb: {fileID: 0}
   moveSpeed: 1
+  claw: {fileID: 464833321}
   xInputSensitivity: 100
   xInputDamping: 200
   xInput: 0
@@ -972,7 +973,8 @@ GameObject:
   - component: {fileID: 464833320}
   - component: {fileID: 464833319}
   - component: {fileID: 464833318}
-  m_Layer: 0
+  - component: {fileID: 464833321}
+  m_Layer: 7
   m_Name: ClawBody
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1019,8 +1021,8 @@ HingeJoint2D:
     m_MaximumMotorForce: 10000
   m_UseLimits: 1
   m_AngleLimits:
-    m_LowerAngle: -90
-    m_UpperAngle: 90
+    m_LowerAngle: -45
+    m_UpperAngle: 45
 --- !u!58 &464833319
 CircleCollider2D:
   m_ObjectHideFlags: 0
@@ -1084,6 +1086,30 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 0
+--- !u!114 &464833321
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 464833316}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5c469f4fb873b504f95ce2d862910e94, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  rb: {fileID: 0}
+  clawC: {fileID: 757812567}
+  defaultY: -1
+  targetY: -1
+  verticalStrength: 5
+  yLimits: {x: -3.7, y: -1}
+  heightMoving: 0
+  defaultGravity: 5
+  defaultAngularDamp: 3
+  sequenceGravity: 50
+  sequenceAngularDamp: 50
+  inSequence: 0
 --- !u!1 &481807915
 GameObject:
   m_ObjectHideFlags: 0
@@ -1429,6 +1455,24 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bf8728b05d935db469f632572176e3aa, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  l_prong: {fileID: 2005189673}
+  r_prong: {fileID: 2073351864}
+  relaxSetting:
+    abs_angleRange: {x: 5, y: 15}
+    useMotor: 0
+    motorStrength: 0
+    motorDir: 0
+  expandSetting:
+    abs_angleRange: {x: 5, y: 70}
+    useMotor: 1
+    motorStrength: 200
+    motorDir: 1
+  grabSetting:
+    abs_angleRange: {x: 7, y: 70}
+    useMotor: 1
+    motorStrength: 125
+    motorDir: -1
+  state: -1
 --- !u!1 &1064802608
 GameObject:
   m_ObjectHideFlags: 0
@@ -1541,7 +1585,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1083804331}
   - component: {fileID: 1083804332}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Body
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2142,12 +2186,12 @@ HingeJoint2D:
   m_UseConnectedAnchor: 1
   m_UseMotor: 0
   m_Motor:
-    m_MotorSpeed: 0
+    m_MotorSpeed: 4.7
     m_MaximumMotorForce: 10000
   m_UseLimits: 1
   m_AngleLimits:
     m_LowerAngle: -5
-    m_UpperAngle: 15
+    m_UpperAngle: 60
 --- !u!50 &2005189674
 Rigidbody2D:
   serializedVersion: 5
@@ -2160,7 +2204,7 @@ Rigidbody2D:
   m_Simulated: 1
   m_UseFullKinematicContacts: 0
   m_UseAutoMass: 0
-  m_Mass: 0.1
+  m_Mass: 0.0001
   m_LinearDamping: 0
   m_AngularDamping: 5
   m_GravityScale: 5
@@ -2348,7 +2392,7 @@ HingeJoint2D:
     m_MaximumMotorForce: 10000
   m_UseLimits: 1
   m_AngleLimits:
-    m_LowerAngle: -15
+    m_LowerAngle: -60
     m_UpperAngle: 5
 --- !u!50 &2073351865
 Rigidbody2D:
@@ -2362,7 +2406,7 @@ Rigidbody2D:
   m_Simulated: 1
   m_UseFullKinematicContacts: 0
   m_UseAutoMass: 0
-  m_Mass: 0.1
+  m_Mass: 0.0001
   m_LinearDamping: 0
   m_AngularDamping: 5
   m_GravityScale: 5

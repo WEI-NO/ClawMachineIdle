@@ -1,0 +1,134 @@
+using System.Collections;
+using UnityEngine;
+
+public class ClawObject : MonoBehaviour
+{
+    [Header("References")]
+    public Rigidbody2D rb;
+    public ClawController clawC;
+
+    [Header("Vertical Properties")]
+    public float defaultY = -1.0f;
+    public float targetY = -1.0f;
+    public float verticalStrength = 1.0f;
+    public Vector2 yLimits = new Vector2(-5.0f, -1.0f);
+    public bool heightMoving = false;
+    private HingeJoint2D selfHinge;
+
+    [Header("Swing Prevention")]
+    public float defaultGravity = 5;
+    public float defaultAngularDamp = 3;
+    public float sequenceGravity = 100, sequenceAngularDamp = 100;
+
+    [Header("Grab Sequence Properties")]
+    public bool inSequence = false;
+    private Coroutine currentSequence = null;
+
+    
+
+    private void Awake()
+    {
+        selfHinge = GetComponent<HingeJoint2D>();
+        rb = GetComponent<Rigidbody2D>();
+    }
+
+    private void Start()
+    {
+        targetY = defaultY;
+    }
+
+    private void Update()
+    {
+        if (Input.GetKeyDown(KeyCode.Space))
+        {
+            StartGrabSequence();
+        }
+
+        if (Input.GetKey(KeyCode.UpArrow))
+        {
+            targetY += Time.deltaTime * verticalStrength;
+        }
+
+        if (Input.GetKey(KeyCode.DownArrow))
+        {
+            targetY -= Time.deltaTime * verticalStrength;
+        }
+
+        targetY = Mathf.Clamp(targetY, yLimits.x, yLimits.y);
+    }
+
+    private void FixedUpdate()
+    {
+        HeightUpdate();
+    }
+
+    public void StartGrabSequence()
+    {
+        if (currentSequence == null)
+        {
+            currentSequence = StartCoroutine(GrabSequence());
+        }
+    }
+
+    private IEnumerator GrabSequence()
+    {
+        inSequence = true;
+        clawC.ChangeState(ClawState.Expand);
+        targetY = -3.7f;
+        heightMoving = true;
+        rb.angularDamping = sequenceAngularDamp;
+        rb.gravityScale = sequenceGravity;
+
+        yield return null;
+        while (heightMoving)
+        {
+            yield return null;
+        }
+        yield return null;
+
+        clawC.ChangeState(ClawState.Grab);
+        yield return new WaitForSeconds(1f);
+
+        targetY = -1.0f;
+        heightMoving = true;
+        yield return null;
+        while (heightMoving)
+        {
+            yield return null;
+        }
+
+        rb.angularDamping = defaultAngularDamp;
+        rb.gravityScale = defaultGravity;
+        clawC.ChangeState(ClawState.Relax);
+        currentSequence = null;
+        inSequence = false;
+    }
+
+    /// <summary>
+    /// Updates the height of the crane. Should be called in FixedUpdate();
+    /// </summary>
+    private float heightVelocity; // Needs to be a field (not local)
+
+    private void HeightUpdate()
+    {
+        if (!selfHinge) return;
+
+        var c_anchor = selfHinge.connectedAnchor;
+        float currentY = c_anchor.y;
+
+        if (Mathf.Abs(targetY - currentY) <= 0.01f)
+        {
+            c_anchor.y = targetY;
+            heightVelocity = 0f;
+            heightMoving = false;
+        }
+        else
+        {
+            c_anchor.y = Mathf.SmoothDamp(currentY, targetY, ref heightVelocity, 0.35f, verticalStrength);
+            heightMoving = true;
+        }
+
+        c_anchor.y = Mathf.Clamp(c_anchor.y, yLimits.x, yLimits.y);
+        selfHinge.connectedAnchor = c_anchor;
+    }
+}
