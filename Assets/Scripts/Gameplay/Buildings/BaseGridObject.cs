@@ -69,12 +69,12 @@ public class BaseGridObject : MonoBehaviour
         if (!SnapToGrid || Grid2D.Instance == null) return;
         if (GridControlledObject == null) return;
 
-        Vector2 dimension = (Vector2)ObjectDimension * Grid2D.Instance.cellSize;
-        Vector2 offset = dimension / 2.0f; 
+        float offsetAxis = Grid2D.Instance.cellSize / 2.0f;
+        Vector2 offset = new Vector2(offsetAxis, offsetAxis); 
 
         Vector2Int cellPos = Grid2D.Instance.GetGridPosition((Vector2)transform.position + offset);
 
         GridPosition = cellPos;
-        GridControlledObject.position = new Vector2(GridPosition.x, GridPosition.y);
+        GridControlledObject.position = new Vector2(GridPosition.x, GridPosition.y) * Grid2D.Instance.cellSize;
     }
 }
