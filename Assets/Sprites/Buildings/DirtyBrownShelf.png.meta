@@ -1,10 +1,10 @@
 fileFormatVersion: 2
-guid: 61f136129b174d54980d5bd1b6e2bfbf
+guid: a03b97fd23ef22947bad3a03fdc9cf12
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: 2033081354703007675
-    second: Pink_ClawMachine_2_0
+      213: -6000249554576487287
+    second: DirtyBrownShelf_0
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -126,12 +126,12 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: Pink_ClawMachine_2_0
+      name: DirtyBrownShelf_0
       rect:
         serializedVersion: 2
-        x: 0
+        x: 17
         y: 0
-        width: 32
+        width: 31
         height: 37
       alignment: 6
       pivot: {x: 0, y: 0}
@@ -141,8 +141,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: bbfea8a68b4f63c10800000000000000
-      internalID: 2033081354703007675
+      spriteID: 98cc5cf12d4dabca0800000000000000
+      internalID: -6000249554576487287
       vertices: []
       indices: 
       edges: []
@@ -151,7 +151,7 @@ TextureImporter:
     customData: 
     physicsShape: []
     bones: []
-    spriteID: 21a7f41b05192424cbc96570af7973df
+    spriteID: 44d7cec414b9ea64aaf968852daa9dae
     internalID: 0
     vertices: []
     indices: 
@@ -161,7 +161,7 @@ TextureImporter:
     spriteCustomMetadata:
       entries: []
     nameFileIdTable:
-      Pink_ClawMachine_2_0: 2033081354703007675
+      DirtyBrownShelf_0: -6000249554576487287
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

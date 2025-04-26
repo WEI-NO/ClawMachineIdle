@@ -1,5 +1,12 @@
 using UnityEngine;
 
+public enum GridObjectState
+{
+    Invalid,
+    Moving, // It is currently in ghost mode
+    InWorld, // Placed in world and can be interacted with
+}
+
 public class BaseGridObject : MonoBehaviour
 {
     #region Base Class
@@ -60,6 +67,10 @@ public class BaseGridObject : MonoBehaviour
 
     [Header("State Properties")]
     public bool SnapToGrid = true;
+    public GridObjectState objectState = GridObjectState.Invalid;
+
+    [Header("Grid Properties")]
+    public GridType occupiedType;
 
     /// <summary>
     /// Called in Update() and snaps the building to Grid if SnapToGrid flag is true.
@@ -77,4 +88,52 @@ public class BaseGridObject : MonoBehaviour
         GridPosition = cellPos;
         GridControlledObject.position = new Vector2(GridPosition.x, GridPosition.y) * Grid2D.Instance.cellSize;
     }
+
+    #region State
+
+    private void StateMachineUpdate()
+    {
+
+    }
+
+    public void ChangeState(GridObjectState state)
+    {
+        if (state == objectState)
+        {
+            return;
+        }
+
+        objectState = state;
+        switch(state)
+        {
+            case GridObjectState.Moving:
+                OnMovingState_Start();
+                break;
+            case GridObjectState.InWorld:
+                OnInWorldState_Start();
+                break;
+        }
+    }
+    
+    public void OnMovingState_Start()
+    {
+
+    }
+
+    public void OnMovingState_Update()
+    {
+
+    }
+
+    public void OnInWorldState_Start()
+    {
+
+    }
+
+    public void OnInWorldState_Update()
+    {
+
+    }
+
+    #endregion state
 }
