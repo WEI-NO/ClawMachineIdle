@@ -163,7 +163,7 @@ public struct GridTile2D
         {
             return false;
         }
-        isParent = isParent;
+        this.isParent = isParent;
         containedObject = obj;
         return true;
     }

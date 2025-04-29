@@ -20,6 +20,7 @@ public class BaseGridObject : MonoBehaviour
 
     private void Awake()
     {
+        SetInWorld = false;
         OnAwake();
     }
     private void OnEnable()
@@ -33,7 +34,7 @@ public class BaseGridObject : MonoBehaviour
     private void Update()
     {
         SnapToGridUpdate();
-
+        StateMachineUpdate();
         OnUpdate();
     }
     private void FixedUpdate()
@@ -64,9 +65,11 @@ public class BaseGridObject : MonoBehaviour
     public Vector2Int ObjectDimension = new Vector2Int(1, 1);
     public Vector2Int GridPosition;
     public Transform GridControlledObject; // The child object that represents the building.
+    public SpriteRenderer ghostView;
 
     [Header("State Properties")]
     public bool SnapToGrid = true;
+    public bool SetInWorld = false;
     public GridObjectState objectState = GridObjectState.Invalid;
 
     [Header("Grid Properties")]
@@ -93,7 +96,17 @@ public class BaseGridObject : MonoBehaviour
 
     private void StateMachineUpdate()
     {
-
+        switch (objectState)
+        {
+            case GridObjectState.Invalid:
+                break;
+            case GridObjectState.Moving:
+                OnMovingState_Update();
+                break;
+            case GridObjectState.InWorld:
+                OnInWorldState_Update();
+                break;
+        }
     }
 
     public void ChangeState(GridObjectState state)
@@ -115,22 +128,24 @@ public class BaseGridObject : MonoBehaviour
         }
     }
     
-    public void OnMovingState_Start()
+    public virtual void OnMovingState_Start()
+    {
+        if (ghostView) ghostView.enabled = true;
+    }
+
+    public virtual void OnMovingState_Update()
     {
 
     }
 
-    public void OnMovingState_Update()
+    public virtual void OnInWorldState_Start()
     {
+        if (ghostView) ghostView.enabled = false;
 
+        SetInWorld = true;
     }
 
-    public void OnInWorldState_Start()
-    {
-
-    }
-
-    public void OnInWorldState_Update()
+    public virtual void OnInWorldState_Update()
     {
 
     }

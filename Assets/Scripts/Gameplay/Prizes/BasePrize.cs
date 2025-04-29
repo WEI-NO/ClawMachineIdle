@@ -71,10 +71,6 @@ public class BasePrize : MonoBehaviour
             rb.gravityScale = 0.0f;
             rb.mass = 100f;
         }
-        //if (col)
-        //{
-        //    col.isTrigger = true;
-        //}
     }
 
     public void SetTarget(Transform target)
