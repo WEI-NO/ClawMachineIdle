@@ -23,6 +23,7 @@ public class ClawObject : MonoBehaviour
     [Header("Grab Sequence Properties")]
     public bool inSequence = false;
     private Coroutine currentSequence = null;
+    public bool downSequence = false;
 
     
 
@@ -70,11 +71,18 @@ public class ClawObject : MonoBehaviour
         }
     }
 
+    public void ExpediteGrab()
+    {
+        if (!inSequence || !downSequence) return;
+        targetY = selfHinge.connectedAnchor.y;
+    }
+
     private IEnumerator GrabSequence()
     {
+        downSequence = true;
         inSequence = true;
         clawC.ChangeState(ClawState.Expand);
-        targetY = -3.7f;
+        targetY = yLimits.x;
         heightMoving = true;
         rb.angularDamping = sequenceAngularDamp;
         rb.gravityScale = sequenceGravity;
@@ -85,7 +93,7 @@ public class ClawObject : MonoBehaviour
             yield return null;
         }
         yield return null;
-
+        downSequence = false;
         clawC.ChangeState(ClawState.Grab);
         yield return new WaitForSeconds(1f);
 
@@ -99,7 +107,7 @@ public class ClawObject : MonoBehaviour
 
         rb.angularDamping = defaultAngularDamp;
         rb.gravityScale = defaultGravity;
-        clawC.ChangeState(ClawState.Relax);
+        //clawC.ChangeState(ClawState.Relax);
         currentSequence = null;
         inSequence = false;
     }
@@ -131,4 +139,5 @@ public class ClawObject : MonoBehaviour
         c_anchor.y = Mathf.Clamp(c_anchor.y, yLimits.x, yLimits.y);
         selfHinge.connectedAnchor = c_anchor;
     }
+
 }

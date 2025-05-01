@@ -1,13 +1,13 @@
 fileFormatVersion: 2
-guid: 9a2caf48dc4675e499bf901b7bfbfad2
+guid: 9f032c9adc44fdf4dab877744786eca7
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: -5344359744104623075
-    second: EggPrizes_0
+      213: 3081625435594573982
+    second: ClawBody_2_0
   - first:
-      213: 9080076636406384814
-    second: EggPrizes_1
+      213: -1646451375878656315
+    second: ClawBody_2_1
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -129,61 +129,113 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: EggPrizes_0
+      name: ClawBody_2_0
       rect:
         serializedVersion: 2
-        x: 4
-        y: 34
-        width: 25
-        height: 29
+        x: 51
+        y: 104
+        width: 30
+        height: 24
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
-      physicsShape:
-      - - {x: 11.5, y: -6.5}
-        - {x: 9.5, y: 6.5}
-        - {x: 2.5, y: 13.5}
-        - {x: -2.5, y: 13.5}
-        - {x: -9.5, y: 6.5}
-        - {x: -11.5, y: -6.5}
-        - {x: -4.5, y: -13.5}
-        - {x: 4.5, y: -13.5}
+      physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: d141fbcd02505d5b0800000000000000
-      internalID: -5344359744104623075
+      spriteID: e984c6ba10224ca20800000000000000
+      internalID: 3081625435594573982
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: EggPrizes_1
+      name: ClawBody_2_1
       rect:
         serializedVersion: 2
-        x: 36
-        y: 34
-        width: 25
-        height: 29
+        x: 77
+        y: 69
+        width: 14
+        height: 30
+      alignment: 9
+      pivot: {x: 0.37408972, y: 0.9316914}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape:
+      - - {x: 7, y: -6}
+        - {x: 7, y: 3}
+        - {x: 0, y: 15}
+        - {x: -6, y: 15}
+        - {x: -6, y: 10}
+        - {x: -3, y: 9}
+        - {x: 0, y: 3}
+        - {x: 0, y: -4}
+        - {x: -1, y: -7}
+        - {x: -7, y: -9}
+        - {x: -7, y: -15}
+        - {x: 0, y: -15}
+      tessellationDetail: 0
+      bones: []
+      spriteID: 5ceacc86231a629e0800000000000000
+      internalID: -1646451375878656315
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ClawBody_2_2
+      rect:
+        serializedVersion: 2
+        x: 39
+        y: 69
+        width: 14
+        height: 30
+      alignment: 9
+      pivot: {x: 0.61991423, y: 0.9338717}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape:
+      - - {x: -7, y: -6}
+        - {x: -7, y: 3}
+        - {x: 0, y: 15}
+        - {x: 6, y: 15}
+        - {x: 6, y: 10}
+        - {x: 3, y: 9}
+        - {x: 0, y: 3}
+        - {x: 0, y: -4}
+        - {x: 1.5, y: -7}
+        - {x: 7, y: -9}
+        - {x: 7, y: -15}
+        - {x: 0, y: -15}
+      tessellationDetail: 0
+      bones: []
+      spriteID: 0ad257889db75bb4caaa2f97e40992d4
+      internalID: -630322629
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ClawBody_2_3
+      rect:
+        serializedVersion: 2
+        x: 16
+        y: 0
+        width: 10
+        height: 48
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
-      physicsShape:
-      - - {x: 11.5, y: -6.5}
-        - {x: 9.5, y: 6.5}
-        - {x: 2.5, y: 13.5}
-        - {x: -2.5, y: 13.5}
-        - {x: -9.5, y: 6.5}
-        - {x: -11.5, y: -6.5}
-        - {x: -4.5, y: -13.5}
-        - {x: 4.5, y: -13.5}
+      physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: ea8835ea799e20e70800000000000000
-      internalID: 9080076636406384814
+      spriteID: 1164efcd3e003e949817ff192b1750bf
+      internalID: -1791595951
       vertices: []
       indices: 
       edges: []
@@ -192,7 +244,7 @@ TextureImporter:
     customData: 
     physicsShape: []
     bones: []
-    spriteID: 2201769d311b6c643b297ff1932a8f2b
+    spriteID: f0818a39cf8a18e42ac863f56b1dfa4a
     internalID: 0
     vertices: []
     indices: 
@@ -202,8 +254,11 @@ TextureImporter:
     spriteCustomMetadata:
       entries: []
     nameFileIdTable:
-      EggPrizes_0: -5344359744104623075
-      EggPrizes_1: 9080076636406384814
+      ClawBody_2_0: 3081625435594573982
+      ClawBody_2_1: -1646451375878656315
+      ClawBody_2_2: -630322629
+      ClawBody_2_3: -1791595951
+      ClawBody_2_4: -1258178904
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
