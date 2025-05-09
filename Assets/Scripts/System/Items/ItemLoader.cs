@@ -14,6 +14,7 @@ public class ItemLoader : MonoBehaviour
         {
             database[type] = new Dictionary<string, BaseItem>();
 
+
         }
     }
 
