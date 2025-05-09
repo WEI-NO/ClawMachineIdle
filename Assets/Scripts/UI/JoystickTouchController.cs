@@ -13,13 +13,46 @@ public class JoystickTouchController : MonoBehaviour, IPointerDownHandler, IPoin
     public float rotateStrength = 10.0f;
     public Vector2 lastMousePosition;
     public float resetStrength = 1.0f;
+    public Transform target;
+
+    private Animator animator;
+
+    [Header("Animator Triggers")]
+    public string downTrigger = "Pressed";
+    public string startDownTrigger = "Down";
+
+    public void Awake()
+    {
+        if (!target) target = transform;
+
+        animator = GetComponent<Animator>();
+
+    }
+
+    private void Update()
+    {
+        if (CraneStickController.Instance)
+        {
+            float zAngle = target.eulerAngles.z;
+
+            // Normalize to [-180, 180]
+            if (zAngle > 180f)
+                zAngle -= 360f;
+
+            // Normalize to range [-1, 1]
+            float progress = Mathf.Clamp(zAngle / maxRotateAngle, -1f, 1f);
+
+            // Pass in progress to the crane controller
+            CraneStickController.Instance.SimulateXInput(-progress);
+        }
+    }
 
     public void OnDrag(PointerEventData eventData)
     {
         Vector2 latestTouchPos = eventData.position;
         float xDiff = latestTouchPos.x - lastMousePosition.x;
 
-        Vector3 currAngle = transform.eulerAngles;
+        Vector3 currAngle = target.eulerAngles;
 
         // Convert from 0–360 to -180–180
         float zAngle = currAngle.z;
@@ -35,7 +68,7 @@ public class JoystickTouchController : MonoBehaviour, IPointerDownHandler, IPoin
         if (zAngle < 0f) zAngle += 360f;
 
         currAngle.z = zAngle;
-        transform.eulerAngles = currAngle;
+        target.eulerAngles = currAngle;
 
         lastMousePosition = latestTouchPos;
     }
@@ -44,16 +77,19 @@ public class JoystickTouchController : MonoBehaviour, IPointerDownHandler, IPoin
     {
         lastMousePosition = eventData.position;
         isTouched = true;
+        animator.SetBool(downTrigger, true);
+        animator.SetTrigger(startDownTrigger);
     }
 
     public void OnPointerUp(PointerEventData eventData)
     {
         isTouched = false;
+        animator.SetBool(downTrigger, false);
     }
 
     void FixedUpdate()
     {
-        float zAngle = transform.eulerAngles.z;
+        float zAngle = target.eulerAngles.z;
 
         // Normalize to [-180, 180]
         if (zAngle > 180f)
@@ -70,7 +106,7 @@ public class JoystickTouchController : MonoBehaviour, IPointerDownHandler, IPoin
     {
         if (isTouched) return;
 
-        Vector3 currAngle = transform.eulerAngles;
+        Vector3 currAngle = target.eulerAngles;
 
         // Smoothly move Z angle toward 0 using ResetStrength (degrees per second)
         currAngle.z = Mathf.LerpAngle(currAngle.z, 0f, resetStrength * Time.deltaTime);
@@ -80,6 +116,6 @@ public class JoystickTouchController : MonoBehaviour, IPointerDownHandler, IPoin
             currAngle.z = 0f;
         }
 
-        transform.eulerAngles = currAngle;
+        target.eulerAngles = currAngle;
     }
 }

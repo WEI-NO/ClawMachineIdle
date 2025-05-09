@@ -4,6 +4,7 @@ public class BoundaryManager : MonoBehaviour
 {
     [Header("Table Properties")]
     public Transform table;
+    public float tableScaleMultiplier = 1.0f;
     [Range(0f, 1f)]
     public float tableVerticalAnchor = 0.0f; // 0 = bottom, 1 = top of screen
 
@@ -25,7 +26,7 @@ public class BoundaryManager : MonoBehaviour
 
         // ---------- Table Scaling ----------
         float newScaleX = screenWidth / 2.0f;
-        table.localScale = new Vector3(newScaleX, newScaleX, 1f);
+        table.localScale = new Vector3(newScaleX, newScaleX, 1f) * tableScaleMultiplier;
 
         SpriteRenderer sr = table.GetComponent<SpriteRenderer>();
         if (sr == null) return;
@@ -42,12 +43,12 @@ public class BoundaryManager : MonoBehaviour
 
         // ---------- Walls Scaling and Positioning ----------
 
-        // Left Wall
-        leftWall.position = new Vector2(-screenWidth / 2 + wallThickness / 2, 0);
-        leftWall.localScale = new Vector3(wallThickness, screenHeight);
+        //// Left Wall
+        //leftWall.position = new Vector2(-screenWidth / 2 + wallThickness / 2, 0);
+        //leftWall.localScale = new Vector3(wallThickness, screenHeight);
 
-        // Right Wall
-        rightWall.position = new Vector2(screenWidth / 2 - wallThickness / 2, 0);
-        rightWall.localScale = new Vector3(wallThickness, screenHeight, 1);
+        //// Right Wall
+        //rightWall.position = new Vector2(screenWidth / 2 - wallThickness / 2, 0);
+        //rightWall.localScale = new Vector3(wallThickness, screenHeight, 1);
     }
 }

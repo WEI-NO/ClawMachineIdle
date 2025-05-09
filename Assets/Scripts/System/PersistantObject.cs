@@ -11,7 +11,7 @@ public class PersistantObject : MonoBehaviour
     void Awake()
     {
         Initializer.SetInstance(this);
-        DontDestroyOnLoad(this.gameObject);
+        //DontDestroyOnLoad(this.gameObject);
 
         // Get Components/References
         _SceneHandler = GetComponent<SceneHandler>();

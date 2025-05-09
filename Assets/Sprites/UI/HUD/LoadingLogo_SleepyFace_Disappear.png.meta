@@ -1,0 +1,509 @@
+fileFormatVersion: 2
+guid: 792ae3cbb479ed34aa5bd1336fa72c3f
+TextureImporter:
+  internalIDToNameTable:
+  - first:
+      213: 7404849690521002506
+    second: LoadingLogo_SleepyFace_Disappear_0
+  - first:
+      213: -6369635759680908373
+    second: LoadingLogo_SleepyFace_Disappear_1
+  - first:
+      213: -7560234466414937502
+    second: LoadingLogo_SleepyFace_Disappear_2
+  - first:
+      213: 1286588288468486846
+    second: LoadingLogo_SleepyFace_Disappear_3
+  - first:
+      213: 2784399337352885000
+    second: LoadingLogo_SleepyFace_Disappear_4
+  - first:
+      213: 5776833063291960453
+    second: LoadingLogo_SleepyFace_Disappear_5
+  - first:
+      213: 5274342816953150806
+    second: LoadingLogo_SleepyFace_Disappear_6
+  - first:
+      213: -1224218130413319915
+    second: LoadingLogo_SleepyFace_Disappear_7
+  - first:
+      213: 3537009633176274169
+    second: LoadingLogo_SleepyFace_Disappear_8
+  - first:
+      213: 2177380737992272074
+    second: LoadingLogo_SleepyFace_Disappear_9
+  - first:
+      213: 7488194854187357888
+    second: LoadingLogo_SleepyFace_Disappear_10
+  - first:
+      213: -5743834425413577269
+    second: LoadingLogo_SleepyFace_Disappear_11
+  - first:
+      213: 2737798828332191055
+    second: LoadingLogo_SleepyFace_Disappear_12
+  - first:
+      213: -2375586799629853334
+    second: LoadingLogo_SleepyFace_Disappear_13
+  - first:
+      213: 1534089278033167409
+    second: LoadingLogo_SleepyFace_Disappear_14
+  - first:
+      213: -4185514984361015329
+    second: LoadingLogo_SleepyFace_Disappear_15
+  - first:
+      213: 1445907653501458002
+    second: LoadingLogo_SleepyFace_Disappear_16
+  - first:
+      213: 1396533256243423564
+    second: LoadingLogo_SleepyFace_Disappear_17
+  - first:
+      213: 8202090656021450345
+    second: LoadingLogo_SleepyFace_Disappear_18
+  - first:
+      213: -526706710294573928
+    second: LoadingLogo_SleepyFace_Disappear_19
+  - first:
+      213: -6502133312299176098
+    second: LoadingLogo_SleepyFace_Disappear_20
+  externalObjects: {}
+  serializedVersion: 13
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    sRGBTexture: 1
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+    flipGreenChannel: 0
+  isReadable: 0
+  streamingMipmaps: 0
+  streamingMipmapsPriority: 0
+  vTOnly: 0
+  ignoreMipmapLimit: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 2048
+  textureSettings:
+    serializedVersion: 2
+    filterMode: 0
+    aniso: 1
+    mipBias: 0
+    wrapU: 1
+    wrapV: 1
+    wrapW: 1
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spritePixelsToUnits: 32
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spriteGenerateFallbackPhysicsShape: 1
+  alphaUsage: 1
+  alphaIsTransparency: 1
+  spriteTessellationDetail: -1
+  textureType: 8
+  textureShape: 1
+  singleChannelComponent: 0
+  flipbookRows: 1
+  flipbookColumns: 1
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  ignorePngGamma: 0
+  applyGammaDecoding: 0
+  swizzle: 50462976
+  cookieLightType: 0
+  platformSettings:
+  - serializedVersion: 4
+    buildTarget: DefaultTexturePlatform
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 0
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: Standalone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: Android
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: iOS
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: LoadingLogo_SleepyFace_Disappear_0
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 0
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: a026aaa9f8f43c660800000000000000
+      internalID: 7404849690521002506
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: LoadingLogo_SleepyFace_Disappear_1
+      rect:
+        serializedVersion: 2
+        x: 32
+        y: 0
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: ba3189b36028a97a0800000000000000
+      internalID: -6369635759680908373
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: LoadingLogo_SleepyFace_Disappear_2
+      rect:
+        serializedVersion: 2
+        x: 64
+        y: 0
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 26a3ca20fc6a41790800000000000000
+      internalID: -7560234466414937502
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: LoadingLogo_SleepyFace_Disappear_3
+      rect:
+        serializedVersion: 2
+        x: 96
+        y: 0
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: eba87525b31ead110800000000000000
+      internalID: 1286588288468486846
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: LoadingLogo_SleepyFace_Disappear_4
+      rect:
+        serializedVersion: 2
+        x: 128
+        y: 0
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 80370c7e17c24a620800000000000000
+      internalID: 2784399337352885000
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: LoadingLogo_SleepyFace_Disappear_5
+      rect:
+        serializedVersion: 2
+        x: 160
+        y: 0
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 58cbf38601f6b2050800000000000000
+      internalID: 5776833063291960453
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: LoadingLogo_SleepyFace_Disappear_6
+      rect:
+        serializedVersion: 2
+        x: 192
+        y: 0
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 65d202ce8da323940800000000000000
+      internalID: 5274342816953150806
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: LoadingLogo_SleepyFace_Disappear_7
+      rect:
+        serializedVersion: 2
+        x: 224
+        y: 0
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 5190f19b814b20fe0800000000000000
+      internalID: -1224218130413319915
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: LoadingLogo_SleepyFace_Disappear_8
+      rect:
+        serializedVersion: 2
+        x: 256
+        y: 0
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 9f44b90858bf51130800000000000000
+      internalID: 3537009633176274169
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: LoadingLogo_SleepyFace_Disappear_9
+      rect:
+        serializedVersion: 2
+        x: 288
+        y: 0
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: ac8aec4be3c973e10800000000000000
+      internalID: 2177380737992272074
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: LoadingLogo_SleepyFace_Disappear_10
+      rect:
+        serializedVersion: 2
+        x: 320
+        y: 0
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 0c6deb4bb896be760800000000000000
+      internalID: 7488194854187357888
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: LoadingLogo_SleepyFace_Disappear_11
+      rect:
+        serializedVersion: 2
+        x: 352
+        y: 0
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: bc55090b50dc940b0800000000000000
+      internalID: -5743834425413577269
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: LoadingLogo_SleepyFace_Disappear_12
+      rect:
+        serializedVersion: 2
+        x: 384
+        y: 0
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: f4d8835678d9ef520800000000000000
+      internalID: 2737798828332191055
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    outline: []
+    customData: 
+    physicsShape: []
+    bones: []
+    spriteID: e5673222f219b6e4baac4aa7073516ef
+    internalID: 0
+    vertices: []
+    indices: 
+    edges: []
+    weights: []
+    secondaryTextures: []
+    spriteCustomMetadata:
+      entries: []
+    nameFileIdTable:
+      LoadingLogo_SleepyFace_Disappear_0: 7404849690521002506
+      LoadingLogo_SleepyFace_Disappear_1: -6369635759680908373
+      LoadingLogo_SleepyFace_Disappear_10: 7488194854187357888
+      LoadingLogo_SleepyFace_Disappear_11: -5743834425413577269
+      LoadingLogo_SleepyFace_Disappear_12: 2737798828332191055
+      LoadingLogo_SleepyFace_Disappear_13: -2375586799629853334
+      LoadingLogo_SleepyFace_Disappear_14: 1534089278033167409
+      LoadingLogo_SleepyFace_Disappear_15: -4185514984361015329
+      LoadingLogo_SleepyFace_Disappear_16: -1492008160
+      LoadingLogo_SleepyFace_Disappear_2: -7560234466414937502
+      LoadingLogo_SleepyFace_Disappear_3: 1286588288468486846
+      LoadingLogo_SleepyFace_Disappear_4: 2784399337352885000
+      LoadingLogo_SleepyFace_Disappear_5: 5776833063291960453
+      LoadingLogo_SleepyFace_Disappear_6: 5274342816953150806
+      LoadingLogo_SleepyFace_Disappear_7: -1224218130413319915
+      LoadingLogo_SleepyFace_Disappear_8: 3537009633176274169
+      LoadingLogo_SleepyFace_Disappear_9: 2177380737992272074
+  mipmapLimitGroupName: 
+  pSDRemoveMatte: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
