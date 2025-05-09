@@ -13,6 +13,7 @@ public class ItemLoader : MonoBehaviour
         foreach (ItemCategory type in Enum.GetValues(typeof(ItemCategory)))
         {
             database[type] = new Dictionary<string, BaseItem>();
+
         }
     }
 
