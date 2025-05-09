@@ -5,7 +5,7 @@ using UnityEngine;
 public class ItemLoader : MonoBehaviour
 {
     [Header("Database Properties")]
-    private Dictionary<ItemCategory, Dictionary<string, BaseItem>> database;
+    private Dictionary<ItemCategory, Dictionary<string, BaseItem>> database = new Dictionary<ItemCategory, Dictionary<string, BaseItem>>();
 
     private void Awake()
     {
