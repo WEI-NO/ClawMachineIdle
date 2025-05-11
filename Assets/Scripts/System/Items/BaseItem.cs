@@ -4,10 +4,22 @@ public enum ItemCategory
 {
     Currency,
     Building,
-    Backpack
+    Backpack,
+    Undecided,
+    Count
 }
 
-public class BaseItem : MonoBehaviour
+public enum ItemRarity
+{
+    Common,
+    Rare,
+    Epic,
+    Legendary,
+    Mythical
+}
+
+[CreateAssetMenu(fileName ="Item", menuName ="Bubble Claw/Inventory/Item")]
+public class BaseItem : ScriptableObject
 {
     #region Base Class
     protected virtual void OnAwake() { }
@@ -52,11 +64,13 @@ public class BaseItem : MonoBehaviour
     [SerializeField] private string _itemName;
     [SerializeField] private Sprite _itemIcon;
     [SerializeField] private ItemCategory _itemType;
+    [SerializeField] private ItemRarity _itemRarity;
 
     [Header("Public Properties")]
     public string ItemName { get { return _itemName; } private set { } }
     public Sprite ItemIcon { get { return _itemIcon; } private set { } }
     public ItemCategory ItemType { get { return _itemType; } private set { } }
+    public ItemRarity itemRarity { get { return _itemRarity; } private set { } }
 
 
 }
