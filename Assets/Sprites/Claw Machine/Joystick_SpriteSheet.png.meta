@@ -135,7 +135,7 @@ TextureImporter:
       name: Joystick_SpriteSheet_0
       rect:
         serializedVersion: 2
-        x: 4
+        x: 6
         y: 1
         width: 20
         height: 28
@@ -157,7 +157,7 @@ TextureImporter:
       name: Joystick_SpriteSheet_1
       rect:
         serializedVersion: 2
-        x: 36
+        x: 38
         y: 1
         width: 20
         height: 28
@@ -179,7 +179,7 @@ TextureImporter:
       name: Joystick_SpriteSheet_2
       rect:
         serializedVersion: 2
-        x: 68
+        x: 70
         y: 1
         width: 20
         height: 28
