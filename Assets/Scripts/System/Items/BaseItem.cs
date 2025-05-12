@@ -2,6 +2,7 @@ using UnityEngine;
 
 public enum ItemCategory
 {
+    None = -1,
     Currency,
     Building,
     Backpack,

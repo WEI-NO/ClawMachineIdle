@@ -15,4 +15,4 @@ MonoBehaviour:
   _itemName: Ticket
   _itemIcon: {fileID: -1292138795, guid: c40d573e674f5bd44a148f85a4208544, type: 3}
   _itemType: 0
-  _itemRarity: 0
+  _itemRarity: 2

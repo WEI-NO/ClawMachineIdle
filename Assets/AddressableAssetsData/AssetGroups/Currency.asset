@@ -16,13 +16,13 @@ MonoBehaviour:
   m_GUID: 5040ac14dad995f4183921cfeda77a25
   m_SerializeEntries:
   - m_GUID: ae07eb7bc5b9f114180b93d639a140ec
-    m_Address: Assets/Prefabs/Items/Currency/Coin.asset
+    m_Address: Coin
     m_ReadOnly: 0
     m_SerializedLabels:
     - Currency
     FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: ffd695a6c5b570a4d866374601ad70d0
-    m_Address: Assets/Prefabs/Items/Currency/Ticket.asset
+    m_Address: Ticket
     m_ReadOnly: 0
     m_SerializedLabels:
     - Currency

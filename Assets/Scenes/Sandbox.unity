@@ -265,6 +265,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 77190219}
+  - component: {fileID: 77190220}
   m_Layer: 5
   m_Name: Coin Display
   m_TagString: Untagged
@@ -294,6 +295,21 @@ RectTransform:
   m_AnchoredPosition: {x: -169, y: -126.5}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 1, y: 1}
+--- !u!114 &77190220
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 77190218}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b96a4ca4fe58a1b4ab312ed02cdc69e1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _countText: {fileID: 883466194}
+  _itemName: Coin
+  _category: 0
 --- !u!1 &131718761
 GameObject:
   m_ObjectHideFlags: 0
@@ -1880,9 +1896,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   rb: {fileID: 0}
   clawC: {fileID: 757812567}
+  detector: {fileID: 0}
   heightMoving: 0
   downwardSpeed: 2
-  upwardSpeed: 1
+  upwardSpeedRange: {x: 0.75, y: 2}
+  upwardSpeed: 2
   defaultGravity: 5
   defaultAngularDamp: 3
   sequenceGravity: 25
@@ -3499,6 +3517,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1023529735}
+  - component: {fileID: 1023529736}
   m_Layer: 5
   m_Name: Ticket Display
   m_TagString: Untagged
@@ -3528,6 +3547,21 @@ RectTransform:
   m_AnchoredPosition: {x: -170.9, y: -249}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 1, y: 1}
+--- !u!114 &1023529736
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1023529734}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b96a4ca4fe58a1b4ab312ed02cdc69e1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _countText: {fileID: 198433320}
+  _itemName: Ticket
+  _category: 0
 --- !u!1 &1062935540
 GameObject:
   m_ObjectHideFlags: 0

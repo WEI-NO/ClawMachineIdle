@@ -192,12 +192,11 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4826204483616148250}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: abdadf74ab8e7d24ca95510f0ce819dc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  rb: {fileID: 0}
-  col: {fileID: 0}
-  followTarget: {fileID: 0}
-  followStrength: 10
+  Reward: Coin
+  Quantity: 1
+  RewardItem: {fileID: 0}

@@ -10,7 +10,7 @@ public class PrizeDetector : MonoBehaviour
     public float distanceThreshold = 1.0f;
     public LayerMask groundLayer;
 
-    public List<GameObject> grabbedObj;
+    public List<BasePrize> grabbedObj;
 
     private void Awake()
     {
@@ -28,7 +28,7 @@ public class PrizeDetector : MonoBehaviour
     {
         for (int i = grabbedObj.Count - 1; i >= 0; i--)
         {
-            Destroy(grabbedObj[i]);
+            grabbedObj[i].PrizeClaim();
         }
 
         grabbedObj.Clear();
@@ -84,7 +84,8 @@ public class PrizeDetector : MonoBehaviour
     {
         if (collision.gameObject.CompareTag("Prize"))
         {
-            grabbedObj.Add(collision.gameObject);
+            BasePrize prize = collision.gameObject.GetComponent<BasePrize>();
+            grabbedObj.Add(prize);
             containedCount++;
             if (containedCount >= containThreshold)
             {
@@ -97,7 +98,8 @@ public class PrizeDetector : MonoBehaviour
     {
         if (collision.gameObject.CompareTag("Prize"))
         {
-            grabbedObj.Remove(collision.gameObject);
+            BasePrize prize = collision.gameObject.GetComponent<BasePrize>();
+            grabbedObj.Remove(prize);
             containedCount = Mathf.Clamp(containedCount - 1, 0, containedCount);
 
         }

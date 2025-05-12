@@ -1,6 +1,8 @@
 using CustomLibrary.References;
+using NUnit.Framework.Internal.Commands;
 using System;
 using System.Collections;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class ClawObject : MonoBehaviour
@@ -10,6 +12,7 @@ public class ClawObject : MonoBehaviour
     [Header("References")]
     public Rigidbody2D rb;
     public ClawController clawC;
+    public PrizeDetector detector;
 
     [Header("Vertical Properties")]
     //public float defaultY = -1.0f;
@@ -18,6 +21,7 @@ public class ClawObject : MonoBehaviour
     //public Vector2 yLimits = new Vector2(-5.0f, -1.0f);
     public bool heightMoving = false;
     public float downwardSpeed;
+    public Vector2 upwardSpeedRange = new Vector2(1.0f, 2.0f);
     public float upwardSpeed;
     private HingeJoint2D selfHinge;
 
@@ -44,6 +48,7 @@ public class ClawObject : MonoBehaviour
 
         selfHinge = GetComponent<HingeJoint2D>();
         rb = GetComponent<Rigidbody2D>();
+        detector = GetComponentInChildren<PrizeDetector>();
     }
 
     private void Start()
@@ -58,6 +63,15 @@ public class ClawObject : MonoBehaviour
             StartGrabSequence();
         }
 
+        float rarityMultiplier = 0.25f;
+        float totalMultiplier = 0.0f;
+        foreach (var i in detector.grabbedObj)
+        {
+            if (i.RewardItem == null) continue;
+            totalMultiplier += (i.RewardItem.itemRarity.ToInt()+1) * rarityMultiplier;
+        }
+
+        upwardSpeed = Mathf.Clamp(upwardSpeedRange.y - totalMultiplier, upwardSpeedRange.x, upwardSpeedRange.y);
         //if (Input.GetKey(KeyCode.UpArrow))
         //{
         //    targetY += Time.deltaTime * verticalStrength;
@@ -112,7 +126,7 @@ public class ClawObject : MonoBehaviour
 
         downSequence = false;
         clawC.ChangeState(ClawState.Grab);
-        yield return new WaitForSeconds(0.75f);
+        yield return new WaitForSeconds(0.85f);
         OnGrabbed?.Invoke();
         CraneStickController.Instance.SetTargetY(CraneStickController.Instance.yLimits.y);
         CraneStickController.Instance.SetVerticalSpeed(upwardSpeed);

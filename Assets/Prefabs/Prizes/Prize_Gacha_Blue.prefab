@@ -75,10 +75,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: abdadf74ab8e7d24ca95510f0ce819dc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  rb: {fileID: 0}
-  col: {fileID: 0}
-  followTarget: {fileID: 0}
-  followStrength: 10
+  Reward: Coin
+  Quantity: 1
+  RewardItem: {fileID: 0}
 --- !u!60 &9079409599845725284
 PolygonCollider2D:
   m_ObjectHideFlags: 0
