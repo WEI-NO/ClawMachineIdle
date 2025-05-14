@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 
 public enum ClawState
@@ -19,6 +20,12 @@ public class ClawController : MonoBehaviour
     public ClawSettings expandSetting;
     public ClawSettings grabSetting;
 
+    public Action OnGrabComplete;
+    public Action OnExpandComplete;
+
+    [Header("Completion Detection")]
+    public float angleThreshold = 1f; // degrees
+
     [Header("State Properties")]
     public ClawState state = ClawState.None;
 
@@ -26,6 +33,8 @@ public class ClawController : MonoBehaviour
     void Start()
     {
         ChangeState(ClawState.Relax);
+        OnGrabComplete += () => { print("grab complete!"); };
+        OnExpandComplete += () => { print("expand complete!"); };
     }
 
     void Update()
@@ -42,6 +51,43 @@ public class ClawController : MonoBehaviour
         {
             ChangeState(ClawState.Grab);
         }
+
+        CheckIfClawCompleted();
+    }
+
+    private void CheckIfClawCompleted()
+    {
+        if (state != ClawState.Grab && state != ClawState.Expand)
+            return;
+
+        float leftAngle = l_prong.jointAngle;
+        float rightAngle = r_prong.jointAngle;
+
+        float leftTarget = state == ClawState.Grab ? grabSetting.abs_angleRange.y : expandSetting.abs_angleRange.y;
+        float rightTarget = state == ClawState.Grab ? -grabSetting.abs_angleRange.y : -expandSetting.abs_angleRange.y;
+
+        bool leftClose = Mathf.Abs(leftAngle - leftTarget) <= angleThreshold;
+        bool rightClose = Mathf.Abs(rightAngle - rightTarget) <= angleThreshold;
+
+        if (leftClose && rightClose)
+        {
+            if (state == ClawState.Grab && OnGrabComplete != null)
+            {
+                OnGrabComplete.Invoke();
+                state = ClawState.None; // prevent repeat calls
+            }
+            else if (state == ClawState.Expand && OnExpandComplete != null)
+            {
+                OnExpandComplete.Invoke();
+                state = ClawState.None;
+            }
+        }
+    }
+
+    public void SetClawState(bool isTrigger)
+    {
+        l_prong.GetComponent<Collider2D>().isTrigger = isTrigger;
+        r_prong.GetComponent<Collider2D>().isTrigger = isTrigger;
     }
 
     #region Settings

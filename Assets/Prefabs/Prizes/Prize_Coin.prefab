@@ -76,7 +76,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: -2
-  m_Sprite: {fileID: -5344359744104623075, guid: 9a2caf48dc4675e499bf901b7bfbfad2, type: 3}
+  m_Sprite: {fileID: 2582750977393768557, guid: c40d573e674f5bd44a148f85a4208544, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -100,8 +100,8 @@ GameObject:
   - component: {fileID: 877366788651066923}
   - component: {fileID: -6121305140060126434}
   m_Layer: 6
-  m_Name: Prize_Blue
-  m_TagString: Untagged
+  m_Name: Prize_Coin
+  m_TagString: Prize
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -137,17 +137,17 @@ Rigidbody2D:
   m_Mass: 1
   m_LinearDamping: 0
   m_AngularDamping: 0.05
-  m_GravityScale: 1
-  m_Material: {fileID: 0}
+  m_GravityScale: 0.5
+  m_Material: {fileID: 6200000, guid: f06407d487ab0054aa137ea99d602043, type: 2}
   m_IncludeLayers:
     serializedVersion: 2
     m_Bits: 0
   m_ExcludeLayers:
     serializedVersion: 2
     m_Bits: 0
-  m_Interpolate: 0
+  m_Interpolate: 1
   m_SleepingMode: 1
-  m_CollisionDetection: 1
+  m_CollisionDetection: 0
   m_Constraints: 0
 --- !u!58 &877366788651066923
 CircleCollider2D:
@@ -184,7 +184,7 @@ CircleCollider2D:
   m_CompositeOperation: 0
   m_CompositeOrder: 0
   m_Offset: {x: 0, y: 0}
-  m_Radius: 0.4
+  m_Radius: 0.25
 --- !u!114 &-6121305140060126434
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -197,5 +197,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: abdadf74ab8e7d24ca95510f0ce819dc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  rb: {fileID: 0}
-  col: {fileID: 0}
+  Reward: Coin
+  Quantity: 1
+  RewardItem: {fileID: 0}

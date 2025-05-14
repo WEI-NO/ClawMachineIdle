@@ -15,8 +15,6 @@ public class BasePrize : MonoBehaviour
 
     private void Awake()
     {
-        rb = GetComponent<Rigidbody2D>();
-        col = GetComponent<Collider2D>();
         OnAwake();
     }
     private void OnEnable()
@@ -25,6 +23,10 @@ public class BasePrize : MonoBehaviour
     }
     private void Start()
     {
+        ItemLoader.Instance.LoadItem(Reward, (item) =>
+        {
+            RewardItem = item;
+        });
         OnStart();
     }
     private void Update()
@@ -33,7 +35,6 @@ public class BasePrize : MonoBehaviour
     }
     private void FixedUpdate()
     {
-        FollowTargetUpdate();
         OnFixedUpdate();
     }
     private void OnDisable()
@@ -46,42 +47,20 @@ public class BasePrize : MonoBehaviour
     }
     #endregion base class
 
-    [Header("Components")]
-    public Rigidbody2D rb;
-    public Collider2D col;
+    [Header("Prize Settings")]
+    public string Reward;
+    public int Quantity = 1;
+    public BaseItem RewardItem;
+    
 
-    [Header("Control")]
-    public Transform followTarget;
-    public float followStrength = 10.0f;
-
-    #region Controls
-
-    private void FollowTargetUpdate()
+    public virtual void PrizeClaim()
     {
-        if (followTarget)
+        if (RewardItem)
         {
-            transform.position = Vector3.Lerp(transform.position, followTarget.transform.position, Time.fixedDeltaTime * followStrength);
+            PlayerInventory.Instance.GiveItem(RewardItem, Quantity);
         }
+        Destroy(gameObject);
     }
 
-    public void ActivateGrabbedState()
-    {
-        if (rb)
-        {
-            rb.gravityScale = 0.0f;
-            rb.mass = 100f;
-        }
-        //if (col)
-        //{
-        //    col.isTrigger = true;
-        //}
-    }
-
-    public void SetTarget(Transform target)
-    {
-        followTarget = target;
-    }
-
-    #endregion controls
 
 }
