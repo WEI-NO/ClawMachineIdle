@@ -878,7 +878,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   alignment: 1
-  originYOffset: 9
+  originYOffset: 8
+  GridDimension: {x: 0, y: 0}
   mainTilemap: {fileID: 1233942307}
 --- !u!1 &1916515662
 GameObject:
@@ -924,7 +925,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ce2d905c0b70cab42a583324d6fdb38a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  RoomDimension: {x: 0, y: 0}
+  RoomDimension: {x: 3, y: 3}
 --- !u!1 &2001329426
 GameObject:
   m_ObjectHideFlags: 0
