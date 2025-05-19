@@ -80,16 +80,19 @@ public class BaseGridObject : MonoBehaviour
     /// </summary>
     private void SnapToGridUpdate()
     {
-        if (!SnapToGrid || Grid2D.Instance == null) return;
-        if (GridControlledObject == null) return;
+        if (!SnapToGrid || Grid2D.Instance == null || GridControlledObject == null)
+            return;
 
-        float offsetAxis = Grid2D.Instance.cellSize / 2.0f;
-        Vector2 offset = new Vector2(offsetAxis, offsetAxis); 
+        //// Offset if needed to shift where mouse detection happens
+        //Vector2 worldPos = transform.position;
 
-        Vector2Int cellPos = Grid2D.Instance.GetGridPosition((Vector2)transform.position + offset);
+        //// Snap the child to the closest grid cell
+        //Vector2Int cellPos = Grid2D.Instance.GetGridPosition(worldPos);
+        //GridPosition = cellPos;
 
-        GridPosition = cellPos;
-        GridControlledObject.position = new Vector2(GridPosition.x, GridPosition.y) * Grid2D.Instance.cellSize;
+        // Get world position from cellPos and move the child there
+        Vector2 snappedPos = Grid2D.Instance.GetWorldPosition(GridPosition);
+        GridControlledObject.position = snappedPos;
     }
 
     #region State
