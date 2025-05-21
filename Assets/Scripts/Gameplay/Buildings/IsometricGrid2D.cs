@@ -20,6 +20,7 @@ public class IsometricGrid2D : MonoBehaviour
 
     [Header("Ground Tile")]
     [SerializeField] private Tilemap mainTilemap; // For alignment purposes
+    [SerializeField] private Tile groundTile;
     public Dictionary<Vector2Int, bool> GroundTiles = new Dictionary<Vector2Int, bool>(); // <Coordinate, Occupation>
 
     void Awake()
@@ -30,6 +31,11 @@ public class IsometricGrid2D : MonoBehaviour
     private void Start()
     {
         InitializeGroundTiles();
+
+        InitializeTile(new Vector2Int(-1, 0));
+        InitializeTile(new Vector2Int(-1, 1));
+        InitializeTile(new Vector2Int(-1, 2));
+
     }
 
 
@@ -102,6 +108,58 @@ public class IsometricGrid2D : MonoBehaviour
         //    }
         //}
         print(GroundTiles.Count);
+    }
+
+    /// <summary>
+    /// Adds a tile worth of points into the ground dictionary.
+    /// Provided tileposition is in relation to the 0, 0 tile.
+    /// </summary>
+    /// <param name="tilePosition"></param>
+    public void InitializeTile(Vector2Int tilePosition)
+    {
+        // Place the tile at the grid position
+        mainTilemap.SetTile((Vector3Int)tilePosition, groundTile);
+
+        int worldX = (tilePosition.x - tilePosition.y) * (PixelPerRoom / 2);
+        int worldY = (tilePosition.x + tilePosition.y) * (PixelPerRoom / 4);
+
+        Vector2Int startPixel = new Vector2Int(worldX, worldY);
+
+        Vector2Int pixelCount = new Vector2Int(PixelPerRoom, PixelPerRoom);
+
+        // Bottom Half
+        for (int y = 0; y < pixelCount.y / 4; y++)
+        {
+            int allowedHalfX = ((y + 1) * 4) / 2;
+            for (int x = -allowedHalfX; x < allowedHalfX; x++)
+            {
+                Vector2Int coord = startPixel + new Vector2Int(x, y);
+                print(coord);
+                if (GroundTiles.ContainsKey(coord))
+                {
+                    continue;
+                }
+                GroundTiles.Add(coord, false);
+            }
+        }
+
+        // Top Half
+        int startY = pixelCount.y / 4;
+        for (int y = startY; y < pixelCount.y / 2; y++)
+        {
+            int allowedHalfX = (startY * 4) / 2 - (Mathf.Abs(y - startY) * 2);
+            for (int x = -allowedHalfX; x < allowedHalfX; x++)
+            {
+                Vector2Int coord = startPixel + new Vector2Int(x, y);
+                print(coord);
+                if (GroundTiles.ContainsKey(coord))
+                {
+                    continue;
+                }
+                GroundTiles.Add(coord, false);
+            }
+        }
+
     }
 
     #endregion tiles

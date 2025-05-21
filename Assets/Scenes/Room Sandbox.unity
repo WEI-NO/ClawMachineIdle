@@ -881,6 +881,7 @@ MonoBehaviour:
   originYOffset: 8
   GridDimension: {x: 0, y: 0}
   mainTilemap: {fileID: 1233942307}
+  groundTile: {fileID: 11400000, guid: 8942c63e48cab584299563fed4e3523e, type: 2}
 --- !u!1 &1916515662
 GameObject:
   m_ObjectHideFlags: 0
