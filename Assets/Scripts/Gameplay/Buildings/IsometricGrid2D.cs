@@ -101,6 +101,7 @@ public class IsometricGrid2D : MonoBehaviour
         //        GroundTiles.Add(coord, false);
         //    }
         //}
+        print(GroundTiles.Count);
     }
 
     #endregion tiles

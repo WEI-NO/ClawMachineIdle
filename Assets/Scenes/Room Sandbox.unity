@@ -980,13 +980,25 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 4076156920689143246, guid: 17599aeefc9e769499f6c023b1e27b27, type: 3}
+      propertyPath: m_Color.a
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4679034283707852851, guid: 17599aeefc9e769499f6c023b1e27b27, type: 3}
+      propertyPath: blueprint.PixelDimension.x
+      value: 14
+      objectReference: {fileID: 0}
+    - target: {fileID: 4679034283707852851, guid: 17599aeefc9e769499f6c023b1e27b27, type: 3}
+      propertyPath: blueprint.PixelDimension.y
+      value: 14
+      objectReference: {fileID: 0}
     - target: {fileID: 4733345903952975412, guid: 17599aeefc9e769499f6c023b1e27b27, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -2.167
+      value: -0.041
       objectReference: {fileID: 0}
     - target: {fileID: 4733345903952975412, guid: 17599aeefc9e769499f6c023b1e27b27, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0.163
+      value: 0.625
       objectReference: {fileID: 0}
     - target: {fileID: 4733345903952975412, guid: 17599aeefc9e769499f6c023b1e27b27, type: 3}
       propertyPath: m_LocalPosition.z
