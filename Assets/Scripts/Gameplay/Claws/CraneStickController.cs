@@ -10,6 +10,8 @@ public class CraneStickController : MonoBehaviour
     public float moveSpeed;
     public ClawObject claw;
 
+    public bool isActive;
+
     [Header("Input Properties")]
     public float xInputSensitivity = 1.0f;
     public float xInputDamping = 1.0f;
@@ -20,10 +22,14 @@ public class CraneStickController : MonoBehaviour
     [Header("Target Height")]
     public float targetY;
     public Vector2 yLimits = new Vector2(-5f, 5f);
+    public float grabY;
+    public float idleY;
+    public float inactiveY;
 
     [Header("Movement Settings")]
     public float verticalSpeed = 5f;
     public float arriveThreshold = 0.05f;
+    public float activationSpeed = 5f;
 
     public bool isMoving = false;
 
@@ -33,17 +39,23 @@ public class CraneStickController : MonoBehaviour
     {
         Initializer.SetInstance(this);
         rb = GetComponent<Rigidbody2D>();
+        isActive = true;
     }
 
     private void Start()
     {
-        SetTargetY(yLimits.y);
+        SetTargetY(idleY);
         CalculateHorizontalLimits();
     }
 
     // Update is called once per frame
     void Update()
     {
+        if (Input.GetKeyDown(KeyCode.Period))
+        {
+            SetActive(!isActive);
+        }
+
         //XInputUpdate();
         if (Input.GetKey(KeyCode.DownArrow))
         {
@@ -166,6 +178,19 @@ public class CraneStickController : MonoBehaviour
 
         float direction = Mathf.Sign(distance);
         float newY = position.y + direction * verticalSpeed * Time.fixedDeltaTime;
+        if (direction < 0)
+        {
+            if (newY <= targetY)
+            {
+                newY = targetY;
+            }
+        } else if (direction > 0)
+        {
+           if (newY >= targetY)
+            {
+                newY = targetY;
+            }
+        }
         newY = Mathf.Clamp(newY, yLimits.x, yLimits.y);
 
         rb.MovePosition(new Vector2(position.x, newY));
@@ -180,6 +205,22 @@ public class CraneStickController : MonoBehaviour
     {
         targetY = Mathf.Clamp(newY, yLimits.x, yLimits.y);
         isMoving = true;
+    }
+
+    public void SetActive(bool active)
+    {
+        if (active == isActive) return;
+
+        SetVerticalSpeed(activationSpeed);
+
+        if (!active)
+        {
+            SetTargetY(inactiveY);
+        } else
+        {
+            SetTargetY(idleY);
+        }
+        isActive = active;
     }
 
     public void Halt()

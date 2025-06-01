@@ -1,0 +1,101 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bbb281ee3bf0b054c82ac2347e9e782c, type: 3}
+  m_Name: Prize
+  m_EditorClassIdentifier: 
+  m_GroupName: Prize
+  m_GUID: d0e32573a5ecd874ea148a9f7fad1f5d
+  m_SerializeEntries:
+  - m_GUID: 039349127f6900c48bb1da702f1f2e1a
+    m_Address: prize_egg_mythical_furniture
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - Prize
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 0e6548ae9af1b3e4fb251b9f83bb5d18
+    m_Address: prize_egg_common_plushie
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - Prize
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 383da609e90db9449bb1f7abfdb94088
+    m_Address: prize_egg_epic_plushie
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - Prize
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 6ebfbb1ea808ac748873f2a0efbd0d1a
+    m_Address: prize_egg_epic_furniture
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - Prize
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 7eb56950b8f74c342b42cc5756c26a9e
+    m_Address: prize_egg_legendary_plushie
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - Prize
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 82aa387bee0bca74183038b123153dcd
+    m_Address: prize_coin_small
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - Prize
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: aac230b26f20cb7418ce9654f2cea34c
+    m_Address: prize_egg_rare_furniture
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - Prize
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: afd9d93cca154834c9f1eecc6e4f3126
+    m_Address: prize_egg_common_furniture
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - Prize
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: be2bf9578c50c7f4da11a3d2568997df
+    m_Address: prize_egg_mythical_plushie
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - Prize
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: c16f7dbb3036b2d428e08978247f5949
+    m_Address: prize_egg_legendary_furniture
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - Prize
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: dc55c2ee0e8ad2d4ba8d4bbceb25144b
+    m_Address: prize_coin_big
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - Prize
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: e14b06c1be0e3894ab2230d048c5bbd3
+    m_Address: prize_egg_rare_plushie
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - Prize
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: f187c71445c459845b9e1734b0e10815
+    m_Address: prize_ticket
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - Prize
+    FlaggedDuringContentUpdateRestriction: 0
+  m_ReadOnly: 0
+  m_Settings: {fileID: 11400000, guid: 5a8ab5add29d66f4fb0a87e6060c50e0, type: 2}
+  m_SchemaSet:
+    m_Schemas:
+    - {fileID: 11400000, guid: 206609ccb0e0c1f4cafd27818505aa85, type: 2}
+    - {fileID: 11400000, guid: b0adbf453e86fed4890e3e0ff9714cfa, type: 2}

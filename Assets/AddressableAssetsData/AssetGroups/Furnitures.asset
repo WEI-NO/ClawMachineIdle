@@ -1,0 +1,35 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bbb281ee3bf0b054c82ac2347e9e782c, type: 3}
+  m_Name: Furnitures
+  m_EditorClassIdentifier: 
+  m_GroupName: Furnitures
+  m_GUID: 42afd6dbef1cb524dba79d23bca768c2
+  m_SerializeEntries:
+  - m_GUID: 7a0602944ca31464c9012295550844a8
+    m_Address: clawmachine_basic
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - Furniture
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: dd9707b0b407a484f9a1305af49145fc
+    m_Address: table_wood
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - Furniture
+    FlaggedDuringContentUpdateRestriction: 0
+  m_ReadOnly: 0
+  m_Settings: {fileID: 11400000, guid: 5a8ab5add29d66f4fb0a87e6060c50e0, type: 2}
+  m_SchemaSet:
+    m_Schemas:
+    - {fileID: 11400000, guid: 979da02dad191d3448b02edd70bc63ff, type: 2}
+    - {fileID: 11400000, guid: 4bf690807cd85844dbd5da90f14f2461, type: 2}

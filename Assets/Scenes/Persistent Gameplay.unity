@@ -127,6 +127,14 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 2094664076088675224, guid: c5259eb6f838aed4395bc43569397739, type: 3}
+      propertyPath: m_SizeDelta.x
+      value: 11.69689
+      objectReference: {fileID: 0}
+    - target: {fileID: 2094664076088675224, guid: c5259eb6f838aed4395bc43569397739, type: 3}
+      propertyPath: m_SizeDelta.y
+      value: 11.902499
+      objectReference: {fileID: 0}
     - target: {fileID: 3954920298226682193, guid: c5259eb6f838aed4395bc43569397739, type: 3}
       propertyPath: m_Name
       value: Claw Machine Game
@@ -170,6 +178,22 @@ PrefabInstance:
     - target: {fileID: 4963145443782895663, guid: c5259eb6f838aed4395bc43569397739, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7730126917791076930, guid: c5259eb6f838aed4395bc43569397739, type: 3}
+      propertyPath: m_SizeDelta.x
+      value: 11.925746
+      objectReference: {fileID: 0}
+    - target: {fileID: 7730126917791076930, guid: c5259eb6f838aed4395bc43569397739, type: 3}
+      propertyPath: m_SizeDelta.y
+      value: 11.902499
+      objectReference: {fileID: 0}
+    - target: {fileID: 8512942190728520694, guid: c5259eb6f838aed4395bc43569397739, type: 3}
+      propertyPath: m_SizeDelta.x
+      value: 11.69689
+      objectReference: {fileID: 0}
+    - target: {fileID: 8512942190728520694, guid: c5259eb6f838aed4395bc43569397739, type: 3}
+      propertyPath: m_SizeDelta.y
+      value: 11.902499
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

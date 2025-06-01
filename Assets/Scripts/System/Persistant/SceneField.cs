@@ -21,6 +21,11 @@ public class SceneField
         m_SceneName = sceneName;
     }
 
+    public bool Compare(SceneField other)
+    {
+        return other.m_SceneName.CompareTo(m_SceneName) == 0;
+    }
+
 
     // makes it work with the existing Unity methods (LoadLevel/LoadScene)
     public static implicit operator string(SceneField sceneField)

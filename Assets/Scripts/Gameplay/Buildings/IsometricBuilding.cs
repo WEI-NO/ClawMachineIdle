@@ -1,83 +1,229 @@
 using JetBrains.Annotations;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using UnityEngine;
 
 public class IsometricBuilding : MonoBehaviour
 {
+    [Header("Components")]
+    private Animator anim;
+
+    [Header("Building Info")]
+    public string BuildingName;
+    public string Suffix;
+
     [Header("Building Properties")]
     public IsometricBlueprint blueprint;
+    public Transform GridVisual;
+    public ShaderInstancer shader;
+
+    [Header("Outline Properties")]
+    public float maxWidth = 5;
+    public float selectedOutlineWidth = 1.0f;
+    public float draggingOutlineWidth = 0.5f;
+    public bool selected = false;
+
+    private void Awake()
+    {
+        anim = GetComponent<Animator>();
+        if (GridVisual)
+        {
+            shader = GridVisual.GetComponent<ShaderInstancer>();
+        }
+    }
+
+    private void Start()
+    {
+        SetOutline(false, 0.0f);
+    }
 
     private void Update()
     {
         DEBUG_TestIsometricGridInput();
-
-        if (blueprint.LastGridPosition != blueprint.GridPosition)
+        if (blueprint.TargetPosition != blueprint.GridPosition)
         {
-            Vector2Int direction = blueprint.GridPosition - blueprint.LastGridPosition;
+            Vector2Int direction = blueprint.TargetPosition - blueprint.GridPosition;
+            Vector2Int result = direction / 2;
 
-            List<Vector2Int> testPoints = new List<Vector2Int>();
+            // Clamp each component separately
+            if (direction.x > 0)
+                result.x = Mathf.Max(result.x, 1);
+            else if (direction.x < 0)
+                result.x = Mathf.Min(result.x, -1);
+            // if result.x == 0, leave it as 0
 
-            if (direction.x > 0) // Right
-            {
-                // Moved right
-                testPoints.Add(blueprint.GetCornerPosition(IsometricCorner.Bottom_R));
-                testPoints.Add(blueprint.GetCornerPosition(IsometricCorner.Right_B));
-                testPoints.Add(blueprint.GetCornerPosition(IsometricCorner.Right_T));
-                testPoints.Add(blueprint.GetCornerPosition(IsometricCorner.Top_R));
-            }
-            else if (direction.x < 0) // Left
-            {
-                // Moved left
-                testPoints.Add(blueprint.GetCornerPosition(IsometricCorner.Bottom_L));
-                testPoints.Add(blueprint.GetCornerPosition(IsometricCorner.Left_B));
-                testPoints.Add(blueprint.GetCornerPosition(IsometricCorner.Left_T));
-                testPoints.Add(blueprint.GetCornerPosition(IsometricCorner.Top_L));
-            }
+            if (direction.y > 0)
+                result.y = Mathf.Max(result.y, 1);
+            else if (direction.y < 0)
+                result.y = Mathf.Min(result.y, -1);
 
-            if (direction.y > 0) // Up
-            {
-                // Moved up
-                testPoints.Add(blueprint.GetCornerPosition(IsometricCorner.Left_T));
-                testPoints.Add(blueprint.GetCornerPosition(IsometricCorner.Top_L));
-                testPoints.Add(blueprint.GetCornerPosition(IsometricCorner.Top_R));
-                testPoints.Add(blueprint.GetCornerPosition(IsometricCorner.Right_T));
-            }
-            else if (direction.y < 0) // Down
-            {
-                // Moved down
-                testPoints.Add(blueprint.GetCornerPosition(IsometricCorner.Left_B));
-                testPoints.Add(blueprint.GetCornerPosition(IsometricCorner.Bottom_L));
-                testPoints.Add(blueprint.GetCornerPosition(IsometricCorner.Bottom_R));
-                testPoints.Add(blueprint.GetCornerPosition(IsometricCorner.Right_B));
-            }
-
-            bool outOfBound = false;
-            foreach (var point in testPoints)
-            {
-                if (!IsometricGrid2D.Instance.GetWorldPosition(point, out Vector2 w))
-                {
-                    // If it is out of bound.
-                    outOfBound = true;
-                    break;
-                }
-            }
-
-            if (outOfBound)
+            Vector2Int targetPosition = blueprint.GridPosition + result;
+            if (!ValidPlacement(targetPosition, blueprint.GridPosition, out List<IsometricCorner> directions))
             {
                 blueprint.GridPosition = blueprint.LastGridPosition;
-            }
+                // Try pixel snapping up a ramp
+                Vector2Int pixelPerfectOffset = new Vector2Int();
 
-            // If it is not out of bound, apply the change
-            IsometricGrid2D.Instance.GetWorldPosition(blueprint.GridPosition, out Vector2 wp);
-            transform.position = wp;
+                foreach (var p in directions)
+                {
+                    pixelPerfectOffset = Vector2Int.zero;
+                    switch (p)
+                    {
+                        case IsometricCorner.Right_B:
+                            pixelPerfectOffset.x = 2;
+                            break;
+                        case IsometricCorner.Left_B:
+                            pixelPerfectOffset.x = -2;
+                            break;
+                        case IsometricCorner.Top_L:
+                            pixelPerfectOffset.y = 1;
+                            break;
+                        case IsometricCorner.Bottom_L:
+                            pixelPerfectOffset.y = -1;
+                            break;
+                    }
+                    if (pixelPerfectOffset != Vector2Int.zero)
+                    {
+                        targetPosition = blueprint.GridPosition + pixelPerfectOffset;
+                        if (!ValidPlacement(targetPosition, blueprint.GridPosition, out List<IsometricCorner> dir))
+                        {
+                            blueprint.GridPosition = blueprint.LastGridPosition;
+                        } else
+                        {
+                            blueprint.GridPosition = targetPosition;
+                        }
+                    } else
+                    {
+                        break;
+                    }
+                }
+            } else
+            {
+                blueprint.GridPosition = targetPosition;
+            }
         }
 
+        // If it is not out of bound, apply the change
+        IsometricGrid2D.Instance.GetWorldPosition(blueprint.GridPosition, out Vector2 wp);
+        transform.position = wp;
+
+        blueprint.LastGridPosition = blueprint.GridPosition;
+    }
+
+    #region Outline Control
+
+    public void SetOutline(bool state, bool isDragging)
+    {
+        if (!shader) return;
+
+        float target = state ? isDragging ? draggingOutlineWidth : selectedOutlineWidth : 0;
+        target *= maxWidth;
+        shader.SetFloat(1, target);
+    }
+
+    public void SetOutline(bool state, float widthPercentage)
+    {
+        if (!shader) return;
+
+        float target = state ? maxWidth * widthPercentage : 0.0f;
+        shader.SetFloat(1, target);
+    }
+
+    #endregion outline control
+
+    public void SetSelected(bool state, bool isDragging)//, float outlineWidthPercentage = 1.0f)
+    {
+        if (state == selected) return;
+        selected = state;
+
+        SetOutline(state, isDragging);
+    }
+
+    public void PlayAnimation(string trigger)
+    {
+        anim.SetTrigger(trigger);
+    }
+
+    public void ChangeVisualSize(float size)
+    {
+        if (!GridVisual) return;
+
+        GridVisual.localScale = new Vector3(size, size, 1.0f);
+    }
+
+    public bool ValidPlacement(Vector2Int coord, Vector2Int current, out List<IsometricCorner> directions)
+    {
+        Vector2Int direction = coord - current;
+        //direction = new Vector2Int(direction.x != 0 ? direction.x / Mathf.Abs(direction.x) : 0, direction.y != 0 ? direction.y / Mathf.Abs(direction.y) : 0);
+        directions = new List<IsometricCorner>();
+        List<Vector2Int> testPoints = new List<Vector2Int>();
+
+
+        if (direction.x > 0) // Right
+        {
+            // Moved right
+            testPoints.Add(blueprint.GetCornerPosition(IsometricCorner.Bottom_R));
+            testPoints.Add(blueprint.GetCornerPosition(IsometricCorner.Right_B));
+            testPoints.Add(blueprint.GetCornerPosition(IsometricCorner.Right_T));
+            testPoints.Add(blueprint.GetCornerPosition(IsometricCorner.Top_R));
+            directions.Add(IsometricCorner.Right_B);
+        }
+        else if (direction.x < 0) // Left
+        {
+            // Moved left
+            testPoints.Add(blueprint.GetCornerPosition(IsometricCorner.Bottom_L));
+            testPoints.Add(blueprint.GetCornerPosition(IsometricCorner.Left_B));
+            testPoints.Add(blueprint.GetCornerPosition(IsometricCorner.Left_T));
+            testPoints.Add(blueprint.GetCornerPosition(IsometricCorner.Top_L));
+            directions.Add(IsometricCorner.Left_B);
+        }
+
+        if (direction.y > 0) // Up
+        {
+            // Moved up
+            testPoints.Add(blueprint.GetCornerPosition(IsometricCorner.Left_T));
+            testPoints.Add(blueprint.GetCornerPosition(IsometricCorner.Top_L));
+            testPoints.Add(blueprint.GetCornerPosition(IsometricCorner.Top_R));
+            testPoints.Add(blueprint.GetCornerPosition(IsometricCorner.Right_T));
+            directions.Add(IsometricCorner.Top_L);
+        }
+        else if (direction.y < 0) // Down
+        {
+            // Moved down
+            testPoints.Add(blueprint.GetCornerPosition(IsometricCorner.Left_B));
+            testPoints.Add(blueprint.GetCornerPosition(IsometricCorner.Bottom_L));
+            testPoints.Add(blueprint.GetCornerPosition(IsometricCorner.Bottom_R));
+            testPoints.Add(blueprint.GetCornerPosition(IsometricCorner.Right_B));
+            directions.Add(IsometricCorner.Bottom_L);
+        }
+
+        bool outOfBound = false;
+        foreach (var point in testPoints)
+        {
+            if (!IsometricGrid2D.Instance.GetWorldPosition(point + direction, out Vector2 w))
+            {
+                // If it is out of bound.
+                outOfBound = true;
+                break;
+            }
+        }
+
+        return !outOfBound;
+    }
+
+    public void Move(Vector2Int gridPosition)
+    {
+        blueprint.GridPosition = gridPosition;
+    }
+
+    public void SetTargetPosition(Vector2Int targetPosition)
+    {
+        blueprint.TargetPosition = targetPosition;
     }
 
     private void DEBUG_TestIsometricGridInput()
     {
-        blueprint.LastGridPosition = blueprint.GridPosition;
         if (Input.GetKeyDown(KeyCode.UpArrow))
         {
             blueprint.GridPosition = blueprint.GridPosition + new Vector2Int(0, 1);
@@ -144,8 +290,9 @@ public struct IsometricBlueprint
     [Header("Blueprint Properties")]
     public Vector2Int PixelDimension; // Dimension in pixel.
 
-    private Vector2Int _lastGridPosition;
-    private Vector2Int _gridPosition;
+    public Vector2Int _lastGridPosition;
+    public Vector2Int _gridPosition;
+    public Vector2Int TargetPosition;
 
     #region Getter/Setter
 
@@ -184,12 +331,26 @@ public struct IsometricBlueprint
     // Function stubs for each corner
     private Vector2Int GetTop_LCorner()
     {
-        return GetBottom_LCorner() + new Vector2Int(0, PixelDimension.y - 1);
+        Vector2Int bottomLeft = GetBottom_LCorner();
+        int height = (PixelDimension.x + PixelDimension.y) / 2; height -= 1;
+
+        int higher = PixelDimension.y > PixelDimension.x ? PixelDimension.y : PixelDimension.x;
+        int lower = PixelDimension.y < PixelDimension.x ? PixelDimension.y : PixelDimension.x;
+        int rightSkew = higher - lower;
+
+        return bottomLeft + new Vector2Int(rightSkew, height);
     }
 
     private Vector2Int GetTop_RCorner()
     {
-        return GetBottom_RCorner() + new Vector2Int(0, PixelDimension.y - 1);
+        Vector2Int bottomRight = GetBottom_RCorner();
+        int height = (PixelDimension.x + PixelDimension.y) / 2; height -= 1;
+
+        int higher = PixelDimension.y > PixelDimension.x ? PixelDimension.y : PixelDimension.x;
+        int lower = PixelDimension.y < PixelDimension.x ? PixelDimension.y : PixelDimension.x;
+        int rightSkew = higher - lower;
+
+        return bottomRight + new Vector2Int(rightSkew, height);
     }
 
     private Vector2Int GetRight_TCorner()
@@ -199,8 +360,8 @@ public struct IsometricBlueprint
 
     private Vector2Int GetRight_BCorner()
     {
-        int heightTravelled = (PixelDimension.x / 2) - 1;
-        return _gridPosition + new Vector2Int(PixelDimension.x - 1, heightTravelled);
+        int heightTravelled = (PixelDimension.y / 2) - 1;
+        return _gridPosition + new Vector2Int(PixelDimension.y - 1, heightTravelled);
     }
 
     private Vector2Int GetBottom_LCorner()
@@ -215,14 +376,15 @@ public struct IsometricBlueprint
 
     private Vector2Int GetLeft_BCorner()
     {
-        int heightTravelled = PixelDimension.x / 2;
+        int heightTravelled = PixelDimension.x / 2 - 1;
         return _gridPosition + new Vector2Int(-PixelDimension.x, heightTravelled);
     }
 
     private Vector2Int GetLeft_TCorner()
     {
-        return GetLeft_BCorner() + new Vector2Int(0, -1);
+        return GetLeft_BCorner() + new Vector2Int(0, 1);
     }
+    
 
     #endregion isometric corners
 

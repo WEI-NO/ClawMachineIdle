@@ -20,7 +20,7 @@ public class IsometricGrid2D : MonoBehaviour
 
     [Header("Ground Tile")]
     [SerializeField] private Tilemap mainTilemap; // For alignment purposes
-    [SerializeField] private Tile groundTile;
+    [SerializeField] private TileBase groundTile;
     public Dictionary<Vector2Int, bool> GroundTiles = new Dictionary<Vector2Int, bool>(); // <Coordinate, Occupation>
 
     void Awake()
@@ -32,16 +32,11 @@ public class IsometricGrid2D : MonoBehaviour
     {
         InitializeGroundTiles();
 
-        InitializeTile(new Vector2Int(-1, 0));
-        InitializeTile(new Vector2Int(-1, 1));
-        InitializeTile(new Vector2Int(-1, 2));
-
     }
 
 
     void Update()
     {
-        
     }
 
     private void Initialize()
@@ -73,30 +68,42 @@ public class IsometricGrid2D : MonoBehaviour
         GridDimension = new Vector2Int(PlayerRoom.Instance.GetWidth(), PlayerRoom.Instance.GetHeight());
         Vector2Int pixelCount = GridDimension * PixelPerRoom;
 
-        int halfX = pixelCount.x / 2;
-
-        // Bottom Half
-        for (int y = 0; y < pixelCount.y / 4; y++)
+        if (mainTilemap)
         {
-            int allowedHalfX = ((y + 1) * 4) / 2;
-            for (int x = -allowedHalfX; x < allowedHalfX; x++)
+            mainTilemap.ClearAllTiles();
+            for (int i = 0; i < GridDimension.x; i++)
             {
-                Vector2Int coord = new Vector2Int(x, y);
-                GroundTiles.Add(coord, false);
+                for (int j = 0; j < GridDimension.y; j++)
+                {
+                    InitializeTile(new Vector2Int(i, j));
+                }
             }
         }
 
-        // Top Half
-        int startY = pixelCount.y / 4;
-        for (int y = startY; y < pixelCount.y / 2; y++)
-        {
-            int allowedHalfX = (startY * 4) / 2 - (Mathf.Abs(y - startY) * 2);
-            for (int x = -allowedHalfX; x < allowedHalfX; x++)
-            {
-                Vector2Int coord = new Vector2Int(x, y);
-                GroundTiles.Add(coord, false);
-            }
-        }
+        //int halfX = pixelCount.x / 2;
+
+        //// Bottom Half
+        //for (int y = 0; y < pixelCount.y / 4; y++)
+        //{
+        //    int allowedHalfX = ((y + 1) * 4) / 2;
+        //    for (int x = -allowedHalfX; x < allowedHalfX; x++)
+        //    {
+        //        Vector2Int coord = new Vector2Int(x, y);
+        //        GroundTiles.Add(coord, false);
+        //    }
+        //}
+
+        //// Top Half
+        //int startY = pixelCount.y / 4;
+        //for (int y = startY; y < pixelCount.y / 2; y++)
+        //{
+        //    int allowedHalfX = (startY * 4) / 2 - (Mathf.Abs(y - startY) * 2);
+        //    for (int x = -allowedHalfX; x < allowedHalfX; x++)
+        //    {
+        //        Vector2Int coord = new Vector2Int(x, y);
+        //        GroundTiles.Add(coord, false);
+        //    }
+        //}
 
         //for (int i = -halfX; i < halfX; i++)
         //{
@@ -107,7 +114,6 @@ public class IsometricGrid2D : MonoBehaviour
         //        GroundTiles.Add(coord, false);
         //    }
         //}
-        print(GroundTiles.Count);
     }
 
     /// <summary>
@@ -134,7 +140,6 @@ public class IsometricGrid2D : MonoBehaviour
             for (int x = -allowedHalfX; x < allowedHalfX; x++)
             {
                 Vector2Int coord = startPixel + new Vector2Int(x, y);
-                print(coord);
                 if (GroundTiles.ContainsKey(coord))
                 {
                     continue;
@@ -151,7 +156,6 @@ public class IsometricGrid2D : MonoBehaviour
             for (int x = -allowedHalfX; x < allowedHalfX; x++)
             {
                 Vector2Int coord = startPixel + new Vector2Int(x, y);
-                print(coord);
                 if (GroundTiles.ContainsKey(coord))
                 {
                     continue;

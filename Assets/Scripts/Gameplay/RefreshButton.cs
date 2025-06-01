@@ -3,8 +3,9 @@ using UnityEngine;
 
 public class RefreshButton : InGameButton
 {
+    public PrizeDumper prizeDumper;
     protected override void ButtonFunction()
     {
-        print("Refresh");
+        prizeDumper.StartRefreshPrize();
     }
 }

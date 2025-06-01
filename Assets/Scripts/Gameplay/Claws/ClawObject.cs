@@ -112,7 +112,7 @@ public class ClawObject : MonoBehaviour
         inSequence = true;
         clawC.ChangeState(ClawState.Expand);
         //targetY = yLimits.x;
-        CraneStickController.Instance.SetTargetY(CraneStickController.Instance.yLimits.x);
+        CraneStickController.Instance.SetTargetY(CraneStickController.Instance.grabY);
         CraneStickController.Instance.SetVerticalSpeed(downwardSpeed);
         heightMoving = true;
         rb.angularDamping = sequenceAngularDamp;
@@ -128,7 +128,7 @@ public class ClawObject : MonoBehaviour
         clawC.ChangeState(ClawState.Grab);
         yield return new WaitForSeconds(0.85f);
         OnGrabbed?.Invoke();
-        CraneStickController.Instance.SetTargetY(CraneStickController.Instance.yLimits.y);
+        CraneStickController.Instance.SetTargetY(CraneStickController.Instance.idleY);
         CraneStickController.Instance.SetVerticalSpeed(upwardSpeed);
         //targetY = -1.0f;
         heightMoving = true;

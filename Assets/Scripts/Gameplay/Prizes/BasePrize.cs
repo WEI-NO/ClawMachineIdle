@@ -23,10 +23,7 @@ public class BasePrize : MonoBehaviour
     }
     private void Start()
     {
-        ItemLoader.Instance.LoadItem(Reward, (item) =>
-        {
-            RewardItem = item;
-        });
+        RewardItem = MainDatabase.Instance.DB_Currency.GetDataByID(Reward);
         OnStart();
     }
     private void Update()
@@ -51,16 +48,28 @@ public class BasePrize : MonoBehaviour
     public string Reward;
     public int Quantity = 1;
     public BaseItem RewardItem;
+    public ItemRarity ItemRarity;
+    public bool isEgg;
     
+    protected void SetQuantity(int q)
+    {
+        Quantity = q;
+    }
 
-    public virtual void PrizeClaim()
+    public void PrizeClaim()
+    {
+        PrizeClaimFunction();
+        Destroy(gameObject);
+    }
+
+    public virtual void PrizeClaimFunction()
     {
         if (RewardItem)
         {
             PlayerInventory.Instance.GiveItem(RewardItem, Quantity);
         }
-        Destroy(gameObject);
     }
 
+    
 
 }

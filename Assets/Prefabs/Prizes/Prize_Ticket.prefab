@@ -76,7 +76,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: -2
-  m_Sprite: {fileID: -1292138795, guid: c40d573e674f5bd44a148f85a4208544, type: 3}
+  m_Sprite: {fileID: -7196405766381433629, guid: ef22d0d24c0554e4d8cc1e80ce2d4169, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -164,6 +164,7 @@ MonoBehaviour:
   Reward: Ticket
   Quantity: 1
   RewardItem: {fileID: 0}
+  PrizeRarity: 3
 --- !u!61 &4180668345730299926
 BoxCollider2D:
   m_ObjectHideFlags: 0

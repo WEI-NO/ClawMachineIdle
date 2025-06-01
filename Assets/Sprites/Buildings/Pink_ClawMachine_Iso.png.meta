@@ -129,17 +129,35 @@ TextureImporter:
       name: Pink_ClawMachine_Iso_0
       rect:
         serializedVersion: 2
-        x: 18
-        y: 17
-        width: 30
-        height: 41
+        x: 13
+        y: 13
+        width: 40
+        height: 49
       alignment: 9
-      pivot: {x: 0.46875, y: 0}
+      pivot: {x: 0.475, y: 0.08163265}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: -1
+      outline:
+      - - {x: 16, y: -15.5}
+        - {x: 17, y: -13.5}
+        - {x: 17, y: 6.5}
+        - {x: 16, y: 18.5}
+        - {x: 2, y: 22.5}
+        - {x: -6, y: 22.5}
+        - {x: -17, y: 15.5}
+        - {x: -17, y: -15.5}
+        - {x: -7, y: -22.5}
+        - {x: 1, y: -22.5}
+      physicsShape:
+      - - {x: 13, y: -14.5}
+        - {x: 13, y: 14.5}
+        - {x: 1, y: 20.5}
+        - {x: -3, y: 20.5}
+        - {x: -15, y: 14.5}
+        - {x: -15, y: -14.5}
+        - {x: -3, y: -20.5}
+        - {x: 1, y: -20.5}
+      tessellationDetail: 0
       bones: []
       spriteID: 915480e87ad6661f0800000000000000
       internalID: -1052032896534559463

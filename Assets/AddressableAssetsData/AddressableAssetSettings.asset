@@ -15,7 +15,7 @@ MonoBehaviour:
   m_DefaultGroup: 4f66b273064a9ef4fb19e766787e3b14
   m_currentHash:
     serializedVersion: 2
-    Hash: 800ccfa5e6d10167714b78a5aa42a183
+    Hash: cb56280ddf2fcbded3ed5ee1462229f1
   m_OptimizeCatalogSize: 0
   m_BuildRemoteCatalog: 0
   m_CatalogRequestsTimeout: 0
@@ -59,8 +59,10 @@ MonoBehaviour:
   m_BuildAddressablesWithPlayerBuild: 0
   m_overridePlayerVersion: '[UnityEditor.PlayerSettings.bundleVersion]'
   m_GroupAssets:
+  - {fileID: 11400000, guid: 5a681fbb8b60c874fbb5e046977d20c2, type: 2}
   - {fileID: 11400000, guid: 6111af9c36344ed4397508ead10226bf, type: 2}
-  - {fileID: 11400000, guid: d5774847396acc249816ca50b94c7631, type: 2}
+  - {fileID: 11400000, guid: 9b5dc1da961578846bd6fa776ed04073, type: 2}
+  - {fileID: 11400000, guid: 4ee35a7d46de18944ab4d3644d5f8a0a, type: 2}
   m_BuildSettings:
     m_LogResourceManagerExceptions: 1
     m_BundleBuildPath: Temp/com.unity.addressables/AssetBundles
@@ -101,6 +103,9 @@ MonoBehaviour:
     m_LabelNames:
     - default
     - Currency
+    - Prize
+    - Furniture
+    - Plushie
   m_SchemaTemplates: []
   m_GroupTemplateObjects:
   - {fileID: 11400000, guid: 15962f4ef55447d45941bc373e23c528, type: 2}

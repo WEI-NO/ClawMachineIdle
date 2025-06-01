@@ -21,6 +21,7 @@ public class PlayerInventory : MonoBehaviour
 {
     public static PlayerInventory Instance;
 
+    // Sorted by ItemCategory -> name
     public List<Dictionary<string, InventoryItem>> Backpack = new List<Dictionary<string, InventoryItem>>();
     public Action<InventoryItem> OnBackpackModified;
     private void Awake()

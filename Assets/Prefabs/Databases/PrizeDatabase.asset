@@ -1,0 +1,27 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 25d0d6fd29c240c4388f93093d6617c7, type: 3}
+  m_Name: PrizeDatabase
+  m_EditorClassIdentifier: 
+  allData:
+  - {fileID: 11400000, guid: f406c1b1aef49d3489cc83e5b438ab6d, type: 2}
+  - {fileID: 11400000, guid: ff9f82296911c0840801ef59cdd759bd, type: 2}
+  - {fileID: 11400000, guid: 25ea494b323eb264192a12f0de0512a3, type: 2}
+  - {fileID: 11400000, guid: dd2e5a2fbe14fd749aa878bc85e3cb33, type: 2}
+  - {fileID: 11400000, guid: aaec76f15677203468e8bf2085293f60, type: 2}
+  - {fileID: 11400000, guid: a926208abfe11a3439036f0ed7b80095, type: 2}
+  - {fileID: 11400000, guid: 09bbd8ccf9ba79d4e9c318c46956687d, type: 2}
+  - {fileID: 11400000, guid: 55b11d5473be90840b5c21ce1373be87, type: 2}
+  - {fileID: 11400000, guid: afee245ec0b918248bc30a18c9383443, type: 2}
+  - {fileID: 11400000, guid: 75af6aeb18b22b044990339e4a8f6402, type: 2}
+  - {fileID: 11400000, guid: 42155a5734f670d4793a01dd5dc614b4, type: 2}
+  - {fileID: 11400000, guid: 4a13a9b3d29a0fc439bd1d41059f8da0, type: 2}
