@@ -6,282 +6,311 @@ using UnityEngine.Events;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
 
+/// <summary>
+/// Handles touch interactions for isometric building placement and selection.
+/// Manages selection, drag/move, edit mode, and camera controls.
+/// </summary>
 public class TouchController : MonoBehaviour
 {
+    // --- Singleton & Instance ---
+    public static TouchController Instance { get; private set; }
+
+    // --- Inspector References ---
+    [Header("Core References")]
+    [SerializeField] private MovingIndicator movingIndicator;
+
+    [Header("Touch Settings")]
+    [SerializeField] private float holdThreshold = 1.5f;
+
+    [Header("Camera Controls")]
+    [SerializeField] private float cameraPanSensitivity = 1.0f;
+
+    // --- Touch State ---
+    [SerializeField] private bool isHolding;
+    [SerializeField] private bool isDragging;
+    [SerializeField] private bool triggeredHold;
+    [SerializeField] private float holdTimer;
+    private bool lostHold = false;
+    [SerializeField] private int pointerId = -1;
+    private Vector2 lastTouchPosition;
+    private Vector3 dragOrigin;
+    private Vector2Int dragOffset;
+    private Vector2Int startGridOrigin;
+
+    // --- Selection State ---
     [SerializeField] private IsometricBuilding targetBuilding;
     public IsometricBuilding selectedBuilding;
-
     public Action<IsometricBuilding> OnSelectedBuildingChange;
 
-    public static TouchController Instance;
+    // --- Edit Mode State ---
+    public bool EditMode;
 
-    private GraphicRaycaster _raycaster;
-
-    // Adjustable hold time threshold (seconds)
-    public float holdThreshold = 1.5f;
-
-    private bool isHolding = false;
-    private bool isDragging = false;
-    private float holdTimer = 0f;
-    private Vector2Int dragOffset;
-    private Vector3 dragOrigin;
-    private Vector2Int startOrigin;
-
+    // --- Unity Events (for UI/Animation hooks) ---
     public UnityEvent OnTouchStart;
     public UnityEvent OnTouchUpdate;
     public UnityEvent OnTouchLeave;
     public UnityEvent OnHoldComplete;
 
-    public MovingIndicator movingIndicator;
-    private bool triggeredHold = false;
+    public Action OnEditModeEnter;
+    public Action OnEditModeExit;
 
-    [Header("Camera Controls")]
-    public float CameraPanSensitivity = 1.0f;
+    #region Unity Methods
 
-    [Header("Building Size Visual")]
-
-    // Touch or mouse id
-    private int pointerId = -1;
-
-    void Awake()
+    private void Awake()
     {
-        Initializer.SetInstance(this);
+        if (Instance && Instance != this) Destroy(gameObject);
+        Instance = this;
+        // Setup or validate any required references here
     }
 
-    // Update is called once per frame
-    void Update()
+    private void Update()
     {
-        HandleTouch();
+        HandleTouchInput();
     }
 
-    private Vector2 lastTouchPosition; // Add this to your class if not already
+    #endregion
 
-    void HandleTouch()
+    #region Touch Processing
+
+    private void HandleTouchInput()
     {
         if (Input.touchCount == 0) return;
-
         Touch touch = Input.GetTouch(0);
-        Vector2 wp = Camera.main.ScreenToWorldPoint(touch.position);
 
-        if (IsPointerOverAnyUI(touch.position))
-        {
-            return;
-        }
+        // Early-out for UI
+        if (IsPointerOverAnyUI(touch.position)) return;
 
-        IsometricBuilding buildingUnderFinger = FindBuildingOnTouch();
+        Vector2 worldPoint = Camera.main.ScreenToWorldPoint(touch.position);
+        IsometricBuilding building = FindBuildingAtScreenPoint(touch.position);
 
         switch (touch.phase)
         {
             case TouchPhase.Began:
-                HandleTouchBegan(touch, wp, buildingUnderFinger);
+                BeginTouch(touch, worldPoint, building);
                 break;
-
             case TouchPhase.Moved:
             case TouchPhase.Stationary:
-                HandleTouchDrag(touch, wp, buildingUnderFinger);
+                UpdateTouch(touch, worldPoint, building);
                 break;
-
             case TouchPhase.Ended:
             case TouchPhase.Canceled:
-                HandleTouchEnd(touch, buildingUnderFinger);
+                EndTouch(touch, building);
                 break;
         }
     }
 
-    private void HandleTouchBegan(Touch touch, Vector2 wp, IsometricBuilding buildingUnderFinger)
+    private void BeginTouch(Touch touch, Vector2 worldPoint, IsometricBuilding building)
     {
-        lastTouchPosition = wp;
+        // Start hold state
         isHolding = true;
-        holdTimer = 0f;
         pointerId = touch.fingerId;
-        targetBuilding = null;
+        holdTimer = 0f;
+        lastTouchPosition = worldPoint;
+        targetBuilding = building;
+        isDragging = false;
+        triggeredHold = false;
 
-        if (buildingUnderFinger)
+        OnTouchStart?.Invoke();
+
+        // If the finger clicked on a building on 'down'
+        if (targetBuilding)
         {
-            targetBuilding = buildingUnderFinger;
-            dragOrigin = (Vector3)wp;
-            startOrigin = targetBuilding.blueprint.GridPosition;
-
-            // Visuals and selection
-            movingIndicator.Activate(() => holdTimer, () => holdThreshold);
+            startGridOrigin = targetBuilding.blueprint.GridPosition;
+            dragOrigin = worldPoint;
+            if (!EditMode)
+            {
+                movingIndicator?.Activate(() => holdTimer, () => holdThreshold);
+            }
             targetBuilding.PlayAnimation("Held");
             SelectBuilding(targetBuilding, false);
 
-            // Register callback for hold complete
-            OnHoldComplete.AddListener(() => { targetBuilding.PlayAnimation("Selected"); });
+            // Set up hold-complete logic only once per touch
+            OnHoldComplete.RemoveAllListeners();
+            OnHoldComplete.AddListener(() =>
+            {
+                targetBuilding.PlayAnimation("Selected");
+            });
+        }
+        else
+        {
+            SelectBuilding(null, false);
         }
     }
 
-    private void HandleTouchDrag(Touch touch, Vector2 wp, IsometricBuilding buildingUnderFinger)
+    private void UpdateTouch(Touch touch, Vector2 worldPoint, IsometricBuilding building)
     {
-        if (!isHolding || touch.fingerId != pointerId) return;
-
-        bool isOffBuilding = (buildingUnderFinger == null || buildingUnderFinger != targetBuilding || targetBuilding == null) && !triggeredHold;
-        if (!isDragging)
-        {
-            isDragging = true;
-            if (targetBuilding)
-                startOrigin = targetBuilding.blueprint.GridPosition;
-        }
-
-        if (isOffBuilding)
-        {
-            HandleDragOffBuilding(wp);
+        if (!isHolding || touch.fingerId != pointerId)
             return;
-        }
-
-        // Continue normal hold/drag logic if still on the same building
-        Vector3 offset = (Vector3)wp - dragOrigin;
-        offset = new Vector3(32 * offset.x, 32 * offset.y, 0);
-        dragOffset = startOrigin + new Vector2Int(Mathf.RoundToInt(offset.x), Mathf.RoundToInt(offset.y));
 
         holdTimer += Time.deltaTime;
+        bool overTarget = building != null && building == targetBuilding;
 
-        if (holdTimer >= holdThreshold && !triggeredHold)
+        // --- Early cancel if finger is off building before hold completes
+        if (!overTarget && !triggeredHold && !lostHold)
         {
-            movingIndicator.Deactivate();
-            OnHoldComplete?.Invoke();
-            triggeredHold = true;
+            // Cancel hold: lose the right to move/drag
+            movingIndicator?.Deactivate();
+            lostHold = true;
+
+            // Play release animation and deselect if desired
             if (targetBuilding)
-                targetBuilding.SetOutline(true, 0.5f);
+            {
+                targetBuilding.PlayAnimation("Release");
+                SelectBuilding(null, false);
+            }
+            OnHoldComplete.RemoveAllListeners();
+            // DO NOT set isHolding = false or pointerId = -1
+            // Allow camera pan for the rest of this touch
         }
 
-        if (isDragging && triggeredHold)
+
+        if (!isDragging && targetBuilding && !lostHold)
         {
+            if (holdTimer >= holdThreshold || EditMode)
+            {
+                // Trigger hold-complete (enter edit mode)
+                triggeredHold = true;
+                isDragging = true;
+                movingIndicator?.Deactivate();
+                OnHoldComplete?.Invoke();
+                SetEditMode(true);
+
+                if (targetBuilding)
+                    targetBuilding.SetOutline(true, 0.5f);
+            }
+        }
+
+        // Is dragging and target building exists and either triggered hold or editmode is on and haven't lost hold
+        if (isDragging && targetBuilding && (triggeredHold || EditMode) && !lostHold)
+        {
+            // Dragging logic
+            Vector3 offset = worldPoint - (Vector2)dragOrigin;
+            offset = new Vector3(32 * offset.x, 32 * offset.y, 0); // TODO: Make 32 a configurable "pixels per grid" field
+            dragOffset = startGridOrigin + new Vector2Int(Mathf.RoundToInt(offset.x), Mathf.RoundToInt(offset.y));
             targetBuilding.SetTargetPosition(dragOffset);
         }
-
-        lastTouchPosition = wp;
-    }
-
-    private void HandleDragOffBuilding(Vector2 wp)
-    {
-        SelectBuilding(null, false);
-
-        if (isDragging)
+        else if (!overTarget)
         {
-            Vector2 delta = wp - lastTouchPosition;
-            delta *= CameraPanSensitivity;
-            // Invert if you want "drag world, not camera" feel
-            RoomCamera.Instance.SetTargetPosition(Camera.main.transform.position - (Vector3)delta);
-            lastTouchPosition = wp;
+            // Camera pan (still allowed after lostHold)
+            Vector2 delta = worldPoint - lastTouchPosition;
+            RoomCamera.Instance.SetTargetPosition(Camera.main.transform.position - (Vector3)(delta * cameraPanSensitivity));
         }
 
-        // If finger has left original building before drag starts, cancel hold
-        if (holdTimer < holdThreshold)
-        {
-            movingIndicator.Deactivate();
-            OnHoldComplete.RemoveAllListeners();
-            triggeredHold = false;
-            holdTimer = 0f;
-            if (targetBuilding)
-                targetBuilding.PlayAnimation("Release");
-        }
+        lastTouchPosition = worldPoint;
+        OnTouchUpdate?.Invoke();
+
     }
 
-    private void HandleTouchEnd(Touch touch, IsometricBuilding buildingUnderFinger)
+    private void EndTouch(Touch touch, IsometricBuilding building)
     {
-        if (!isHolding || touch.fingerId != pointerId) return;
+        if (!isHolding || touch.fingerId != pointerId)
+            return;
 
+        // End drag/hold state
         isHolding = false;
+        lostHold = false;
         pointerId = -1;
 
         if (targetBuilding)
         {
-            // If touch is let go on the same building selected, play the select animation and outline
-            if (targetBuilding == buildingUnderFinger || triggeredHold)
+            // If still holding same building, select it; else, release
+            if (targetBuilding == building || triggeredHold)
             {
                 targetBuilding.PlayAnimation("Selected");
                 SelectBuilding(targetBuilding, false);
             }
-            // If touch is let go and hovering over a different building, AND hold hasn't been triggered on the targetBuilding
             else
             {
                 targetBuilding.PlayAnimation("Release");
                 SelectBuilding(null, false);
             }
+            if (isDragging)
+            {
+                isDragging = false;
+                targetBuilding.SetTargetPosition(targetBuilding.blueprint.GridPosition);
+            }
         }
 
-        if (isDragging && targetBuilding)
-        {
-            isDragging = false;
-            targetBuilding.SetTargetPosition(targetBuilding.blueprint.GridPosition);
-        }
-        movingIndicator.Deactivate();
+        movingIndicator?.Deactivate();
         triggeredHold = false;
         OnHoldComplete.RemoveAllListeners();
+        OnTouchLeave?.Invoke();
     }
 
+    #endregion
+
+    #region Building Selection/Helpers
 
     private void SelectBuilding(IsometricBuilding building, bool isDragging)
     {
-        var lastSelected = selectedBuilding;
-        // If selecting another building while a different building is selected.
         if (selectedBuilding && selectedBuilding != building)
         {
             selectedBuilding.SetSelected(false, isDragging);
-            selectedBuilding = null;
         }
-
-        // Select the building.
-        if (building)
+        selectedBuilding = building;
+        if (selectedBuilding)
         {
-            selectedBuilding = building;
             selectedBuilding.SetSelected(true, isDragging);
         }
-
-        if (lastSelected != selectedBuilding)
-        {
-            OnSelectedBuildingChange?.Invoke(selectedBuilding);
-        }
+        OnSelectedBuildingChange?.Invoke(selectedBuilding);
     }
 
-    private IsometricBuilding FindBuildingOnTouch()
+    private IsometricBuilding FindBuildingAtScreenPoint(Vector2 screenPosition)
     {
-        Touch touch = Input.GetTouch(0);
-        Vector2 wp = Camera.main.ScreenToWorldPoint(touch.position);
-        Collider2D[] hits = Physics2D.OverlapPointAll(wp);
-        IsometricBuilding result = null;
-        float lowestY = float.MaxValue;
+        Vector2 worldPoint = Camera.main.ScreenToWorldPoint(screenPosition);
+        Collider2D[] hits = Physics2D.OverlapPointAll(worldPoint);
 
-        foreach (var h in hits)
+        IsometricBuilding closest = null;
+        float lowestY = float.MaxValue;
+        foreach (var hit in hits)
         {
-            var building = h.GetComponentInParent<IsometricBuilding>();
+            var building = hit.GetComponentInParent<IsometricBuilding>();
             if (building != null)
             {
-                if (building == targetBuilding)
+                if (building == selectedBuilding)
                 {
-                    result = targetBuilding;
-                    break;
+                    return building;
                 }
                 float y = building.transform.position.y;
                 if (y < lowestY)
                 {
                     lowestY = y;
-                    result = building;
+                    closest = building;
                 }
             }
         }
-        return result;
+        return closest;
     }
 
-    // Returns true if pointer is over any UI element in any canvas
     public static bool IsPointerOverAnyUI(Vector2 screenPosition)
     {
-        // Get all active GraphicRaycasters
-        var raycasters = FindObjectsByType<GraphicRaycaster>(sortMode:FindObjectsSortMode.None);
+        var raycasters = FindObjectsByType<GraphicRaycaster>(sortMode: FindObjectsSortMode.None);
         foreach (var raycaster in raycasters)
         {
-            // Only check enabled and active canvases
             if (!raycaster.enabled || !raycaster.gameObject.activeInHierarchy)
                 continue;
-
             PointerEventData ped = new PointerEventData(EventSystem.current) { position = screenPosition };
             List<RaycastResult> results = new List<RaycastResult>();
             raycaster.Raycast(ped, results);
-            if (results.Count > 0)
-                return true;
+            if (results.Count > 0) return true;
         }
         return false;
     }
+
+    #endregion
+
+    #region Edit Mode
+
+    public void SetEditMode(bool enabled)
+    {
+        if (EditMode == enabled) return;
+        EditMode = enabled;
+        //if (enabled)
+        //{
+        //    OnSelectedBuildingChange?.Invoke(null); // Deselect in edit mode
+        //}
+        EditModeUI.Instance?.Toggle(EditMode);
+    }
+
+    #endregion
 }

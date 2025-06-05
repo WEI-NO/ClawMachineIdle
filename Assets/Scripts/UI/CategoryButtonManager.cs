@@ -15,6 +15,7 @@ public class CategoryButtonManager : MonoBehaviour
     //[SerializeField] private Transform foregroundParent;
 
     [SerializeField] private TextMeshProUGUI categoryText;
+    private BagUIContent bagContent;
 
     private void Start()
     {
@@ -27,6 +28,7 @@ public class CategoryButtonManager : MonoBehaviour
                 buttons.Add(button);
             }
         }
+        bagContent = GetComponentInParent<BagUIContent>();
         Choose(0);
     }
 
@@ -42,15 +44,23 @@ public class CategoryButtonManager : MonoBehaviour
         foreach (var b in buttons)
         {
             float yOffset = defaultYOffset;
+            // If the button is found
             if (b == activeButton)
             {
+                
                 b.SetActive(true);
                 yOffset = selectedYOffset;
                 SetCategoryName(index);
+                if (bagContent)
+                {
+                    bagContent.ShowCategory((BagCategory)index);
+                }
                 //b.transform.SetParent(foregroundParent, true);
             }
+            // If it is not the active button
             else
             {
+                // And it is also active
                 if (b.active)
                 {
                     b.SetActive(false);

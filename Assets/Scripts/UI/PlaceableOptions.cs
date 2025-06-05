@@ -11,6 +11,9 @@ public class PlaceableOptions : MonoBehaviour
     [SerializeField] private TextMeshProUGUI nameText;
     [SerializeField] private TextMeshProUGUI suffixText;
 
+    private IsometricBuilding lastSavedBuilding = null;
+
+    private bool currentState = false;
     private void Awake()
     {
         anim = GetComponent<Animator>();
@@ -24,16 +27,32 @@ public class PlaceableOptions : MonoBehaviour
         }
     }
 
+    private void Update()
+    {
+        if (currentState && TouchController.Instance.EditMode)
+        {
+            anim.SetTrigger("Hide");
+            currentState = false;
+        }
+    }
+
     private void OnSelectedBuildingChange(IsometricBuilding b)
     {
+        if (TouchController.Instance.EditMode)
+        {
+            return;
+        }
+        if (b == lastSavedBuilding) return;
         if (!b)
         {
             // Hide
             anim.SetTrigger("Hide");
+            currentState = false;
         } else
         {
             // Show
             anim.SetTrigger("Show");
+            currentState = true;
             if (nameText)
             {
                 nameText.text = b.BuildingName;
@@ -42,8 +61,8 @@ public class PlaceableOptions : MonoBehaviour
             {
                 suffixText.text = b.Suffix;
             }
-
         }
+        lastSavedBuilding = b;
     }
 
     private IsometricBuilding GetCurrentBuilding()
@@ -75,6 +94,12 @@ public class PlaceableOptions : MonoBehaviour
         if (GetCurrentBuilding() is var placeable)
         {
             // Perform function
+            if (MainDatabase.Instance.DB_Placeable.GetDataByID(placeable.BuildingID) is var data)
+            {
+                PlayerInventory.Instance.GiveItem(data, 1);
+                Destroy(placeable.gameObject);
+                OnSelectedBuildingChange(null);
+            }
         }
     }
 

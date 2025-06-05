@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5e6f3fbb560bd6041a202ea918fa4f23, type: 3}
   m_Name: IsometricRule_Floor
   m_EditorClassIdentifier: 
-  m_DefaultSprite: {fileID: -7541642142940281356, guid: c801c81ea291652458a0a29eeee405d2, type: 3}
+  m_DefaultSprite: {fileID: 489354470, guid: 739d332f3be6a7f41a0ec708ce041279, type: 3}
   m_DefaultGameObject: {fileID: 0}
   m_DefaultColliderType: 1
   m_TilingRules:

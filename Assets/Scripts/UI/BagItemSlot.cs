@@ -71,4 +71,9 @@ public class BagItemSlot : MonoBehaviour
     {
         SlotItemDisplay.Instance.DisplayItem(heldItem);
     }
+
+    public BaseItem GetItem()
+    {
+        return item;
+    }
 }

@@ -27,11 +27,12 @@ public class RoomCamera : MonoBehaviour
         // Maintain Z position for orthographic camera
         position.z = transform.position.z;
         targetPosition = position;
+        transform.position = targetPosition;
     }
 
     private void Update()
     {
         // Smoothly move camera towards targetPosition
-        transform.position = Vector3.Lerp(transform.position, targetPosition, lerpSpeed * Time.deltaTime);
+        //transform.position = Vector3.Lerp(transform.position, targetPosition, lerpSpeed * Time.deltaTime);
     }
 }

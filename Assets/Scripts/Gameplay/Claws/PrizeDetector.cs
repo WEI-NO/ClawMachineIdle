@@ -1,3 +1,4 @@
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -11,6 +12,9 @@ public class PrizeDetector : MonoBehaviour
     public LayerMask groundLayer;
 
     public List<BasePrize> grabbedObj;
+    [SerializeField] private GameObject claimEffect;
+    [SerializeField] private float claimDelay = 0.1f;
+    private Coroutine prizeClaimCoroutine = null;
 
     private void Awake()
     {
@@ -26,9 +30,26 @@ public class PrizeDetector : MonoBehaviour
 
     private void ClaimPrize()
     {
+        if (prizeClaimCoroutine != null)
+        {
+            StopCoroutine(prizeClaimCoroutine);
+        }
+        prizeClaimCoroutine = StartCoroutine(ClaimPrizeCoroutine());
+    }
+
+    private IEnumerator ClaimPrizeCoroutine()
+    {
         for (int i = grabbedObj.Count - 1; i >= 0; i--)
         {
-            grabbedObj[i].PrizeClaim();
+            if (grabbedObj[i])
+            {
+                if (claimEffect)
+                {
+                    Instantiate(claimEffect, grabbedObj[i].transform.position, Quaternion.identity);
+                }
+                grabbedObj[i].PrizeClaim();
+            }
+            yield return new WaitForSeconds(claimDelay);
         }
 
         grabbedObj.Clear();

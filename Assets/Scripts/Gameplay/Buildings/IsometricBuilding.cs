@@ -12,6 +12,7 @@ public class IsometricBuilding : MonoBehaviour
     [Header("Building Info")]
     public string BuildingName;
     public string Suffix;
+    public string BuildingID;
 
     [Header("Building Properties")]
     public IsometricBlueprint blueprint;
