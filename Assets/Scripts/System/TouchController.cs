@@ -134,6 +134,8 @@ public class TouchController : MonoBehaviour
         else
         {
             SelectBuilding(null, false);
+            // Start camera drag!
+            RoomCamera.Instance.OnDragStart(touch.position);
         }
     }
 
@@ -161,8 +163,9 @@ public class TouchController : MonoBehaviour
             OnHoldComplete.RemoveAllListeners();
             // DO NOT set isHolding = false or pointerId = -1
             // Allow camera pan for the rest of this touch
+            // If the finger left the building, start panning
+            RoomCamera.Instance.OnDragStart(touch.position); // Ensure pan drag starts after hold is lost
         }
-
 
         if (!isDragging && targetBuilding && !lostHold)
         {
@@ -192,14 +195,13 @@ public class TouchController : MonoBehaviour
         else if (!overTarget)
         {
             // Camera pan (still allowed after lostHold)
-            Vector2 delta = worldPoint - lastTouchPosition;
-            RoomCamera.Instance.SetTargetPosition(Camera.main.transform.position - (Vector3)(delta * cameraPanSensitivity));
+            RoomCamera.Instance.OnDragUpdate(touch.position);
         }
 
         lastTouchPosition = worldPoint;
         OnTouchUpdate?.Invoke();
-
     }
+
 
     private void EndTouch(Touch touch, IsometricBuilding building)
     {
@@ -294,7 +296,7 @@ public class TouchController : MonoBehaviour
             raycaster.Raycast(ped, results);
             if (results.Count > 0) return true;
         }
-        return false;
+        return false; 
     }
 
     #endregion
