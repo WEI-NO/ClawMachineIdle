@@ -13,7 +13,8 @@ public class PrizeDumper : MonoBehaviour
     public bool InSequence = false;
 
     public List<BasePrize> prizeBag = new List<BasePrize>();
-    [SerializeField] private PrizeSetting prizeSetting;
+
+    //[SerializeField] private PrizeSetting prizeSetting;
     [SerializeField] private Transform prizeContainer;
 
     [SerializeField] private float prizeDumpCooldown = 0.3f;
@@ -26,6 +27,11 @@ public class PrizeDumper : MonoBehaviour
     [SerializeField] private float prizeDumpForce = 5f;      // Magnitude of force
     [SerializeField] private float minAngle = -45f;          // In degrees, left-down
     [SerializeField] private float maxAngle = 45f;           // In degrees, right-down
+
+    [Header("Prize Properties")]
+    public SO_PrizeEntries prizeEntry;
+    public Vector2Int DropAmountRange = new Vector2Int(15, 20);
+    public int DropAmountInterval = 2;
     private void Start()
     {
 
@@ -79,7 +85,7 @@ public class PrizeDumper : MonoBehaviour
         yield return DeleteAllPrize();
 
 
-        yield return RandomizePrizeBag(prizeSetting);
+        yield return RandomizePrizeBag();
 
         yield return DumpPrizeBag();
 
@@ -95,35 +101,23 @@ public class PrizeDumper : MonoBehaviour
         InSequence = false;
     }
 
-    private IEnumerator RandomizePrizeBag(PrizeSetting setting)
+    private IEnumerator RandomizePrizeBag()
     {
-        var odds = setting.odds.GetOdds();
-        int intervalCount = Mathf.CeilToInt((setting.DropAmountRange.y - setting.DropAmountRange.x) / (float)setting.DropAmountInterval);
+        int intervalCount = Mathf.CeilToInt((DropAmountRange.y - DropAmountRange.x) / (float)DropAmountInterval);
         int randomizedAmount = UnityEngine.Random.Range(0, intervalCount);
-        int dropAmount = setting.DropAmountRange.x + randomizedAmount * setting.DropAmountInterval;
+        int dropAmount = DropAmountRange.x + randomizedAmount * DropAmountInterval;
 
         int dropSelected = 0;
 
         while (dropSelected < dropAmount)
         {
-            float rarityRoll = UnityEngine.Random.Range(0.0f, 1.0f);
-            int rarity = 0;
-            for (int i = odds.Count - 1; i >= 0; i--)
-            {
-                if (rarityRoll >= (1.0f - odds[i]))
-                {
-                    rarity = i;
-                    break;
-                }
-            }
-
             var db = MainDatabase.Instance.DB_Prize;
-            var prizeData = db.GetRandomItemByRarity((ItemRarity)rarity);
+            var prizeData = prizeEntry.RollPrize().prize;
 
             BasePrize newPrize = null;
-            yield return db.LoadAssetCoroutine(prizeData, 
-                (i) => 
-                { 
+            yield return db.LoadAssetCoroutine(prizeData,
+                (i) =>
+                {
                     if (i == null) return;
                     newPrize = Instantiate(i);
                     if (newPrize) newPrize.gameObject.SetActive(false);
@@ -134,20 +128,13 @@ public class PrizeDumper : MonoBehaviour
                 if (prizeData)
                 {
                     print("Failed to find item: " + prizeData.ItemName);
-                } else
+                }
+                else
                 {
                     print("No Random Item Selected, Skipping");
                 }
                 continue;
             }
-
-            if (newPrize.isEgg && !prizeSetting.odds.RollEggChance())
-            {
-                print("Deleted one egg;");
-                Destroy(newPrize.gameObject);
-                continue;
-            }
-            print("Loaded item: " + prizeData.ItemName);
 
             newPrize.gameObject.SetActive(false);
             newPrize.transform.SetParent(prizeContainer);
@@ -195,84 +182,84 @@ public class PrizeDumper : MonoBehaviour
     }
 }
 
-[System.Serializable]
-public class PrizeSetting
-{
-    public Vector2Int DropAmountRange = new Vector2Int(5, 10);
-    public int DropAmountInterval = 1; // Determines the range between dropAmountRange, so interval of 1 gets 5, 6, 7 etc. interval of 2 gets 5, 7, 9,
-    public PrizeOdds odds;
+//[System.Serializable]
+//public class PrizeSetting
+//{
+//    public Vector2Int DropAmountRange = new Vector2Int(5, 10);
+//    public int DropAmountInterval = 1; // Determines the range between dropAmountRange, so interval of 1 gets 5, 6, 7 etc. interval of 2 gets 5, 7, 9,
+//    public PrizeOdds odds;
 
-    public PrizeSetting()
-    {
-        odds.GetOdds();
-    }
-}
+//    public PrizeSetting()
+//    {
+//        odds.GetOdds();
+//    }
+//}
 
-[System.Serializable]
-public struct PrizeOdds
-{
-    public bool initialized;
-    public bool valid;
-    private bool clean;
-    public float eggChance;
-    public List<int> oddCounts;
-    public List<float> _odds;
-    public List<float> odds { 
-        get
-        {
-            CalculateOdds(oddCounts);
-            if (!valid) return null;
-            return _odds;
-        }
-        private set { } }
+//[System.Serializable]
+//public struct PrizeOdds
+//{
+//    public bool initialized;
+//    public bool valid;
+//    private bool clean;
+//    public float eggChance;
+//    public List<int> oddCounts;
+//    public List<float> _odds;
+//    public List<float> odds { 
+//        get
+//        {
+//            CalculateOdds(oddCounts);
+//            if (!valid) return null;
+//            return _odds;
+//        }
+//        private set { } }
 
-    public List<float> GetOdds()
-    {
-        return odds;
-    }
+//    public List<float> GetOdds()
+//    {
+//        return odds;
+//    }
 
-    private void CalculateOdds(List<int> count)
-    {
-        //if (clean) return;
-        if (count == null) {
-            valid = false;
-            return;
-        }
+//    private void CalculateOdds(List<int> count)
+//    {
+//        //if (clean) return;
+//        if (count == null) {
+//            valid = false;
+//            return;
+//        }
 
-        valid = true;
-        if (count.Count != ItemRarity.Count.ToInt())
-        {
-            clean = false;
-            valid = false;
-            return;
-        }
-        _odds = new List<float>();
-        int sum = 0;
-        foreach (int i in count)
-        {
-            sum += i;
-        }
+//        valid = true;
+//        if (count.Count != ItemRarity.Count.ToInt())
+//        {
+//            clean = false;
+//            valid = false;
+//            return;
+//        }
+//        _odds = new List<float>();
+//        int sum = 0;
+//        foreach (int i in count)
+//        {
+//            sum += i;
+//        }
 
-        for (int i = 0; i < count.Count; i++)
-        {
-            if (sum == 0)
-            {
-                _odds.Add(1.0f / count.Count);
-            } else
-            {
-                _odds.Add((float)count[i] / sum);
-            }
-        }
-        clean = true;
-    }
+//        for (int i = 0; i < count.Count; i++)
+//        {
+//            if (sum == 0)
+//            {
+//                _odds.Add(1.0f / count.Count);
+//            } else
+//            {
+//                _odds.Add((float)count[i] / sum);
+//            }
+//        }
+//        clean = true;
+//    }
 
-    public bool RollEggChance()
-    {
-        float chance = Mathf.Clamp(eggChance, 0, 1.0f);
+//    public bool RollEggChance()
+//    {
+//        float chance = Mathf.Clamp(eggChance, 0, 1.0f);
 
-        float roll = UnityEngine.Random.Range(0.0f, 1.0f);
+//        float roll = UnityEngine.Random.Range(0.0f, 1.0f);
 
-        return roll <= chance;
-    }
+//        return roll <= chance;
+//    }
 
-}
+//}

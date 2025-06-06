@@ -1,0 +1,23 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a063deb7a5faf3240be751ac2473f910, type: 3}
+  m_Name: Forest Prize Entries
+  m_EditorClassIdentifier: 
+  entries:
+  - prize: {fileID: 11400000, guid: f406c1b1aef49d3489cc83e5b438ab6d, type: 2}
+    entry: 100
+  - prize: {fileID: 11400000, guid: 15cb6e77d4c6173408b5233d332452de, type: 2}
+    entry: 20
+  entryOdds:
+  - 0.8333333
+  - 0.16666667
+  oddCalculated: 1

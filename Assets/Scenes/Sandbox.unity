@@ -5215,15 +5215,6 @@ MonoBehaviour:
   craneStick: {fileID: 416858468}
   InSequence: 0
   prizeBag: []
-  prizeSetting:
-    DropAmountRange: {x: 16, y: 25}
-    DropAmountInterval: 3
-    odds:
-      initialized: 0
-      valid: 1
-      eggChance: 0.15
-      oddCounts: 28000000280000000a0000000500000005000000
-      _odds: []
   prizeContainer: {fileID: 1842417626}
   prizeDumpCooldown: 0.05
   oldPrizeDeleteWaitTime: 0
@@ -5232,6 +5223,9 @@ MonoBehaviour:
   prizeDumpForce: 5
   minAngle: -135
   maxAngle: -45
+  prizeEntry: {fileID: 11400000, guid: 9e5f922f958ebb34988818acc0410278, type: 2}
+  DropAmountRange: {x: 25, y: 30}
+  DropAmountInterval: 2
 --- !u!4 &1846554416
 Transform:
   m_ObjectHideFlags: 0
@@ -5351,7 +5345,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &1873666354
 RectTransform:
   m_ObjectHideFlags: 0
