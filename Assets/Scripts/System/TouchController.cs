@@ -22,8 +22,6 @@ public class TouchController : MonoBehaviour
     [Header("Touch Settings")]
     [SerializeField] private float holdThreshold = 1.5f;
 
-    [Header("Camera Controls")]
-    [SerializeField] private float cameraPanSensitivity = 1.0f;
 
     // --- Touch State ---
     [SerializeField] private bool isHolding;
@@ -123,7 +121,7 @@ public class TouchController : MonoBehaviour
             }
             targetBuilding.PlayAnimation("Held");
             SelectBuilding(targetBuilding, false);
-
+            PlaceableOptions.Instance.SetBuilding(targetBuilding);
             // Set up hold-complete logic only once per touch
             OnHoldComplete.RemoveAllListeners();
             OnHoldComplete.AddListener(() =>
@@ -134,6 +132,7 @@ public class TouchController : MonoBehaviour
         else
         {
             SelectBuilding(null, false);
+            PlaceableOptions.Instance.SetBuilding(null);
             // Start camera drag!
             RoomCamera.Instance.OnDragStart(touch.position);
         }
@@ -159,6 +158,7 @@ public class TouchController : MonoBehaviour
             {
                 targetBuilding.PlayAnimation("Release");
                 SelectBuilding(null, false);
+                PlaceableOptions.Instance.SetBuilding(null);
             }
             OnHoldComplete.RemoveAllListeners();
             // DO NOT set isHolding = false or pointerId = -1
@@ -220,16 +220,19 @@ public class TouchController : MonoBehaviour
             {
                 targetBuilding.PlayAnimation("Selected");
                 SelectBuilding(targetBuilding, false);
+                PlaceableOptions.Instance.SetBuilding(targetBuilding);
             }
             else
             {
                 targetBuilding.PlayAnimation("Release");
                 SelectBuilding(null, false);
+                PlaceableOptions.Instance.SetBuilding(null);
             }
             if (isDragging)
             {
                 isDragging = false;
                 targetBuilding.SetTargetPosition(targetBuilding.blueprint.GridPosition);
+
             }
         }
 

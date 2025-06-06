@@ -1,9 +1,12 @@
+using CustomLibrary.References;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 
 public class PlaceableOptions : MonoBehaviour
 {
+    public static PlaceableOptions Instance;
+
     [Header("Components")]
     public List<PlaceableOptions> OptionButtons;
     private TouchController tc;
@@ -16,6 +19,8 @@ public class PlaceableOptions : MonoBehaviour
     private bool currentState = false;
     private void Awake()
     {
+        Initializer.SetInstance(this);
+
         anim = GetComponent<Animator>();
     }
 
@@ -23,25 +28,25 @@ public class PlaceableOptions : MonoBehaviour
     {
         if (tc = TouchController.Instance)
         {
-            tc.OnSelectedBuildingChange += OnSelectedBuildingChange;
+            //tc.OnSelectedBuildingChange += OnSelectedBuildingChange;
         }
     }
 
     private void Update()
     {
-        if (currentState && TouchController.Instance.EditMode)
-        {
-            anim.SetTrigger("Hide");
-            currentState = false;
-        }
+        //if (currentState && TouchController.Instance.EditMode)
+        //{
+        //    anim.SetTrigger("Hide");
+        //    currentState = false;
+        //}
     }
 
-    private void OnSelectedBuildingChange(IsometricBuilding b)
+    public void SetBuilding(IsometricBuilding b)
     {
-        if (TouchController.Instance.EditMode)
-        {
-            return;
-        }
+        //if (TouchController.Instance.EditMode)
+        //{
+        //    return;
+        //}
         if (b == lastSavedBuilding) return;
         if (!b)
         {
@@ -98,7 +103,7 @@ public class PlaceableOptions : MonoBehaviour
             {
                 PlayerInventory.Instance.GiveItem(data, 1);
                 Destroy(placeable.gameObject);
-                OnSelectedBuildingChange(null);
+                SetBuilding(null);
             }
         }
     }
@@ -108,6 +113,7 @@ public class PlaceableOptions : MonoBehaviour
         if (GetCurrentBuilding() is var placeable)
         {
             // Perform function
+            placeable.Flip();
         }
     }
 

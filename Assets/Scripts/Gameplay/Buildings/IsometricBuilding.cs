@@ -1,8 +1,16 @@
+using CustomLibrary.References;
 using JetBrains.Annotations;
 using System;
 using System.Collections.Generic;
 using System.IO;
+using System.Runtime.CompilerServices;
 using UnityEngine;
+
+public enum Orientation
+{
+    Left,
+    Right
+}
 
 public class IsometricBuilding : MonoBehaviour
 {
@@ -31,7 +39,18 @@ public class IsometricBuilding : MonoBehaviour
         if (GridVisual)
         {
             shader = GridVisual.GetComponent<ShaderInstancer>();
+            
+            if (GridVisual.transform.rotation.eulerAngles.y == 0)
+            {
+                blueprint.SetOrientation(Orientation.Right);
+            }
+            else
+            {
+                blueprint.SetOrientation(Orientation.Left);
+            }
+
         }
+
     }
 
     private void Start()
@@ -270,6 +289,34 @@ public class IsometricBuilding : MonoBehaviour
             Gizmos.DrawSphere(worldPos, radius);
         }
     }
+
+    #region Rotation
+
+    private const float flippedYRot = 180.0f;
+    private const float normalYRot = 0;
+
+    public void Flip()
+    {
+        int or = blueprint.currentOrientation.ToInt();
+        or = (or + 1) % 2;
+        blueprint.currentOrientation = (Orientation)or;
+        SetFlip(blueprint.currentOrientation);
+    }
+
+    public void SetFlip(Orientation orientation)
+    {
+        if (GridVisual)
+        {
+            Vector3 rot = GridVisual.transform.localRotation.eulerAngles;
+            float yRot = orientation == Orientation.Right ? normalYRot : flippedYRot;
+            rot.y = yRot;
+            GridVisual.transform.localRotation = Quaternion.Euler(rot.x, rot.y, rot.z);
+        }
+        blueprint.SetOrientation(orientation);
+    }
+
+
+    #endregion rotation
 }
 
 public enum IsometricCorner
@@ -290,10 +337,13 @@ public struct IsometricBlueprint
 {
     [Header("Blueprint Properties")]
     public Vector2Int PixelDimension; // Dimension in pixel.
+    public Vector2Int _currentDimension;
 
     public Vector2Int _lastGridPosition;
     public Vector2Int _gridPosition;
     public Vector2Int TargetPosition;
+
+    public Orientation currentOrientation;
 
     #region Getter/Setter
 
@@ -333,25 +383,25 @@ public struct IsometricBlueprint
     private Vector2Int GetTop_LCorner()
     {
         Vector2Int bottomLeft = GetBottom_LCorner();
-        int height = (PixelDimension.x + PixelDimension.y) / 2; height -= 1;
+        int height = (_currentDimension.x + _currentDimension.y) / 2; height -= 1;
 
-        int higher = PixelDimension.y > PixelDimension.x ? PixelDimension.y : PixelDimension.x;
-        int lower = PixelDimension.y < PixelDimension.x ? PixelDimension.y : PixelDimension.x;
+        int higher = _currentDimension.y > _currentDimension.x ? _currentDimension.y : _currentDimension.x;
+        int lower = _currentDimension.y < _currentDimension.x ? _currentDimension.y : _currentDimension.x;
         int rightSkew = higher - lower;
 
-        return bottomLeft + new Vector2Int(rightSkew, height);
+        return bottomLeft + new Vector2Int(rightSkew * (currentOrientation == Orientation.Left ? -1 : 1), height);
     }
 
     private Vector2Int GetTop_RCorner()
     {
         Vector2Int bottomRight = GetBottom_RCorner();
-        int height = (PixelDimension.x + PixelDimension.y) / 2; height -= 1;
+        int height = (_currentDimension.x + _currentDimension.y) / 2; height -= 1;
 
-        int higher = PixelDimension.y > PixelDimension.x ? PixelDimension.y : PixelDimension.x;
-        int lower = PixelDimension.y < PixelDimension.x ? PixelDimension.y : PixelDimension.x;
+        int higher = _currentDimension.y > _currentDimension.x ? _currentDimension.y : _currentDimension.x;
+        int lower = _currentDimension.y < _currentDimension.x ? _currentDimension.y : _currentDimension.x;
         int rightSkew = higher - lower;
 
-        return bottomRight + new Vector2Int(rightSkew, height);
+        return bottomRight + new Vector2Int(rightSkew * (currentOrientation == Orientation.Left ? -1 : 1), height);
     }
 
     private Vector2Int GetRight_TCorner()
@@ -361,8 +411,8 @@ public struct IsometricBlueprint
 
     private Vector2Int GetRight_BCorner()
     {
-        int heightTravelled = (PixelDimension.y / 2) - 1;
-        return _gridPosition + new Vector2Int(PixelDimension.y - 1, heightTravelled);
+        int heightTravelled = (_currentDimension.y / 2) - 1;
+        return _gridPosition + new Vector2Int(_currentDimension.y - 1, heightTravelled);
     }
 
     private Vector2Int GetBottom_LCorner()
@@ -377,16 +427,26 @@ public struct IsometricBlueprint
 
     private Vector2Int GetLeft_BCorner()
     {
-        int heightTravelled = PixelDimension.x / 2 - 1;
-        return _gridPosition + new Vector2Int(-PixelDimension.x, heightTravelled);
+        int heightTravelled = _currentDimension.x / 2 - 1;
+        return _gridPosition + new Vector2Int(-_currentDimension.x, heightTravelled);
     }
 
     private Vector2Int GetLeft_TCorner()
     {
         return GetLeft_BCorner() + new Vector2Int(0, 1);
     }
-    
 
     #endregion isometric corners
+
+    #region Flip
+
+    public void SetOrientation(Orientation or)
+    {
+        currentOrientation = or;
+        Vector2Int flippedDimension = currentOrientation == Orientation.Left ? new Vector2Int(PixelDimension.y, PixelDimension.x) : PixelDimension;
+        _currentDimension = flippedDimension;
+    }
+
+    #endregion flip
 
 }
