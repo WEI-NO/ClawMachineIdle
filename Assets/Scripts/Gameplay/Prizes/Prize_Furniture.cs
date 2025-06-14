@@ -2,19 +2,19 @@ using UnityEngine;
 
 public class Prize_Furniture : BasePrize
 {
+    public SO_EggPrizeEntries dropTable;
+
     public override void PrizeClaimFunction()
     {
-        BaseItem furniture = null;
-        var db = MainDatabase.Instance.DB_Placeable;
-
-        if (db.GetRandomBuilding(ItemRarity) is var b)
+        if (dropTable)
         {
-            furniture = b;
-        }
-
-        if (furniture)
-        {
-            PlayerInventory.Instance.GiveItem(furniture, 1);
+            var db = MainDatabase.Instance.DB_Placeable;
+            var prizeData = dropTable.RollPrize().prize;
+            
+            if (prizeData)
+            {
+                PlayerInventory.Instance.GiveItem(prizeData, 1);
+            }
         }
     }
 }

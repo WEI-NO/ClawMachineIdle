@@ -15,32 +15,14 @@ MonoBehaviour:
   m_GroupName: Prize
   m_GUID: d0e32573a5ecd874ea148a9f7fad1f5d
   m_SerializeEntries:
-  - m_GUID: 039349127f6900c48bb1da702f1f2e1a
-    m_Address: prize_egg_mythical_furniture
+  - m_GUID: 4746e2517e86a3c4fb160d92a15c1a7d
+    m_Address: prize_egg_plushie_forest
     m_ReadOnly: 0
     m_SerializedLabels:
     - Prize
     FlaggedDuringContentUpdateRestriction: 0
-  - m_GUID: 0e6548ae9af1b3e4fb251b9f83bb5d18
-    m_Address: prize_egg_common_plushie
-    m_ReadOnly: 0
-    m_SerializedLabels:
-    - Prize
-    FlaggedDuringContentUpdateRestriction: 0
-  - m_GUID: 383da609e90db9449bb1f7abfdb94088
-    m_Address: prize_egg_epic_plushie
-    m_ReadOnly: 0
-    m_SerializedLabels:
-    - Prize
-    FlaggedDuringContentUpdateRestriction: 0
-  - m_GUID: 6ebfbb1ea808ac748873f2a0efbd0d1a
-    m_Address: prize_egg_epic_furniture
-    m_ReadOnly: 0
-    m_SerializedLabels:
-    - Prize
-    FlaggedDuringContentUpdateRestriction: 0
-  - m_GUID: 7eb56950b8f74c342b42cc5756c26a9e
-    m_Address: prize_egg_legendary_plushie
+  - m_GUID: 60afc69397f1f894d98cf0f38b2c1a66
+    m_Address: prize_egg_furniture_forest
     m_ReadOnly: 0
     m_SerializedLabels:
     - Prize
@@ -51,38 +33,8 @@ MonoBehaviour:
     m_SerializedLabels:
     - Prize
     FlaggedDuringContentUpdateRestriction: 0
-  - m_GUID: aac230b26f20cb7418ce9654f2cea34c
-    m_Address: prize_egg_rare_furniture
-    m_ReadOnly: 0
-    m_SerializedLabels:
-    - Prize
-    FlaggedDuringContentUpdateRestriction: 0
-  - m_GUID: afd9d93cca154834c9f1eecc6e4f3126
-    m_Address: prize_egg_common_furniture
-    m_ReadOnly: 0
-    m_SerializedLabels:
-    - Prize
-    FlaggedDuringContentUpdateRestriction: 0
-  - m_GUID: be2bf9578c50c7f4da11a3d2568997df
-    m_Address: prize_egg_mythical_plushie
-    m_ReadOnly: 0
-    m_SerializedLabels:
-    - Prize
-    FlaggedDuringContentUpdateRestriction: 0
-  - m_GUID: c16f7dbb3036b2d428e08978247f5949
-    m_Address: prize_egg_legendary_furniture
-    m_ReadOnly: 0
-    m_SerializedLabels:
-    - Prize
-    FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: dc55c2ee0e8ad2d4ba8d4bbceb25144b
     m_Address: prize_coin_big
-    m_ReadOnly: 0
-    m_SerializedLabels:
-    - Prize
-    FlaggedDuringContentUpdateRestriction: 0
-  - m_GUID: e14b06c1be0e3894ab2230d048c5bbd3
-    m_Address: prize_egg_rare_plushie
     m_ReadOnly: 0
     m_SerializedLabels:
     - Prize

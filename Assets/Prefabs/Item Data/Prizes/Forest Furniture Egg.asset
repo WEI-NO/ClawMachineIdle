@@ -10,11 +10,11 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 1ad4db3ccb2d0a2438094c87b96eed9b, type: 3}
-  m_Name: Common Plushie Egg
+  m_Name: Forest Furniture Egg
   m_EditorClassIdentifier: 
-  _itemName: Common Plushie Egg
-  _itemAddress: prize_egg_common_plushie
-  _itemIcon: {fileID: 9080076636406384814, guid: 9a2caf48dc4675e499bf901b7bfbfad2, type: 3}
+  _itemName: Forest Furniture Egg
+  _itemAddress: prize_egg_furniture_forest
+  _itemIcon: {fileID: 1415699010, guid: 9a2caf48dc4675e499bf901b7bfbfad2, type: 3}
   _itemType: 3
   _itemRarity: 0
   ItemDescription: 

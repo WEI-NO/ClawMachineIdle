@@ -3,42 +3,42 @@ using System.Collections.Generic;
 using UnityEngine;
 
 [Serializable]
-public class PrizeEntry
+public abstract class ItemEntry<T>
 {
-    public PrizeItem prize;
+    public T prize;
     public int entry;
 }
 
 
-[CreateAssetMenu(menuName = "Game/Prize List")]
-public class SO_PrizeEntries : ScriptableObject
+public class SO_BasePrizeEntries<T1, T2> : ScriptableObject where T1 : ItemEntry<T2>
 {
-    public List<PrizeEntry> entries = new List<PrizeEntry>();
+    public List<T1> entries = new List<T1>();
     public List<float> entryOdds = new List<float>();
     public bool oddCalculated = false;
 
-    public PrizeEntry RollPrize()
+    public T1 RollPrize()
     {
         CalculateOdds();
 
-        float rarityRoll = UnityEngine.Random.Range(0.0f, 1.0f);
-        int selectedIndex = 0;
-        for (int i = entryOdds.Count - 1; i >= 0; i--)
+        float rarityRoll = UnityEngine.Random.Range(0f, 1f);
+        float cumulative = 0f;
+
+        for (int i = 0; i < entryOdds.Count; i++)
         {
-            if (rarityRoll >= (1.0f - entryOdds[i])) 
+            cumulative += entryOdds[i];
+            if (rarityRoll < cumulative)
             {
-                selectedIndex = i;
-                break;
+                return entries[i];
             }
         }
-        if (selectedIndex < entries.Count)
-        {
-            return entries[selectedIndex];
-        } else
-        {
-            return null;
-        }
+
+        // Fallback: return the last entry if not found due to float rounding issues
+        if (entries.Count > 0)
+            return entries[entries.Count - 1];
+
+        return null;
     }
+
 
     public void CalculateOdds()
     {

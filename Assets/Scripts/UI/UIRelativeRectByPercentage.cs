@@ -29,15 +29,15 @@ public class UIAspectRelativeButton : MonoBehaviour
         CacheScreenSize();
     }
 
-#if UNITY_EDITOR
-    void OnValidate()
-    {
-        if (rectTransform == null)
-            rectTransform = GetComponent<RectTransform>();
-        UpdateRect();
-        CacheScreenSize();
-    }
-#endif
+//#if UNITY_EDITOR
+//    void OnValidate()
+//    {
+//        if (rectTransform == null)
+//            rectTransform = GetComponent<RectTransform>();
+//        UpdateRect();
+//        CacheScreenSize();
+//    }
+//#endif
 
     void Update()
     {
@@ -58,12 +58,21 @@ public class UIAspectRelativeButton : MonoBehaviour
     {
         if (rectTransform == null || spritePixelWidth <= 0 || spritePixelHeight <= 0)
             return;
+        if (Screen.width <= 0 || Screen.height <= 0)
+            return;
 
         float aspectModifier = (float)Screen.height / (float)Screen.width;
         float targetHeight = Screen.height * sizePercent * aspectModifier;
         float aspect = spritePixelWidth / spritePixelHeight;
         float targetWidth = targetHeight * aspect;
 
+        // Defensive: Clamp to positive values
+        if (float.IsNaN(targetWidth) || float.IsNaN(targetHeight) ||
+            float.IsInfinity(targetWidth) || float.IsInfinity(targetHeight) ||
+            targetWidth <= 0 || targetHeight <= 0)
+            return;
+
         rectTransform.sizeDelta = new Vector2(targetWidth, targetHeight);
     }
+
 }

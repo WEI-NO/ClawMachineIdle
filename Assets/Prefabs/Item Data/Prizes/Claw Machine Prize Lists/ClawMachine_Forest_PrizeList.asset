@@ -10,14 +10,20 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: a063deb7a5faf3240be751ac2473f910, type: 3}
-  m_Name: Forest Prize Entries
+  m_Name: ClawMachine_Forest_PrizeList
   m_EditorClassIdentifier: 
   entries:
   - prize: {fileID: 11400000, guid: f406c1b1aef49d3489cc83e5b438ab6d, type: 2}
     entry: 100
   - prize: {fileID: 11400000, guid: 15cb6e77d4c6173408b5233d332452de, type: 2}
-    entry: 20
+    entry: 5
+  - prize: {fileID: 11400000, guid: 25ea494b323eb264192a12f0de0512a3, type: 2}
+    entry: 10
+  - prize: {fileID: 11400000, guid: dd2e5a2fbe14fd749aa878bc85e3cb33, type: 2}
+    entry: 10
   entryOdds:
-  - 0.8333333
-  - 0.16666667
+  - 0.8
+  - 0.04
+  - 0.08
+  - 0.08
   oddCalculated: 1

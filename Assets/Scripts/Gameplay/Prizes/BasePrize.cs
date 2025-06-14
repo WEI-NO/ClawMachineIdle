@@ -50,6 +50,10 @@ public class BasePrize : MonoBehaviour
     public BaseItem RewardItem;
     public ItemRarity ItemRarity;
     public bool isEgg;
+    [Header("Effect Settings")]
+    [SerializeField] private GameObject effect;
+    [SerializeField] private bool onUI = true;
+    
     
     protected void SetQuantity(int q)
     {
@@ -67,7 +71,29 @@ public class BasePrize : MonoBehaviour
         if (RewardItem)
         {
             PlayerInventory.Instance.GiveItem(RewardItem, Quantity);
+
+            // Spawn Effect
+            if (effect)
+            {
+                if (onUI && PersistentCanvas.Instance != null)
+                {
+                    // Convert world position to screen space
+                    Vector3 screenPos = Camera.main.WorldToScreenPoint(transform.position);
+
+                    // Instantiate effect under MainCanvas
+                    GameObject uiEffect = Instantiate(effect, screenPos, Quaternion.identity, PersistentCanvas.Instance.transform);
+                }
+                else
+                {
+                    // Spawn effect in world space
+                    Instantiate(effect, transform.position, Quaternion.identity);
+                }
+            }
+
         }
+
+
+
     }
 
     

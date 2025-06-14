@@ -6,6 +6,8 @@ using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
 
+using CMT = ClawMachineThemeController;
+
 public class PrizeDumper : MonoBehaviour
 {
     [SerializeField] private CraneStickController craneStick;
@@ -29,14 +31,32 @@ public class PrizeDumper : MonoBehaviour
     [SerializeField] private float maxAngle = 45f;           // In degrees, right-down
 
     [Header("Prize Properties")]
-    public SO_PrizeEntries prizeEntry;
+    [SerializeField] private SO_ClawMachinePrizeEntries currentPrizeEntry;
     public Vector2Int DropAmountRange = new Vector2Int(15, 20);
     public int DropAmountInterval = 2;
+
+    [Header("Themes Properties")]
+    [SerializeField] private List<SO_ClawMachinePrizeEntries> themedEntries;
+
     private void Start()
     {
-
+        if (CMT.Instance)
+        {
+            CMT.Instance.OnThemeChange += OnThemeChange;
+        }
+        OnThemeChange(CMT.Instance.CurrentTheme);
     }
 
+    private void OnThemeChange(CM_Theme theme)
+    {
+        int themeIndex = theme.ToInt();
+        if (themedEntries != null && themedEntries.Count > themeIndex)
+        {
+            currentPrizeEntry = themedEntries[themeIndex];
+        }
+    }
+
+    // Initiates the prize refresh main sequence
     public void StartRefreshPrize()
     {
         if (InSequence)
@@ -47,32 +67,7 @@ public class PrizeDumper : MonoBehaviour
         InSequence = true;
     }
 
-    private IEnumerator DeleteAllPrize()
-    {
-        Collider2D tableCol = null;
-        if (table && table.GetComponent<Collider2D>() is Collider2D col)
-        {
-            tableCol = col;
-            tableCol.isTrigger = true;
-        }
-
-        yield return new WaitForSeconds(oldPrizeDeleteWaitTime);
-
-        for (int i = prizeContainer.childCount - 1; i >= 0; i--)
-        {
-            if (prizeContainer.GetChild(i) != null)
-            {
-                Destroy(prizeContainer.GetChild(i).gameObject);
-            }
-            yield return null;
-        }
-
-        if (tableCol)
-        {
-            tableCol.isTrigger = false;
-        }
-    }
-
+    // Main sequence for prize refresh
     private IEnumerator RefreshPrizeSequence()
     {
         craneStick.SetActive(false);
@@ -100,7 +95,33 @@ public class PrizeDumper : MonoBehaviour
 
         InSequence = false;
     }
+    // Deletes existing prizes
+    private IEnumerator DeleteAllPrize()
+    {
+        Collider2D tableCol = null;
+        if (table && table.GetComponent<Collider2D>() is Collider2D col)
+        {
+            tableCol = col;
+            tableCol.isTrigger = true;
+        }
 
+        yield return new WaitForSeconds(oldPrizeDeleteWaitTime);
+
+        for (int i = prizeContainer.childCount - 1; i >= 0; i--)
+        {
+            if (prizeContainer.GetChild(i) != null)
+            {
+                Destroy(prizeContainer.GetChild(i).gameObject);
+            }
+            yield return null;
+        }
+
+        if (tableCol)
+        {
+            tableCol.isTrigger = false;
+        }
+    }
+    // Randomizes the loot bag / prize pool
     private IEnumerator RandomizePrizeBag()
     {
         int intervalCount = Mathf.CeilToInt((DropAmountRange.y - DropAmountRange.x) / (float)DropAmountInterval);
@@ -112,7 +133,7 @@ public class PrizeDumper : MonoBehaviour
         while (dropSelected < dropAmount)
         {
             var db = MainDatabase.Instance.DB_Prize;
-            var prizeData = prizeEntry.RollPrize().prize;
+            var prizeData = currentPrizeEntry.RollPrize().prize;
 
             BasePrize newPrize = null;
             yield return db.LoadAssetCoroutine(prizeData,
@@ -145,9 +166,7 @@ public class PrizeDumper : MonoBehaviour
         }
         yield break;
     }
-
-
-
+    // Dumps physical prizes into the machine
     private IEnumerator DumpPrizeBag()
     {
         for (int i = 0; i < prizeBag.Count; i++)
@@ -181,85 +200,3 @@ public class PrizeDumper : MonoBehaviour
         prizeBag.Clear();
     }
 }
-
-//[System.Serializable]
-//public class PrizeSetting
-//{
-//    public Vector2Int DropAmountRange = new Vector2Int(5, 10);
-//    public int DropAmountInterval = 1; // Determines the range between dropAmountRange, so interval of 1 gets 5, 6, 7 etc. interval of 2 gets 5, 7, 9,
-//    public PrizeOdds odds;
-
-//    public PrizeSetting()
-//    {
-//        odds.GetOdds();
-//    }
-//}
-
-//[System.Serializable]
-//public struct PrizeOdds
-//{
-//    public bool initialized;
-//    public bool valid;
-//    private bool clean;
-//    public float eggChance;
-//    public List<int> oddCounts;
-//    public List<float> _odds;
-//    public List<float> odds { 
-//        get
-//        {
-//            CalculateOdds(oddCounts);
-//            if (!valid) return null;
-//            return _odds;
-//        }
-//        private set { } }
-
-//    public List<float> GetOdds()
-//    {
-//        return odds;
-//    }
-
-//    private void CalculateOdds(List<int> count)
-//    {
-//        //if (clean) return;
-//        if (count == null) {
-//            valid = false;
-//            return;
-//        }
-
-//        valid = true;
-//        if (count.Count != ItemRarity.Count.ToInt())
-//        {
-//            clean = false;
-//            valid = false;
-//            return;
-//        }
-//        _odds = new List<float>();
-//        int sum = 0;
-//        foreach (int i in count)
-//        {
-//            sum += i;
-//        }
-
-//        for (int i = 0; i < count.Count; i++)
-//        {
-//            if (sum == 0)
-//            {
-//                _odds.Add(1.0f / count.Count);
-//            } else
-//            {
-//                _odds.Add((float)count[i] / sum);
-//            }
-//        }
-//        clean = true;
-//    }
-
-//    public bool RollEggChance()
-//    {
-//        float chance = Mathf.Clamp(eggChance, 0, 1.0f);
-
-//        float roll = UnityEngine.Random.Range(0.0f, 1.0f);
-
-//        return roll <= chance;
-//    }
-
-//}

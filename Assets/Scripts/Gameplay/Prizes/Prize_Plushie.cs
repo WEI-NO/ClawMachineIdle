@@ -2,19 +2,19 @@ using UnityEngine;
 
 public class Prize_Plushie : BasePrize
 {
+    public SO_EggPrizeEntries dropTable;
+
     public override void PrizeClaimFunction()
     {
-        BaseItem plushie = null;
-        var db = MainDatabase.Instance.DB_Placeable;
-
-        if (db.GetRandomPlushie(ItemRarity) is var p)
+        if (dropTable)
         {
-            plushie = p;
-        }
+            var db = MainDatabase.Instance.DB_Placeable;
+            var prizeData = dropTable.RollPrize().prize;
 
-        if (plushie)
-        {
-            PlayerInventory.Instance.GiveItem(plushie, 1);
+            if (prizeData)
+            {
+                PlayerInventory.Instance.GiveItem(prizeData, 1);
+            }
         }
     }
 }
