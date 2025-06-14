@@ -2046,6 +2046,7 @@ GameObject:
   m_Component:
   - component: {fileID: 8528114656130970196}
   - component: {fileID: 2658741811439078974}
+  - component: {fileID: 7834921216964116991}
   m_Layer: 5
   m_Name: Coin Display
   m_TagString: Untagged
@@ -2088,8 +2089,31 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _countText: {fileID: 3540221669962059537}
+  anim: {fileID: 0}
   _itemName: Coin
   _category: 0
+--- !u!95 &7834921216964116991
+Animator:
+  serializedVersion: 7
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3919005401176946395}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: b0a2eb0919ef92c4a9f62f943344c351, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_AnimatePhysics: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0
 --- !u!1 &3954920298226682193
 GameObject:
   m_ObjectHideFlags: 0
@@ -2483,6 +2507,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1623018461013867647}
   - component: {fileID: 9032239843451413752}
+  - component: {fileID: 5380134976201709819}
   m_Layer: 5
   m_Name: Ticket Display
   m_TagString: Untagged
@@ -2525,8 +2550,31 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _countText: {fileID: 4698115106736795849}
+  anim: {fileID: 0}
   _itemName: Ticket
   _category: 0
+--- !u!95 &5380134976201709819
+Animator:
+  serializedVersion: 7
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4518931509058469517}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: b0a2eb0919ef92c4a9f62f943344c351, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_AnimatePhysics: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0
 --- !u!1 &4553815656666696151
 GameObject:
   m_ObjectHideFlags: 0

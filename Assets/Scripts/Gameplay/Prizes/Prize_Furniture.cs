@@ -6,15 +6,15 @@ public class Prize_Furniture : BasePrize
 
     public override void PrizeClaimFunction()
     {
-        if (dropTable)
-        {
-            var db = MainDatabase.Instance.DB_Placeable;
-            var prizeData = dropTable.RollPrize().prize;
+        //if (dropTable)
+        //{
+        //    var db = MainDatabase.Instance.DB_Placeable;
+        //    var prizeData = dropTable.RollPrize().prize;
             
-            if (prizeData)
-            {
-                PlayerInventory.Instance.GiveItem(prizeData, 1);
-            }
-        }
+        //    if (prizeData)
+        //    {
+        //        PlayerInventory.Instance.GiveItem(prizeData, 1);
+        //    }
+        //}
     }
 }
