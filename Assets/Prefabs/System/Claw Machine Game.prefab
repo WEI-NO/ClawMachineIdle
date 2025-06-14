@@ -2727,7 +2727,7 @@ MonoBehaviour:
   m_fontMaterials: []
   m_fontColor32:
     serializedVersion: 2
-    rgba: 4278190080
+    rgba: 4280295456
   m_fontColor: {r: 0.1254902, g: 0.1254902, b: 0.1254902, a: 1}
   m_enableVertexGradient: 0
   m_colorMode: 3
@@ -3543,7 +3543,7 @@ RectTransform:
   m_AnchorMin: {x: 0, y: 0.5}
   m_AnchorMax: {x: 0, y: 0.5}
   m_AnchoredPosition: {x: 225, y: 50}
-  m_SizeDelta: {x: 397.0415, y: 50}
+  m_SizeDelta: {x: 519.5277, y: 50}
   m_Pivot: {x: 0, y: 0.5}
 --- !u!222 &5215226626686443083
 CanvasRenderer:
@@ -3573,7 +3573,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Dog Plushie
+  m_text: Forest furniture egg
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 44c831c80812a6d4d91cd4cb7cc095e3, type: 2}
   m_sharedMaterial: {fileID: 3994073047944564783, guid: 44c831c80812a6d4d91cd4cb7cc095e3, type: 2}
@@ -3600,12 +3600,12 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 36
+  m_fontSize: 38
   m_fontSizeBase: 36
   m_fontWeight: 400
-  m_enableAutoSizing: 0
+  m_enableAutoSizing: 1
   m_fontSizeMin: 18
-  m_fontSizeMax: 72
+  m_fontSizeMax: 40
   m_fontStyle: 0
   m_HorizontalAlignment: 1
   m_VerticalAlignment: 512
@@ -4638,6 +4638,7 @@ MonoBehaviour:
   placeableDatabase: {fileID: 11400000, guid: a3f3609ce74d3db4c84843c63352263e, type: 2}
   prizeDatabase: {fileID: 11400000, guid: 6c9fdddb0be71a84fbebeeeb26dde82f, type: 2}
   currencyDatabase: {fileID: 11400000, guid: 7734777d46d7b784f85e166092c67c14, type: 2}
+  eggDatabase: {fileID: 11400000, guid: 72e9c2f6cf866f9458150e76c3a297ed, type: 2}
 --- !u!1 &6631029910512853904
 GameObject:
   m_ObjectHideFlags: 0

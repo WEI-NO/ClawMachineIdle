@@ -47,12 +47,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9f5b8e7d91aac764eb2876b313b619b2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Reward: 
+  Reward: Forest Plushie Egg
   Quantity: 1
   RewardItem: {fileID: 0}
   ItemRarity: 0
   isEgg: 1
-  dropTable: {fileID: 11400000, guid: 65c71d3caa3483945b9b41b3cbded771, type: 2}
+  effect: {fileID: 0}
+  onUI: 1
 --- !u!212 &271272820954463492
 SpriteRenderer:
   m_ObjectHideFlags: 0

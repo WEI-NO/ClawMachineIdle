@@ -2,7 +2,7 @@ using UnityEngine;
 using System.Collections.Generic;
 
 [CreateAssetMenu(fileName = "ItemDatabase", menuName = "Items/Database")]
-public class BaseItemDatabase : ScriptableObject
+public abstract class BaseItemDatabase : ScriptableObject
 {
     private static BaseItemDatabase Instance;
 

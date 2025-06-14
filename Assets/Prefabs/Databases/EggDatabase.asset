@@ -9,9 +9,9 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9a3295a0b36181746aaddd0fa42729a6, type: 3}
-  m_Name: ItemDatabase
+  m_Script: {fileID: 11500000, guid: b0412fc85f6f4464dbd1fa9f172ab885, type: 3}
+  m_Name: EggDatabase
   m_EditorClassIdentifier: 
-  allItems:
-  - {fileID: 11400000, guid: ae07eb7bc5b9f114180b93d639a140ec, type: 2}
-  - {fileID: 11400000, guid: ffd695a6c5b570a4d866374601ad70d0, type: 2}
+  allData:
+  - {fileID: 11400000, guid: ebafd513f942f3d478b4e99d3b622a9a, type: 2}
+  - {fileID: 11400000, guid: ad00369c235cda349bcc3628fd801be2, type: 2}

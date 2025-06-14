@@ -2,19 +2,15 @@ using UnityEngine;
 
 public class Prize_Furniture : BasePrize
 {
-    public SO_EggPrizeEntries dropTable;
+    //public SO_EggPrizeEntries dropTable;
+
+    protected override void OnStart()
+    {
+        RewardItem = MainDatabase.Instance.DB_Egg.GetDataByID(Reward);
+    }
 
     public override void PrizeClaimFunction()
     {
-        //if (dropTable)
-        //{
-        //    var db = MainDatabase.Instance.DB_Placeable;
-        //    var prizeData = dropTable.RollPrize().prize;
-            
-        //    if (prizeData)
-        //    {
-        //        PlayerInventory.Instance.GiveItem(prizeData, 1);
-        //    }
-        //}
+        base.PrizeClaimFunction();
     }
 }
