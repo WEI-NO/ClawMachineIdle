@@ -157,9 +157,9 @@ MonoBehaviour:
   lastScreenResolution: {x: 0, y: 0}
   buttonSizeRatio: 0
   joystickSizeRatio: 0
-  refreshButton: {fileID: 1062935546}
-  grabButton: {fileID: 163672826}
-  joystickController: {fileID: 593113296}
+  refreshButton: {fileID: 0}
+  grabButton: {fileID: 0}
+  joystickController: {fileID: 0}
 --- !u!4 &131718763
 Transform:
   m_ObjectHideFlags: 0
@@ -1236,7 +1236,7 @@ MonoBehaviour:
   xLimits: {x: 0, y: 0}
   targetY: 0
   yLimits: {x: -5, y: 10}
-  grabY: 1.3
+  grabY: -5
   idleY: 5
   inactiveY: 10
   verticalSpeed: 5
@@ -4559,7 +4559,7 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 256
   grabbedObj: []
-  claimEffect: {fileID: 468250972416345833, guid: e51480518c2254143af77b6cbb0cd206, type: 3}
+  claimEffect: {fileID: 0}
   claimDelay: 0.1
 --- !u!61 &1753851029
 BoxCollider2D:
