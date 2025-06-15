@@ -23,10 +23,7 @@ public class BasePrize : MonoBehaviour
     }
     private void Start()
     {
-        ItemLoader.Instance.LoadItem(Reward, (item) =>
-        {
-            RewardItem = item;
-        });
+        RewardItem = MainDatabase.Instance.DB_Currency.GetDataByID(Reward);
         OnStart();
     }
     private void Update()
@@ -51,16 +48,54 @@ public class BasePrize : MonoBehaviour
     public string Reward;
     public int Quantity = 1;
     public BaseItem RewardItem;
+    public ItemRarity ItemRarity;
+    public bool isEgg;
+    [Header("Effect Settings")]
+    [SerializeField] private GameObject effect;
+    [SerializeField] private bool onUI = true;
     
+    
+    protected void SetQuantity(int q)
+    {
+        Quantity = q;
+    }
 
-    public virtual void PrizeClaim()
+    public void PrizeClaim()
+    {
+        PrizeClaimFunction();
+        Destroy(gameObject);
+    }
+
+    public virtual void PrizeClaimFunction()
     {
         if (RewardItem)
         {
             PlayerInventory.Instance.GiveItem(RewardItem, Quantity);
+
+            // Spawn Effect
+            if (effect)
+            {
+                if (onUI && PersistentCanvas.Instance != null)
+                {
+                    // Convert world position to screen space
+                    Vector3 screenPos = Camera.main.WorldToScreenPoint(transform.position);
+
+                    // Instantiate effect under MainCanvas
+                    GameObject uiEffect = Instantiate(effect, screenPos, Quaternion.identity, PersistentCanvas.Instance.transform);
+                }
+                else
+                {
+                    // Spawn effect in world space
+                    Instantiate(effect, transform.position, Quaternion.identity);
+                }
+            }
+
         }
-        Destroy(gameObject);
+
+
+
     }
 
+    
 
 }

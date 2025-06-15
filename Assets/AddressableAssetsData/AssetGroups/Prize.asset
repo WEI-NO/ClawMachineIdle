@@ -1,0 +1,53 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bbb281ee3bf0b054c82ac2347e9e782c, type: 3}
+  m_Name: Prize
+  m_EditorClassIdentifier: 
+  m_GroupName: Prize
+  m_GUID: d0e32573a5ecd874ea148a9f7fad1f5d
+  m_SerializeEntries:
+  - m_GUID: 4746e2517e86a3c4fb160d92a15c1a7d
+    m_Address: prize_egg_plushie_forest
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - Prize
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 60afc69397f1f894d98cf0f38b2c1a66
+    m_Address: prize_egg_furniture_forest
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - Prize
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 82aa387bee0bca74183038b123153dcd
+    m_Address: prize_coin_small
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - Prize
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: dc55c2ee0e8ad2d4ba8d4bbceb25144b
+    m_Address: prize_coin_big
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - Prize
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: f187c71445c459845b9e1734b0e10815
+    m_Address: prize_ticket
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - Prize
+    FlaggedDuringContentUpdateRestriction: 0
+  m_ReadOnly: 0
+  m_Settings: {fileID: 11400000, guid: 5a8ab5add29d66f4fb0a87e6060c50e0, type: 2}
+  m_SchemaSet:
+    m_Schemas:
+    - {fileID: 11400000, guid: 206609ccb0e0c1f4cafd27818505aa85, type: 2}
+    - {fileID: 11400000, guid: b0adbf453e86fed4890e3e0ff9714cfa, type: 2}

@@ -1,3 +1,4 @@
+using System.Runtime.CompilerServices;
 using UnityEngine;
 
 namespace CustomLibrary.Math.Vector
@@ -12,6 +13,11 @@ namespace CustomLibrary.Math.Vector
             int i = (int)index;
             original[i] = value;
             return original;
+        }
+
+        public static float GetRandom(this Vector2 main)
+        {
+            return Random.Range(main.x, main.y);
         }
     }
 

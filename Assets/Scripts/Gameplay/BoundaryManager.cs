@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.UI;
 
 public class BoundaryManager : MonoBehaviour
 {
@@ -7,15 +8,40 @@ public class BoundaryManager : MonoBehaviour
     public float tableScaleMultiplier = 1.0f;
     [Range(0f, 1f)]
     public float tableVerticalAnchor = 0.0f; // 0 = bottom, 1 = top of screen
+    private float lastVerticalAnchor;
 
     [Header("Boundary Properties")]
     public Transform leftWall;
     public Transform rightWall;
     public float wallThickness = 1f;
+    public Vector2 lastScreenResolution = Vector2.zero;
+
+    [Header("Buttons Properties")]
+    public float buttonSizeRatio;
+    public float joystickSizeRatio;
+    [SerializeField] private RefreshButton refreshButton;
+    [SerializeField] private GrabButton grabButton;
+    [SerializeField] private JoystickTouchController joystickController;
 
     void Start()
     {
         ScaleBoundaryToScreen();
+    }
+
+    private void Update()
+    {
+        if (lastVerticalAnchor != tableVerticalAnchor)
+        {
+            ScaleBoundaryToScreen();
+        }
+
+        Camera cam = Camera.main;
+        float screenHeight = cam.orthographicSize * 2.0f;
+        float screenWidth = screenHeight * cam.aspect;
+        if (screenHeight != lastScreenResolution.y || screenWidth != lastScreenResolution.x)
+        {
+            ScaleBoundaryToScreen();
+        }
     }
 
     void ScaleBoundaryToScreen()
@@ -23,6 +49,8 @@ public class BoundaryManager : MonoBehaviour
         Camera cam = Camera.main;
         float screenHeight = cam.orthographicSize * 2.0f;
         float screenWidth = screenHeight * cam.aspect;
+
+        lastScreenResolution = new Vector2(screenWidth, screenHeight);
 
         // ---------- Table Scaling ----------
         float newScaleX = screenWidth / 2.0f;
@@ -40,6 +68,7 @@ public class BoundaryManager : MonoBehaviour
         float tableCenterY = topAnchorY - (tableHeight / 2f);
 
         table.position = new Vector3(0f, tableCenterY, table.position.z);
+        lastVerticalAnchor = tableVerticalAnchor;
 
         // ---------- Walls Scaling and Positioning ----------
 

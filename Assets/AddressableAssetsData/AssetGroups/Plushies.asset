@@ -1,0 +1,29 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bbb281ee3bf0b054c82ac2347e9e782c, type: 3}
+  m_Name: Plushies
+  m_EditorClassIdentifier: 
+  m_GroupName: Plushies
+  m_GUID: eeefa979b2bd7364d9cfb379d620f8c0
+  m_SerializeEntries:
+  - m_GUID: f7c35e659ece87d43814287fc312abf8
+    m_Address: plushie_basic_dog
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - Plushie
+    FlaggedDuringContentUpdateRestriction: 0
+  m_ReadOnly: 0
+  m_Settings: {fileID: 11400000, guid: 5a8ab5add29d66f4fb0a87e6060c50e0, type: 2}
+  m_SchemaSet:
+    m_Schemas:
+    - {fileID: 11400000, guid: f1dbd1feb38a2d84c8b35fe2bd806b82, type: 2}
+    - {fileID: 11400000, guid: 4b558f4533d110d4fb82d83382d8d767, type: 2}

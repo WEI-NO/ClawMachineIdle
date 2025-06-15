@@ -10,19 +10,26 @@ public class CraneStickController : MonoBehaviour
     public float moveSpeed;
     public ClawObject claw;
 
+    public bool isActive;
+
     [Header("Input Properties")]
     public float xInputSensitivity = 1.0f;
     public float xInputDamping = 1.0f;
     public float xInput;
     public float xVelocity;
+    public Vector2 xLimits = new Vector2();
 
     [Header("Target Height")]
     public float targetY;
     public Vector2 yLimits = new Vector2(-5f, 5f);
+    public float grabY;
+    public float idleY;
+    public float inactiveY;
 
     [Header("Movement Settings")]
     public float verticalSpeed = 5f;
     public float arriveThreshold = 0.05f;
+    public float activationSpeed = 5f;
 
     public bool isMoving = false;
 
@@ -32,16 +39,23 @@ public class CraneStickController : MonoBehaviour
     {
         Initializer.SetInstance(this);
         rb = GetComponent<Rigidbody2D>();
+        isActive = true;
     }
 
     private void Start()
     {
-        SetTargetY(yLimits.y);
+        SetTargetY(idleY);
+        CalculateHorizontalLimits();
     }
 
     // Update is called once per frame
     void Update()
     {
+        if (Input.GetKeyDown(KeyCode.Period))
+        {
+            SetActive(!isActive);
+        }
+
         //XInputUpdate();
         if (Input.GetKey(KeyCode.DownArrow))
         {
@@ -71,9 +85,8 @@ public class CraneStickController : MonoBehaviour
     private void FixedUpdate()
     {
         CraneMovementUpdate();
-
-
         VerticalMovementUpdate();
+        ClampXPosition();
     }
 
     #region Input
@@ -128,9 +141,21 @@ public class CraneStickController : MonoBehaviour
         if (claw && claw.inSequence)
         {
             xVelocity = 0.0f;
-        } else
+        }
+        else
         {
-            xVelocity = xInput * moveSpeed;
+            float proposedX = rb.position.x + xInput * moveSpeed * Time.fixedDeltaTime;
+
+            // If input would move outside limits, ignore
+            if ((xInput < 0f && rb.position.x <= xLimits.x) ||
+                (xInput > 0f && rb.position.x >= xLimits.y))
+            {
+                xVelocity = 0.0f;
+            }
+            else
+            {
+                xVelocity = xInput * moveSpeed;
+            }
         }
 
         rb.linearVelocityX = xVelocity;
@@ -153,6 +178,19 @@ public class CraneStickController : MonoBehaviour
 
         float direction = Mathf.Sign(distance);
         float newY = position.y + direction * verticalSpeed * Time.fixedDeltaTime;
+        if (direction < 0)
+        {
+            if (newY <= targetY)
+            {
+                newY = targetY;
+            }
+        } else if (direction > 0)
+        {
+           if (newY >= targetY)
+            {
+                newY = targetY;
+            }
+        }
         newY = Mathf.Clamp(newY, yLimits.x, yLimits.y);
 
         rb.MovePosition(new Vector2(position.x, newY));
@@ -169,6 +207,22 @@ public class CraneStickController : MonoBehaviour
         isMoving = true;
     }
 
+    public void SetActive(bool active)
+    {
+        if (active == isActive) return;
+
+        SetVerticalSpeed(activationSpeed);
+
+        if (!active)
+        {
+            SetTargetY(inactiveY);
+        } else
+        {
+            SetTargetY(idleY);
+        }
+        isActive = active;
+    }
+
     public void Halt()
     {
         targetY = rb.position.y;
@@ -178,6 +232,32 @@ public class CraneStickController : MonoBehaviour
     public bool IsMoving()
     {
         return isMoving;
+    }
+
+    private void ClampXPosition()
+    {
+        Vector2 pos = rb.position;
+        if (pos.x < xLimits.x || pos.x > xLimits.y)
+        {
+            pos.x = Mathf.Clamp(pos.x, xLimits.x, xLimits.y);
+            rb.position = new Vector2(pos.x, rb.position.y);
+            rb.linearVelocityX = 0f; // prevent sliding after clamp
+        }
+    }
+
+    private void CalculateHorizontalLimits()
+    {
+        Camera cam = Camera.main;
+        float screenHalfWidth = cam.orthographicSize * cam.aspect;
+
+        float halfCraneWidth = 0.5f;
+        SpriteRenderer sr = GetComponent<SpriteRenderer>();
+        if (sr != null)
+        {
+            halfCraneWidth = sr.bounds.extents.x;
+        }
+
+        xLimits = new Vector2(-screenHalfWidth + halfCraneWidth, screenHalfWidth - halfCraneWidth);
     }
 
     #endregion movement

@@ -35,9 +35,21 @@ public class Grid2D : MonoBehaviour
     /// <returns>Grid Position</returns>
     public Vector2Int GetGridPosition(Vector2 worldPosition)
     {
-        int x = Mathf.FloorToInt(worldPosition.x / cellSize);
-        int y = Mathf.FloorToInt(worldPosition.y / cellSize);
+        float isoX = worldPosition.x / cellSize;
+        float isoY = worldPosition.y / (cellSize / 2);
+
+        int x = Mathf.FloorToInt((isoY + isoX) / 2f);
+        int y = Mathf.FloorToInt((isoY - isoX) / 2f);
+
         return new Vector2Int(x, y);
+    }
+
+    public Vector2 GetWorldPosition(Vector2Int gridPosition)
+    {
+        float x = (gridPosition.x - gridPosition.y) * (cellSize / 2f);
+        float y = (gridPosition.x + gridPosition.y) * (cellSize / 4f); // Adjust divisor to match your isometric tile ratio
+
+        return new Vector2(x, y);
     }
 
     #endregion grid
