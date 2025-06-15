@@ -12,6 +12,7 @@ public class MachineWallpaper : MonoBehaviour
     private void Start()
     {
         ClawMachineThemeController.Instance.OnThemeChange += OnThemeChange;
+        OnThemeChange(ClawMachineThemeController.Instance.CurrentTheme);
     }
 
     private void OnThemeChange(CM_Theme theme)
