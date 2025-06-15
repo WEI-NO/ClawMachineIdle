@@ -16,6 +16,7 @@ public class SceneHandler : MonoBehaviour
 {
     public static SceneHandler Instance;
 
+
     [Header("Scene Properties")]
     //[SerializeField] private SceneField _persistentGameplay;
     [SerializeField] private SceneField _sceneToLoad;
