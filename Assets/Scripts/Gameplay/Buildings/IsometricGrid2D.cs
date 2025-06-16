@@ -20,8 +20,13 @@ public class IsometricGrid2D : MonoBehaviour
 
     [Header("Ground Tile")]
     [SerializeField] private Tilemap mainTilemap; // For alignment purposes
+    [SerializeField] private Tilemap wallTilemap; // For alignment purposes
     [SerializeField] private TileBase groundTile;
+    [SerializeField] private TileBase wallTile_x;
+    [SerializeField] private TileBase wallTile_y;
+    [SerializeField] private TileBase wallCornerTile;
     public Dictionary<Vector2Int, bool> GroundTiles = new Dictionary<Vector2Int, bool>(); // <Coordinate, Occupation>
+    public Dictionary<Vector2Int, bool> WallTiles = new Dictionary<Vector2Int, bool>(); // <Coordinate, Occupation>
 
     void Awake()
     {
@@ -30,7 +35,9 @@ public class IsometricGrid2D : MonoBehaviour
 
     private void Start()
     {
+        // 1. Initialize Ground Tiles then Wall Tiles
         InitializeGroundTiles();
+        InitializeWallTiles();
 
     }
 
@@ -57,6 +64,29 @@ public class IsometricGrid2D : MonoBehaviour
 
     #region Tiles
 
+    private void InitializeWallTiles()
+    {
+        WallTiles = new Dictionary<Vector2Int, bool>();
+        var origin = GridDimension;
+
+        if (wallTilemap)
+        {
+            wallTilemap.ClearAllTiles();
+            wallTilemap.SetTile((Vector3Int)origin, wallCornerTile);
+            for (int i = 1; i <= GridDimension.x; i++)
+            {
+                var newCoord = origin - new Vector2Int(i, 0);
+                InitializeWallTile(newCoord, true);
+            }
+
+            for (int i = 1; i <= GridDimension.y; i++)
+            {
+                var newCoord = origin - new Vector2Int(0, i);
+                InitializeWallTile(newCoord, false);
+            }
+        }
+    }
+
     private void InitializeGroundTiles()
     {
         // 1. Get starting offset height.
@@ -66,7 +96,6 @@ public class IsometricGrid2D : MonoBehaviour
 
         GroundTiles = new Dictionary<Vector2Int, bool>();
         GridDimension = new Vector2Int(PlayerRoom.Instance.GetWidth(), PlayerRoom.Instance.GetHeight());
-        Vector2Int pixelCount = GridDimension * PixelPerRoom;
 
         if (mainTilemap)
         {
@@ -75,45 +104,16 @@ public class IsometricGrid2D : MonoBehaviour
             {
                 for (int j = 0; j < GridDimension.y; j++)
                 {
-                    InitializeTile(new Vector2Int(i, j));
+                    InitializeGroundTile(new Vector2Int(i, j));
                 }
             }
         }
+    }
 
-        //int halfX = pixelCount.x / 2;
+    public void InitializeWallTile(Vector2Int tilePosition, bool left)
+    {
+        wallTilemap.SetTile((Vector3Int)tilePosition, left ? wallTile_x : wallTile_y);
 
-        //// Bottom Half
-        //for (int y = 0; y < pixelCount.y / 4; y++)
-        //{
-        //    int allowedHalfX = ((y + 1) * 4) / 2;
-        //    for (int x = -allowedHalfX; x < allowedHalfX; x++)
-        //    {
-        //        Vector2Int coord = new Vector2Int(x, y);
-        //        GroundTiles.Add(coord, false);
-        //    }
-        //}
-
-        //// Top Half
-        //int startY = pixelCount.y / 4;
-        //for (int y = startY; y < pixelCount.y / 2; y++)
-        //{
-        //    int allowedHalfX = (startY * 4) / 2 - (Mathf.Abs(y - startY) * 2);
-        //    for (int x = -allowedHalfX; x < allowedHalfX; x++)
-        //    {
-        //        Vector2Int coord = new Vector2Int(x, y);
-        //        GroundTiles.Add(coord, false);
-        //    }
-        //}
-
-        //for (int i = -halfX; i < halfX; i++)
-        //{
-        //    for (int j = 0; j < pixelCount.y / 2; j++)
-        //    {
-        //        Vector2Int coord = new Vector2Int(i, j);
-
-        //        GroundTiles.Add(coord, false);
-        //    }
-        //}
     }
 
     /// <summary>
@@ -121,7 +121,7 @@ public class IsometricGrid2D : MonoBehaviour
     /// Provided tileposition is in relation to the 0, 0 tile.
     /// </summary>
     /// <param name="tilePosition"></param>
-    public void InitializeTile(Vector2Int tilePosition)
+    public void InitializeGroundTile(Vector2Int tilePosition)
     {
         // Place the tile at the grid position
         mainTilemap.SetTile((Vector3Int)tilePosition, groundTile);
