@@ -113,6 +113,30 @@ public class IsometricGrid2D : MonoBehaviour
     public void InitializeWallTile(Vector2Int tilePosition, bool left)
     {
         wallTilemap.SetTile((Vector3Int)tilePosition, left ? wallTile_x : wallTile_y);
+        if (left)
+        {
+            int xDiff = Mathf.Abs(tilePosition.x - GridDimension.x);
+            var origin = new Vector2Int(0, tilePosition.x * 16);
+            origin += new Vector2Int((xDiff * -16), (xDiff * 8) + 1);
+
+            int width = 16;
+            int height = 95;
+
+            for (int i = origin.x; i < origin.x + width; i++)
+            {
+                int currentHeight = Mathf.FloorToInt((i - origin.x) / 2.0f);
+                int currentY = origin.y + currentHeight;
+                for (int j = currentY; j < currentY + height; j++)
+                {
+                    var coord = new Vector2Int(i, j);
+                    if (GroundTiles.ContainsKey(coord))
+                    {
+                        continue;
+                    }
+                    GroundTiles.Add(coord, false);
+                }
+            }
+        }
 
     }
 
@@ -132,8 +156,8 @@ public class IsometricGrid2D : MonoBehaviour
         Vector2Int startPixel = new Vector2Int(worldX, worldY);
 
         Vector2Int pixelCount = new Vector2Int(PixelPerRoom, PixelPerRoom);
-
         // Bottom Half
+        //string debugPrint = $"{tilePosition} => [ ";
         for (int y = 0; y < pixelCount.y / 4; y++)
         {
             int allowedHalfX = ((y + 1) * 4) / 2;
@@ -145,6 +169,7 @@ public class IsometricGrid2D : MonoBehaviour
                     continue;
                 }
                 GroundTiles.Add(coord, false);
+                //debugPrint += $"{coord} | ";
             }
         }
 
@@ -161,9 +186,12 @@ public class IsometricGrid2D : MonoBehaviour
                     continue;
                 }
                 GroundTiles.Add(coord, false);
+                //debugPrint += $"{coord} | ";
             }
         }
 
+        //debugPrint += "]";
+        //print(debugPrint);
     }
 
     #endregion tiles
