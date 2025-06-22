@@ -51,15 +51,22 @@ public class IsometricGrid2D : MonoBehaviour
 
     }
 
-    public bool GetWorldPosition(Vector2Int gridPosition, out Vector2 worldPos)
+    public bool GetWorldPosition(Vector2Int gridPosition, out Vector2 worldPos, bool forWallObject = false)
     {
+
         Vector2 originaloffset = new Vector2(0, originYOffset * PixelToWorldSize);
 
         Vector2 buildingPos = (Vector2)gridPosition * PixelToWorldSize;
 
         worldPos = buildingPos + originaloffset;
-
-        return GroundTiles.ContainsKey(gridPosition);
+        if (!forWallObject)
+        {
+            return GroundTiles.ContainsKey(gridPosition);
+        }
+        else
+        {
+            return WallTiles.ContainsKey(gridPosition);
+        }
     }
 
     #region Tiles
@@ -113,14 +120,13 @@ public class IsometricGrid2D : MonoBehaviour
     public void InitializeWallTile(Vector2Int tilePosition, bool left)
     {
         wallTilemap.SetTile((Vector3Int)tilePosition, left ? wallTile_x : wallTile_y);
+        int width = 16;
+        int height = 95;
         if (left)
         {
             int xDiff = Mathf.Abs(tilePosition.x - GridDimension.x);
             var origin = new Vector2Int(0, tilePosition.x * 16);
             origin += new Vector2Int((xDiff * -16), (xDiff * 8) + 1);
-
-            int width = 16;
-            int height = 95;
 
             for (int i = origin.x; i < origin.x + width; i++)
             {
@@ -129,11 +135,34 @@ public class IsometricGrid2D : MonoBehaviour
                 for (int j = currentY; j < currentY + height; j++)
                 {
                     var coord = new Vector2Int(i, j);
-                    if (GroundTiles.ContainsKey(coord))
+                    if (WallTiles.ContainsKey(coord))
                     {
                         continue;
                     }
-                    GroundTiles.Add(coord, false);
+                    WallTiles.Add(coord, false);
+                }
+            }
+        }
+        // Right
+        else
+        {
+            int xDiff = Mathf.Abs(tilePosition.y - GridDimension.y);
+            var origin = new Vector2Int(0, tilePosition.y * 16);
+            origin += new Vector2Int((xDiff * 16), (xDiff * 8) + 1);
+
+
+            for (int i = origin.x - 1 ; i >= origin.x - width; i--)
+            {
+                int currentHeight = Mathf.FloorToInt(((origin.x - 1) - i) / 2.0f);
+                int currentY = origin.y + currentHeight;
+                for (int j = currentY; j < currentY + height; j++)
+                {
+                    var coord = new Vector2Int(i, j);
+                    if (WallTiles.ContainsKey(coord))
+                    {
+                        continue;
+                    }
+                    WallTiles.Add(coord, false);
                 }
             }
         }

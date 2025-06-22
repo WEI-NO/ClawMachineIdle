@@ -1026,6 +1026,16 @@ Tilemap:
       m_TileObjectToInstantiateIndex: 65535
       dummyAlignment: 0
       m_AllTileFlags: 1073741826
+  - first: {x: -2, y: 2, z: 0}
+    second:
+      serializedVersion: 2
+      m_TileIndex: 2
+      m_TileSpriteIndex: 2
+      m_TileMatrixIndex: 0
+      m_TileColorIndex: 0
+      m_TileObjectToInstantiateIndex: 65535
+      dummyAlignment: 0
+      m_AllTileFlags: 1073741825
   - first: {x: 3, y: 2, z: 0}
     second:
       serializedVersion: 2
@@ -1112,7 +1122,7 @@ Tilemap:
     m_Data: {fileID: 11400000, guid: 28ecf3fb9b4ae0242b6d109f8bd2f3b1, type: 2}
   - m_RefCount: 6
     m_Data: {fileID: 11400000, guid: fe0ad2750629e4d48b3a5c7a29be4684, type: 2}
-  - m_RefCount: 3
+  - m_RefCount: 4
     m_Data: {fileID: 11400000, guid: da4f026d990c7f34e91f7014247aadaa, type: 2}
   - m_RefCount: 1
     m_Data: {fileID: 11400000, guid: f5c2e100591f53e4993a4cac11eb9606, type: 2}
@@ -1121,7 +1131,7 @@ Tilemap:
     m_Data: {fileID: 0}
   - m_RefCount: 6
     m_Data: {fileID: -52791655, guid: c801c81ea291652458a0a29eeee405d2, type: 3}
-  - m_RefCount: 3
+  - m_RefCount: 4
     m_Data: {fileID: 1140776610, guid: c801c81ea291652458a0a29eeee405d2, type: 3}
   - m_RefCount: 1
     m_Data: {fileID: -126232514, guid: 739d332f3be6a7f41a0ec708ce041279, type: 3}
@@ -1130,7 +1140,7 @@ Tilemap:
   - m_RefCount: 6
     m_Data: {fileID: 489354470, guid: 739d332f3be6a7f41a0ec708ce041279, type: 3}
   m_TileMatrixArray:
-  - m_RefCount: 17
+  - m_RefCount: 18
     m_Data:
       e00: 1
       e01: 0
@@ -1149,7 +1159,7 @@ Tilemap:
       e32: 0
       e33: 1
   m_TileColorArray:
-  - m_RefCount: 17
+  - m_RefCount: 18
     m_Data: {r: 1, g: 1, b: 1, a: 1}
   m_TileObjectToInstantiateArray: []
   m_AnimationFrameRate: 1
@@ -3525,11 +3535,15 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2859625282978535177, guid: e77e026f7bd8c5042bede61aab23c16c, type: 3}
-      propertyPath: m_LocalPosition.x
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2859625282978535177, guid: e77e026f7bd8c5042bede61aab23c16c, type: 3}
+      propertyPath: m_LocalRotation.y
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2859625282978535177, guid: e77e026f7bd8c5042bede61aab23c16c, type: 3}
-      propertyPath: m_LocalPosition.y
+      propertyPath: m_LocalEulerAnglesHint.y
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4116797622001059485, guid: e77e026f7bd8c5042bede61aab23c16c, type: 3}

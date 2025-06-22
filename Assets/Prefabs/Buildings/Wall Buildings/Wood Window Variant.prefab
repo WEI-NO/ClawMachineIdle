@@ -24,6 +24,22 @@ PrefabInstance:
       propertyPath: BuildingName
       value: Window
       objectReference: {fileID: 0}
+    - target: {fileID: 4679034283707852851, guid: 17599aeefc9e769499f6c023b1e27b27, type: 3}
+      propertyPath: isWallObject
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4679034283707852851, guid: 17599aeefc9e769499f6c023b1e27b27, type: 3}
+      propertyPath: blueprint.IsWallObject
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4679034283707852851, guid: 17599aeefc9e769499f6c023b1e27b27, type: 3}
+      propertyPath: blueprint.PixelDimension.x
+      value: 26
+      objectReference: {fileID: 0}
+    - target: {fileID: 4679034283707852851, guid: 17599aeefc9e769499f6c023b1e27b27, type: 3}
+      propertyPath: blueprint.PixelDimension.y
+      value: 26
+      objectReference: {fileID: 0}
     - target: {fileID: 4733345903952975412, guid: 17599aeefc9e769499f6c023b1e27b27, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
@@ -142,11 +158,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7744335599126668686, guid: 17599aeefc9e769499f6c023b1e27b27, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -0.89
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7744335599126668686, guid: 17599aeefc9e769499f6c023b1e27b27, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 2.08
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8500486680052626458, guid: 17599aeefc9e769499f6c023b1e27b27, type: 3}
       propertyPath: m_Name
