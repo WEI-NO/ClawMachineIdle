@@ -42,8 +42,10 @@ public class PlayerRoom : MonoBehaviour
         int startY = DefaultDimension.y - RoomDimension.y;
         for (int i = startY; i < DefaultDimension.y; i++)
         {
-            IsometricGrid2D.Instance.InitializeTile(new Vector2Int(nextXLayer, i));
+            IsometricGrid2D.Instance.InitializeGroundTile(new Vector2Int(nextXLayer, i));
         }
+
+        IsometricGrid2D.Instance.InitializeWallTile(new Vector2Int(nextXLayer, DefaultDimension.y), true);
         RoomDimension.x += 1;
     }
 
@@ -53,8 +55,9 @@ public class PlayerRoom : MonoBehaviour
         int startX = DefaultDimension.x - RoomDimension.x;
         for (int i = startX; i < DefaultDimension.x; i++)
         {
-            IsometricGrid2D.Instance.InitializeTile(new Vector2Int(i, nextYLayer));
+            IsometricGrid2D.Instance.InitializeGroundTile(new Vector2Int(i, nextYLayer));
         }
+        IsometricGrid2D.Instance.InitializeWallTile(new Vector2Int(DefaultDimension.x, nextYLayer), false);
         RoomDimension.y += 1;
     }
 

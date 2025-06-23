@@ -20,8 +20,13 @@ public class IsometricGrid2D : MonoBehaviour
 
     [Header("Ground Tile")]
     [SerializeField] private Tilemap mainTilemap; // For alignment purposes
+    [SerializeField] private Tilemap wallTilemap; // For alignment purposes
     [SerializeField] private TileBase groundTile;
+    [SerializeField] private TileBase wallTile_x;
+    [SerializeField] private TileBase wallTile_y;
+    [SerializeField] private TileBase wallCornerTile;
     public Dictionary<Vector2Int, bool> GroundTiles = new Dictionary<Vector2Int, bool>(); // <Coordinate, Occupation>
+    public Dictionary<Vector2Int, bool> WallTiles = new Dictionary<Vector2Int, bool>(); // <Coordinate, Occupation>
 
     void Awake()
     {
@@ -30,7 +35,9 @@ public class IsometricGrid2D : MonoBehaviour
 
     private void Start()
     {
+        // 1. Initialize Ground Tiles then Wall Tiles
         InitializeGroundTiles();
+        InitializeWallTiles();
 
     }
 
@@ -44,18 +51,48 @@ public class IsometricGrid2D : MonoBehaviour
 
     }
 
-    public bool GetWorldPosition(Vector2Int gridPosition, out Vector2 worldPos)
+    public bool GetWorldPosition(Vector2Int gridPosition, out Vector2 worldPos, bool forWallObject = false)
     {
+
         Vector2 originaloffset = new Vector2(0, originYOffset * PixelToWorldSize);
 
         Vector2 buildingPos = (Vector2)gridPosition * PixelToWorldSize;
 
         worldPos = buildingPos + originaloffset;
-
-        return GroundTiles.ContainsKey(gridPosition);
+        if (!forWallObject)
+        {
+            return GroundTiles.ContainsKey(gridPosition);
+        }
+        else
+        {
+            return WallTiles.ContainsKey(gridPosition);
+        }
     }
 
     #region Tiles
+
+    private void InitializeWallTiles()
+    {
+        WallTiles = new Dictionary<Vector2Int, bool>();
+        var origin = GridDimension;
+
+        if (wallTilemap)
+        {
+            wallTilemap.ClearAllTiles();
+            wallTilemap.SetTile((Vector3Int)origin, wallCornerTile);
+            for (int i = 1; i <= GridDimension.x; i++)
+            {
+                var newCoord = origin - new Vector2Int(i, 0);
+                InitializeWallTile(newCoord, true);
+            }
+
+            for (int i = 1; i <= GridDimension.y; i++)
+            {
+                var newCoord = origin - new Vector2Int(0, i);
+                InitializeWallTile(newCoord, false);
+            }
+        }
+    }
 
     private void InitializeGroundTiles()
     {
@@ -66,7 +103,6 @@ public class IsometricGrid2D : MonoBehaviour
 
         GroundTiles = new Dictionary<Vector2Int, bool>();
         GridDimension = new Vector2Int(PlayerRoom.Instance.GetWidth(), PlayerRoom.Instance.GetHeight());
-        Vector2Int pixelCount = GridDimension * PixelPerRoom;
 
         if (mainTilemap)
         {
@@ -75,45 +111,62 @@ public class IsometricGrid2D : MonoBehaviour
             {
                 for (int j = 0; j < GridDimension.y; j++)
                 {
-                    InitializeTile(new Vector2Int(i, j));
+                    InitializeGroundTile(new Vector2Int(i, j));
+                }
+            }
+        }
+    }
+
+    public void InitializeWallTile(Vector2Int tilePosition, bool left)
+    {
+        wallTilemap.SetTile((Vector3Int)tilePosition, left ? wallTile_x : wallTile_y);
+        int width = 16;
+        int height = 95;
+        if (left)
+        {
+            int xDiff = Mathf.Abs(tilePosition.x - GridDimension.x);
+            var origin = new Vector2Int(0, tilePosition.x * 16);
+            origin += new Vector2Int((xDiff * -16), (xDiff * 8) + 1);
+
+            for (int i = origin.x; i < origin.x + width; i++)
+            {
+                int currentHeight = Mathf.FloorToInt((i - origin.x) / 2.0f);
+                int currentY = origin.y + currentHeight;
+                for (int j = currentY; j < currentY + height; j++)
+                {
+                    var coord = new Vector2Int(i, j);
+                    if (WallTiles.ContainsKey(coord))
+                    {
+                        continue;
+                    }
+                    WallTiles.Add(coord, false);
+                }
+            }
+        }
+        // Right
+        else
+        {
+            int xDiff = Mathf.Abs(tilePosition.y - GridDimension.y);
+            var origin = new Vector2Int(0, tilePosition.y * 16);
+            origin += new Vector2Int((xDiff * 16), (xDiff * 8) + 1);
+
+
+            for (int i = origin.x - 1 ; i >= origin.x - width; i--)
+            {
+                int currentHeight = Mathf.FloorToInt(((origin.x - 1) - i) / 2.0f);
+                int currentY = origin.y + currentHeight;
+                for (int j = currentY; j < currentY + height; j++)
+                {
+                    var coord = new Vector2Int(i, j);
+                    if (WallTiles.ContainsKey(coord))
+                    {
+                        continue;
+                    }
+                    WallTiles.Add(coord, false);
                 }
             }
         }
 
-        //int halfX = pixelCount.x / 2;
-
-        //// Bottom Half
-        //for (int y = 0; y < pixelCount.y / 4; y++)
-        //{
-        //    int allowedHalfX = ((y + 1) * 4) / 2;
-        //    for (int x = -allowedHalfX; x < allowedHalfX; x++)
-        //    {
-        //        Vector2Int coord = new Vector2Int(x, y);
-        //        GroundTiles.Add(coord, false);
-        //    }
-        //}
-
-        //// Top Half
-        //int startY = pixelCount.y / 4;
-        //for (int y = startY; y < pixelCount.y / 2; y++)
-        //{
-        //    int allowedHalfX = (startY * 4) / 2 - (Mathf.Abs(y - startY) * 2);
-        //    for (int x = -allowedHalfX; x < allowedHalfX; x++)
-        //    {
-        //        Vector2Int coord = new Vector2Int(x, y);
-        //        GroundTiles.Add(coord, false);
-        //    }
-        //}
-
-        //for (int i = -halfX; i < halfX; i++)
-        //{
-        //    for (int j = 0; j < pixelCount.y / 2; j++)
-        //    {
-        //        Vector2Int coord = new Vector2Int(i, j);
-
-        //        GroundTiles.Add(coord, false);
-        //    }
-        //}
     }
 
     /// <summary>
@@ -121,7 +174,7 @@ public class IsometricGrid2D : MonoBehaviour
     /// Provided tileposition is in relation to the 0, 0 tile.
     /// </summary>
     /// <param name="tilePosition"></param>
-    public void InitializeTile(Vector2Int tilePosition)
+    public void InitializeGroundTile(Vector2Int tilePosition)
     {
         // Place the tile at the grid position
         mainTilemap.SetTile((Vector3Int)tilePosition, groundTile);
@@ -132,8 +185,8 @@ public class IsometricGrid2D : MonoBehaviour
         Vector2Int startPixel = new Vector2Int(worldX, worldY);
 
         Vector2Int pixelCount = new Vector2Int(PixelPerRoom, PixelPerRoom);
-
         // Bottom Half
+        //string debugPrint = $"{tilePosition} => [ ";
         for (int y = 0; y < pixelCount.y / 4; y++)
         {
             int allowedHalfX = ((y + 1) * 4) / 2;
@@ -145,6 +198,7 @@ public class IsometricGrid2D : MonoBehaviour
                     continue;
                 }
                 GroundTiles.Add(coord, false);
+                //debugPrint += $"{coord} | ";
             }
         }
 
@@ -161,9 +215,12 @@ public class IsometricGrid2D : MonoBehaviour
                     continue;
                 }
                 GroundTiles.Add(coord, false);
+                //debugPrint += $"{coord} | ";
             }
         }
 
+        //debugPrint += "]";
+        //print(debugPrint);
     }
 
     #endregion tiles
