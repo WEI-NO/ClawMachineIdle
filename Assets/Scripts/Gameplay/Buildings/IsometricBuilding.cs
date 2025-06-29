@@ -4,6 +4,8 @@ using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Runtime.CompilerServices;
+using Unity.VisualScripting;
+using UnityEditor.Rendering;
 using UnityEngine;
 
 public enum Orientation
@@ -79,56 +81,132 @@ public class IsometricBuilding : MonoBehaviour
                 result.y = Mathf.Min(result.y, -1);
 
             Vector2Int targetPosition = blueprint.GridPosition + result;
-            if (!ValidPlacement(targetPosition, blueprint.GridPosition, out List<IsometricCorner> directions))
-            {
-                blueprint.GridPosition = blueprint.LastGridPosition;
-                // Try pixel snapping up a ramp
-                Vector2Int pixelPerfectOffset = new Vector2Int();
 
-                foreach (var p in directions)
+            bool foundValidPlacement = false;
+            if (blueprint.IsWallObject)
+            {
+                if (!ValidPlacement_Wall(targetPosition, blueprint.GridPosition, out List<IsometricCorner> directions))
                 {
-                    pixelPerfectOffset = Vector2Int.zero;
-                    switch (p)
+                    blueprint.GridPosition = blueprint.LastGridPosition;
+                    // Try pixel snapping up a ramp
+                    Vector2Int pixelPerfectOffset = new Vector2Int();
+                    foreach (var p in directions)
                     {
-                        case IsometricCorner.Right_B:
-                            pixelPerfectOffset.x = 2;
-                            break;
-                        case IsometricCorner.Left_B:
-                            pixelPerfectOffset.x = -2;
-                            break;
-                        case IsometricCorner.Top_L:
-                            pixelPerfectOffset.y = 1;
-                            break;
-                        case IsometricCorner.Bottom_L:
-                            pixelPerfectOffset.y = -1;
-                            break;
-                    }
-                    if (pixelPerfectOffset != Vector2Int.zero)
-                    {
-                        targetPosition = blueprint.GridPosition + pixelPerfectOffset;
-                        if (!ValidPlacement(targetPosition, blueprint.GridPosition, out List<IsometricCorner> dir))
+                        pixelPerfectOffset = Vector2Int.zero;
+                        switch (p)
                         {
-                            blueprint.GridPosition = blueprint.LastGridPosition;
+                            case IsometricCorner.Right_B:
+                                pixelPerfectOffset.x = 2;
+                                break;
+                            case IsometricCorner.Left_B:
+                                pixelPerfectOffset.x = -2;
+                                break;
+                            case IsometricCorner.Top_L:
+                                pixelPerfectOffset.y = 1;
+                                break;
+                            case IsometricCorner.Bottom_L:
+                                pixelPerfectOffset.y = -1;
+                                break;
+                        }
+                        if (pixelPerfectOffset != Vector2Int.zero)
+                        {
+                            targetPosition = blueprint.GridPosition + pixelPerfectOffset;
+                            if (!ValidPlacement_Wall(targetPosition, blueprint.GridPosition, out List<IsometricCorner> dir))
+                            {
+                                blueprint.GridPosition = blueprint.LastGridPosition;
+                            }
+                            else
+                            {
+                                blueprint.GridPosition = targetPosition;
+                                foundValidPlacement = true;
+                            }
                         } else
                         {
-                            blueprint.GridPosition = targetPosition;
+                            break;
                         }
-                    } else
-                    {
-                        break;
                     }
                 }
             } else
             {
-                blueprint.GridPosition = targetPosition;
+                if (!ValidPlacement(targetPosition, blueprint.GridPosition, out List<IsometricCorner> directions))
+                {
+                    blueprint.GridPosition = blueprint.LastGridPosition;
+                    // Try pixel snapping up a ramp
+                    Vector2Int pixelPerfectOffset = new Vector2Int();
+
+                    foreach (var p in directions)
+                    {
+                        pixelPerfectOffset = Vector2Int.zero;
+                        switch (p)
+                        {
+                            case IsometricCorner.Right_B:
+                                pixelPerfectOffset.x = 2;
+                                break;
+                            case IsometricCorner.Left_B:
+                                pixelPerfectOffset.x = -2;
+                                break;
+                            case IsometricCorner.Top_L:
+                                pixelPerfectOffset.y = 1;
+                                break;
+                            case IsometricCorner.Bottom_L:
+                                pixelPerfectOffset.y = -1;
+                                break;
+                        }
+                        if (pixelPerfectOffset != Vector2Int.zero)
+                        {
+                            targetPosition = blueprint.GridPosition + pixelPerfectOffset;
+                            if (!ValidPlacement(targetPosition, blueprint.GridPosition, out List<IsometricCorner> dir))
+                            {
+                                blueprint.GridPosition = blueprint.LastGridPosition;
+                            }
+                            else
+                            {
+                                blueprint.GridPosition = targetPosition;
+                                foundValidPlacement = true;
+                            }
+                        }
+                        else
+                        {
+                            break;
+                        }
+                    }
+                }
+                else
+                {
+                    blueprint.GridPosition = targetPosition;
+                    foundValidPlacement = true;
+                }
+            }
+
+            // If getting the half point isn't possible, try the target point
+            if (!foundValidPlacement)
+            {
+                if (!blueprint.IsWallObject ? 
+                    ValidPlacement(blueprint.TargetPosition, blueprint.GridPosition, out List<IsometricCorner> dir1) :
+                    ValidPlacement_Wall(blueprint.TargetPosition, blueprint.GridPosition, out List<IsometricCorner> dir2))
+                {
+                    blueprint.GridPosition = blueprint.TargetPosition;
+                }
             }
         }
-
         // If it is not out of bound, apply the change
-        IsometricGrid2D.Instance.GetWorldPosition(blueprint.GridPosition, out Vector2 wp);
+        IsometricGrid2D.Instance.GetWorldPosition(blueprint.GridPosition, out Vector2 wp, blueprint.IsWallObject);
         transform.position = wp;
 
         blueprint.LastGridPosition = blueprint.GridPosition;
+        
+
+        if (blueprint.IsWallObject)
+        {
+            if (blueprint.GridPosition.x < 0)
+            {
+                SetFlip(Orientation.Right);
+            } else if (blueprint.GridPosition.y > 0)
+            {
+                SetFlip(Orientation.Left);
+            }
+        }
+
     }
 
     #region Outline Control
@@ -170,6 +248,55 @@ public class IsometricBuilding : MonoBehaviour
         if (!GridVisual) return;
 
         GridVisual.localScale = new Vector3(size, size, 1.0f);
+    }
+
+    public bool ValidPlacement_Wall(Vector2Int coord, Vector2Int current, out List<IsometricCorner> directions)
+    {
+        Vector2Int direction = coord - current;
+        //direction = new Vector2Int(direction.x != 0 ? direction.x / Mathf.Abs(direction.x) : 0, direction.y != 0 ? direction.y / Mathf.Abs(direction.y) : 0);
+        directions = new List<IsometricCorner>();
+        List<Vector2Int> testPoints = new List<Vector2Int>();
+
+        if (direction.x > 0) // Right
+        {
+            // Moved right
+            directions.Add(IsometricCorner.Right_B);
+        }
+        else if (direction.x < 0) // Left
+        {
+            // Moved left
+            directions.Add(IsometricCorner.Left_B);
+        }
+
+        if (direction.y > 0) // Up
+        {
+            // Moved up
+            directions.Add(IsometricCorner.Top_L);
+        }
+        else if (direction.y < 0) // Down
+        {
+            // Moved down
+            directions.Add(IsometricCorner.Bottom_L);
+        }
+
+        testPoints.Add(blueprint.GetCornerPosition(IsometricCorner.Bottom_L));
+        testPoints.Add(blueprint.GetCornerPosition(IsometricCorner.Bottom_R));
+        testPoints.Add(blueprint.GetCornerPosition(IsometricCorner.Top_L));
+        testPoints.Add(blueprint.GetCornerPosition(IsometricCorner.Top_R));
+
+
+        bool outOfBound = false;
+        foreach (var point in testPoints)
+        {
+            if (!IsometricGrid2D.Instance.GetWorldPosition(point + direction, out Vector2 w, true))
+            {
+                // If it is out of bound.
+                outOfBound = true;
+                break;
+            }
+        }
+
+        return !outOfBound;
     }
 
     public bool ValidPlacement(Vector2Int coord, Vector2Int current, out List<IsometricCorner> directions)
@@ -299,8 +426,7 @@ public class IsometricBuilding : MonoBehaviour
     {
         int or = blueprint.currentOrientation.ToInt();
         or = (or + 1) % 2;
-        blueprint.currentOrientation = (Orientation)or;
-        SetFlip(blueprint.currentOrientation);
+        SetFlip((Orientation)or);
     }
 
     public void SetFlip(Orientation orientation)
@@ -345,6 +471,8 @@ public struct IsometricBlueprint
 
     public Orientation currentOrientation;
 
+    public bool IsWallObject;
+
     #region Getter/Setter
 
     public Vector2Int GridPosition { get { return _gridPosition; } set { _gridPosition = value; } }
@@ -355,25 +483,47 @@ public struct IsometricBlueprint
 
     public Vector2Int GetCornerPosition(IsometricCorner corner)
     {
-        switch (corner)
+        // Floor objects
+        if (!IsWallObject)
         {
-            case IsometricCorner.Top_L:
-                return GetTop_LCorner();
-            case IsometricCorner.Top_R:
-                return GetTop_RCorner();
-            case IsometricCorner.Right_T:
-                return GetRight_TCorner();
-            case IsometricCorner.Right_B:
-                return GetRight_BCorner();
-            case IsometricCorner.Bottom_L:
-                return GetBottom_LCorner();
-            case IsometricCorner.Bottom_R:
-                return GetBottom_RCorner();
-            case IsometricCorner.Left_B:
-                return GetLeft_BCorner();
-            default: // IsometricCorner.Left_T:
-                return GetLeft_TCorner();
+            switch (corner)
+            {
+                case IsometricCorner.Top_L:
+                    return GetTop_LCorner();
+                case IsometricCorner.Top_R:
+                    return GetTop_RCorner();
+                case IsometricCorner.Right_T:
+                    return GetRight_TCorner();
+                case IsometricCorner.Right_B:
+                    return GetRight_BCorner();
+                case IsometricCorner.Bottom_L:
+                    return GetBottom_LCorner();
+                case IsometricCorner.Bottom_R:
+                    return GetBottom_RCorner();
+                case IsometricCorner.Left_B:
+                    return GetLeft_BCorner();
+                default: // IsometricCorner.Left_T:
+                    return GetLeft_TCorner();
+            }
+        } 
+        // Wall object
+        else
+        {
+            switch(corner)
+            {
+                case IsometricCorner.Top_L:
+                    return GetTop_LCorner();
+                case IsometricCorner.Top_R:
+                    return GetTop_RCorner();
+                case IsometricCorner.Bottom_L:
+                    return GetBottom_LCorner();
+                case IsometricCorner.Bottom_R:
+                    return GetBottom_RCorner();
+                default:
+                    return GetTop_LCorner();
+            }
         }
+
     }
 
 
@@ -382,26 +532,39 @@ public struct IsometricBlueprint
     // Function stubs for each corner
     private Vector2Int GetTop_LCorner()
     {
-        Vector2Int bottomLeft = GetBottom_LCorner();
-        int height = (_currentDimension.x + _currentDimension.y) / 2; height -= 1;
+        if (!IsWallObject)
+        {
+            Vector2Int bottomLeft = GetBottom_LCorner();
+            int height = (_currentDimension.x + _currentDimension.y) / 2; height -= 1;
 
-        int higher = _currentDimension.y > _currentDimension.x ? _currentDimension.y : _currentDimension.x;
-        int lower = _currentDimension.y < _currentDimension.x ? _currentDimension.y : _currentDimension.x;
-        int rightSkew = higher - lower;
+            int higher = _currentDimension.y > _currentDimension.x ? _currentDimension.y : _currentDimension.x;
+            int lower = _currentDimension.y < _currentDimension.x ? _currentDimension.y : _currentDimension.x;
+            int rightSkew = higher - lower;
 
-        return bottomLeft + new Vector2Int(rightSkew * (currentOrientation == Orientation.Left ? -1 : 1), height);
+            return bottomLeft + new Vector2Int(rightSkew * (currentOrientation == Orientation.Left ? -1 : 1), height);
+        } else
+        {
+            return GetBottom_LCorner() + new Vector2Int(0, _currentDimension.y - 1);
+        }
+
     }
 
     private Vector2Int GetTop_RCorner()
     {
-        Vector2Int bottomRight = GetBottom_RCorner();
-        int height = (_currentDimension.x + _currentDimension.y) / 2; height -= 1;
+        if (!IsWallObject)
+        {
+            Vector2Int bottomRight = GetBottom_RCorner();
+            int height = (_currentDimension.x + _currentDimension.y) / 2; height -= 1;
 
-        int higher = _currentDimension.y > _currentDimension.x ? _currentDimension.y : _currentDimension.x;
-        int lower = _currentDimension.y < _currentDimension.x ? _currentDimension.y : _currentDimension.x;
-        int rightSkew = higher - lower;
+            int higher = _currentDimension.y > _currentDimension.x ? _currentDimension.y : _currentDimension.x;
+            int lower = _currentDimension.y < _currentDimension.x ? _currentDimension.y : _currentDimension.x;
+            int rightSkew = higher - lower;
 
-        return bottomRight + new Vector2Int(rightSkew * (currentOrientation == Orientation.Left ? -1 : 1), height);
+            return bottomRight + new Vector2Int(rightSkew * (currentOrientation == Orientation.Left ? -1 : 1), height);
+        } else
+        {
+            return GetBottom_RCorner() + new Vector2Int(0, _currentDimension.y - 1);
+        }
     }
 
     private Vector2Int GetRight_TCorner()
@@ -417,12 +580,36 @@ public struct IsometricBlueprint
 
     private Vector2Int GetBottom_LCorner()
     {
-        return _gridPosition - new Vector2Int(2, 0); // Move grid position 2 pixels to the left
+        if (!IsWallObject)
+            return _gridPosition - new Vector2Int(2, 0); // Move grid position 2 pixels to the left
+        else
+        {
+            if (currentOrientation == Orientation.Right)
+                return _gridPosition;
+            else
+            {
+                int height = Mathf.CeilToInt(_currentDimension.x / 2.0f) - 1;
+                return _gridPosition + new Vector2Int(-(_currentDimension.x - 1), height);
+            }
+        }
+
     }
 
     private Vector2Int GetBottom_RCorner()
     {
-        return _gridPosition + new Vector2Int(1, 0); // Move grid position 1 pixel to the right
+        if (!IsWallObject)
+            return _gridPosition + new Vector2Int(1, 0); // Move grid position 1 pixel to the right
+        else
+        {
+            if (currentOrientation == Orientation.Left)
+                return _gridPosition;
+            else
+            {
+                int height = Mathf.CeilToInt(_currentDimension.x / 2.0f) - 1;
+                return _gridPosition + new Vector2Int(_currentDimension.x - 1, height);
+            }
+        }
+
     }
 
     private Vector2Int GetLeft_BCorner()
