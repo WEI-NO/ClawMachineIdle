@@ -3425,6 +3425,63 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 4f1b5972362548d48b3bb8b469730846, type: 3}
+--- !u!1001 &2369096936214249073
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 897838150670415953, guid: 5bb815ed12fb60b47982e18039c658ec, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -0.23
+      objectReference: {fileID: 0}
+    - target: {fileID: 897838150670415953, guid: 5bb815ed12fb60b47982e18039c658ec, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 1.17
+      objectReference: {fileID: 0}
+    - target: {fileID: 897838150670415953, guid: 5bb815ed12fb60b47982e18039c658ec, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 897838150670415953, guid: 5bb815ed12fb60b47982e18039c658ec, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 897838150670415953, guid: 5bb815ed12fb60b47982e18039c658ec, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 897838150670415953, guid: 5bb815ed12fb60b47982e18039c658ec, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 897838150670415953, guid: 5bb815ed12fb60b47982e18039c658ec, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 897838150670415953, guid: 5bb815ed12fb60b47982e18039c658ec, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 897838150670415953, guid: 5bb815ed12fb60b47982e18039c658ec, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 897838150670415953, guid: 5bb815ed12fb60b47982e18039c658ec, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4049353539146996351, guid: 5bb815ed12fb60b47982e18039c658ec, type: 3}
+      propertyPath: m_Name
+      value: Plushie_Basic_TuxedoCat
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 5bb815ed12fb60b47982e18039c658ec, type: 3}
 --- !u!1001 &3496182711974493141
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -3569,4 +3626,5 @@ SceneRoots:
   - {fileID: 646819167}
   - {fileID: 3496182711974493141}
   - {fileID: 1501368196}
+  - {fileID: 2369096936214249073}
   - {fileID: 4782351728712413046}
