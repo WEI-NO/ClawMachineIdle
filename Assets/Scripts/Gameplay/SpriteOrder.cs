@@ -4,6 +4,8 @@ public class SpriteOrder : MonoBehaviour
 {
     [SerializeField] private SpriteRenderer sr;
     private const int SortMultiplier = 30;
+
+    public float centerOffset = 0;
     void Awake()
     {
         sr = GetComponent<SpriteRenderer>();
@@ -11,7 +13,7 @@ public class SpriteOrder : MonoBehaviour
 
     void Update()
     {
-        int sortOrder = Mathf.RoundToInt(transform.position.y * -1 * SortMultiplier);
+        int sortOrder = Mathf.RoundToInt((transform.position.y + centerOffset) * -1 * SortMultiplier);
         sr.sortingOrder = sortOrder;
     }
 }
