@@ -158,6 +158,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   sr: {fileID: 0}
+  centerOffset: 0
 --- !u!114 &2953505182060188223
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -184,6 +185,7 @@ GameObject:
   - component: {fileID: 4733345903952975412}
   - component: {fileID: 4679034283707852851}
   - component: {fileID: 6149423026579850021}
+  - component: {fileID: 7427971041028555283}
   m_Layer: 0
   m_Name: Base Isometric Placeable
   m_TagString: Untagged
@@ -220,13 +222,20 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   BuildingName: Claw Machine (Pink)
+  Suffix: 
+  BuildingID: 
   blueprint:
     PixelDimension: {x: 14, y: 14}
+    _currentDimension: {x: 0, y: 0}
     _lastGridPosition: {x: 0, y: 0}
     _gridPosition: {x: 0, y: 0}
     TargetPosition: {x: 0, y: 0}
-  GridVisual: {fileID: 7744335599126668686}
-  shader: {fileID: 0}
+    currentOrientation: 0
+    IsWallObject: 0
+  GridVisual:
+  - {fileID: 0}
+  shader:
+  - {fileID: 0}
   maxWidth: 5
   selectedOutlineWidth: 1
   draggingOutlineWidth: 0.25
@@ -253,3 +262,20 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
+--- !u!114 &7427971041028555283
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8500486680052626458}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bfbf6a841572a02498178a01bee9c413, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  DefaultOptions:
+  - {fileID: -6784838654647609704, guid: 61a05b92e11292c4895d871d851560c4, type: 3}
+  - {fileID: -1811321642410761074, guid: bb33537e6930d7f40acc4ec0aa076316, type: 3}
+  - {fileID: 1379247345678703526, guid: 4bdd31fbbda5a4742a4a9c621998a67d, type: 3}
+  CustomizedOptions: []

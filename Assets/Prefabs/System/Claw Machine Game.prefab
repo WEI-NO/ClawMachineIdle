@@ -2152,6 +2152,7 @@ Transform:
   - {fileID: 5040320401723469545}
   - {fileID: 1541157750744593427}
   - {fileID: 5773245711827400416}
+  - {fileID: 3725753711388987103}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &1882107492850865881
@@ -2182,6 +2183,50 @@ MonoBehaviour:
   _sceneToLoad:
     m_SceneAsset: {fileID: 0}
     m_SceneName: 
+--- !u!1 &4018601616484838720
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 3725753711388987103}
+  - component: {fileID: 2863351695652166440}
+  m_Layer: 0
+  m_Name: Incubation
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &3725753711388987103
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4018601616484838720}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 4963145443782895663}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &2863351695652166440
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4018601616484838720}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 445bc50cfc8a4564ba3c3619640a400c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &4072465743983249046
 GameObject:
   m_ObjectHideFlags: 0

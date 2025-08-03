@@ -26,8 +26,8 @@ public class IsometricBuilding : MonoBehaviour
 
     [Header("Building Properties")]
     public IsometricBlueprint blueprint;
-    public Transform GridVisual;
-    public ShaderInstancer shader;
+    public List<Transform> GridVisual;
+    public List<ShaderInstancer> shader;
 
     [Header("Outline Properties")]
     public float maxWidth = 5;
@@ -37,19 +37,24 @@ public class IsometricBuilding : MonoBehaviour
 
     private void Awake()
     {
+        shader = new List<ShaderInstancer>();
         anim = GetComponent<Animator>();
-        if (GridVisual)
+        if (GridVisual != null || GridVisual.Count > 0)
         {
-            shader = GridVisual.GetComponent<ShaderInstancer>();
-            
-            if (GridVisual.transform.rotation.eulerAngles.y == 0)
+            foreach (var gv in GridVisual)
             {
-                blueprint.SetOrientation(Orientation.Right);
+                shader.Add(gv.GetComponent<ShaderInstancer>());
+
+                if (gv.transform.rotation.eulerAngles.y == 0)
+                {
+                    blueprint.SetOrientation(Orientation.Right);
+                }
+                else
+                {
+                    blueprint.SetOrientation(Orientation.Left);
+                }
             }
-            else
-            {
-                blueprint.SetOrientation(Orientation.Left);
-            }
+
 
         }
 
@@ -213,19 +218,26 @@ public class IsometricBuilding : MonoBehaviour
 
     public void SetOutline(bool state, bool isDragging)
     {
-        if (!shader) return;
+        if (shader == null || shader.Count  <= 0) return;
 
-        float target = state ? isDragging ? draggingOutlineWidth : selectedOutlineWidth : 0;
-        target *= maxWidth;
-        shader.SetFloat(1, target);
+        foreach (var s in shader)
+        {
+            float target = state ? isDragging ? draggingOutlineWidth : selectedOutlineWidth : 0;
+            target *= maxWidth;
+            s.SetFloat(1, target);
+        }
     }
 
     public void SetOutline(bool state, float widthPercentage)
     {
-        if (!shader) return;
+        if (shader == null || shader.Count <= 0) return;
 
-        float target = state ? maxWidth * widthPercentage : 0.0f;
-        shader.SetFloat(1, target);
+        foreach (var s in shader)
+        {
+            float target = state ? maxWidth * widthPercentage : 0.0f;
+            s.SetFloat(1, target);
+        }
+
     }
 
     #endregion outline control
@@ -245,9 +257,12 @@ public class IsometricBuilding : MonoBehaviour
 
     public void ChangeVisualSize(float size)
     {
-        if (!GridVisual) return;
+        if (GridVisual == null || GridVisual.Count <= 0) return;
 
-        GridVisual.localScale = new Vector3(size, size, 1.0f);
+        foreach (var gv in GridVisual)
+        {
+            gv.localScale = new Vector3(size, size, 1.0f);
+        }
     }
 
     public bool ValidPlacement_Wall(Vector2Int coord, Vector2Int current, out List<IsometricCorner> directions)
@@ -431,12 +446,16 @@ public class IsometricBuilding : MonoBehaviour
 
     public void SetFlip(Orientation orientation)
     {
-        if (GridVisual)
+        if (GridVisual != null && GridVisual.Count > 0)
         {
-            Vector3 rot = GridVisual.transform.localRotation.eulerAngles;
-            float yRot = orientation == Orientation.Right ? normalYRot : flippedYRot;
-            rot.y = yRot;
-            GridVisual.transform.localRotation = Quaternion.Euler(rot.x, rot.y, rot.z);
+            foreach (var gv in GridVisual)
+            {
+                Vector3 rot = gv.transform.localRotation.eulerAngles;
+                float yRot = orientation == Orientation.Right ? normalYRot : flippedYRot;
+                rot.y = yRot;
+                gv.transform.localRotation = Quaternion.Euler(rot.x, rot.y, rot.z);
+            }
+
         }
         blueprint.SetOrientation(orientation);
     }

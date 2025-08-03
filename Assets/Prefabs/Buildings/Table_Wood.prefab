@@ -25,6 +25,10 @@ PrefabInstance:
       value: Table
       objectReference: {fileID: 0}
     - target: {fileID: 4679034283707852851, guid: 17599aeefc9e769499f6c023b1e27b27, type: 3}
+      propertyPath: 'GridVisual.Array.data[0]'
+      value: 
+      objectReference: {fileID: 2657612160507501649}
+    - target: {fileID: 4679034283707852851, guid: 17599aeefc9e769499f6c023b1e27b27, type: 3}
       propertyPath: blueprint.PixelDimension.y
       value: 24
       objectReference: {fileID: 0}
@@ -145,3 +149,8 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 17599aeefc9e769499f6c023b1e27b27, type: 3}
+--- !u!4 &2657612160507501649 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 7744335599126668686, guid: 17599aeefc9e769499f6c023b1e27b27, type: 3}
+  m_PrefabInstance: {fileID: 5735567358799755743}
+  m_PrefabAsset: {fileID: 0}

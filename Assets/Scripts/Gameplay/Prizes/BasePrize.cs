@@ -62,8 +62,13 @@ public class BasePrize : MonoBehaviour
 
     public void PrizeClaim()
     {
-        PrizeClaimFunction();
+        DefaultPrizeClaim();
         Destroy(gameObject);
+    }
+
+    public void DefaultPrizeClaim()
+    {
+        PrizeClaimFunction();
     }
 
     public virtual void PrizeClaimFunction()
