@@ -104,33 +104,17 @@ public class PlaceableOptions : MonoBehaviour
 
     public void Info()
     {
-        if (GetCurrentBuilding() is var placeable)
-        {
-            // Perform function
-        }
+
     }
 
     public void ToStorage()
     {
-        if (GetCurrentBuilding() is var placeable)
-        {
-            // Perform function
-            if (MainDatabase.Instance.DB_Placeable.GetDataByID(placeable.BuildingID) is var data)
-            {
-                PlayerInventory.Instance.GiveItem(data, 1);
-                Destroy(placeable.gameObject);
-                SetBuilding(null);
-            }
-        }
+
     }
 
     public void Rotate()
     {
-        if (GetCurrentBuilding() is var placeable)
-        {
-            // Perform function
-            placeable.Flip();
-        }
+
     }
 
     #endregion functionalities
