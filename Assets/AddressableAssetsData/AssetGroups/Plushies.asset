@@ -15,6 +15,12 @@ MonoBehaviour:
   m_GroupName: Plushies
   m_GUID: eeefa979b2bd7364d9cfb379d620f8c0
   m_SerializeEntries:
+  - m_GUID: 5bb815ed12fb60b47982e18039c658ec
+    m_Address: plushie_basic_tuxedo_cat
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - Plushie
+    FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: f7c35e659ece87d43814287fc312abf8
     m_Address: plushie_basic_dog
     m_ReadOnly: 0

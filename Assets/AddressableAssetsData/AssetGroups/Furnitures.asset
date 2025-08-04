@@ -15,6 +15,12 @@ MonoBehaviour:
   m_GroupName: Furnitures
   m_GUID: 42afd6dbef1cb524dba79d23bca768c2
   m_SerializeEntries:
+  - m_GUID: 538b1b8c4a2bec94ab979735061be009
+    m_Address: incubator
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - Furniture
+    FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: 7a0602944ca31464c9012295550844a8
     m_Address: clawmachine_basic
     m_ReadOnly: 0
@@ -23,6 +29,12 @@ MonoBehaviour:
     FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: dd9707b0b407a484f9a1305af49145fc
     m_Address: table_wood
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - Furniture
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: e77e026f7bd8c5042bede61aab23c16c
+    m_Address: window_wood
     m_ReadOnly: 0
     m_SerializedLabels:
     - Furniture

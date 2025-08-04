@@ -1,10 +1,10 @@
 fileFormatVersion: 2
-guid: 834671006c95124499d2175c74bd14cc
+guid: 5b361838b2f7d6d4dbbc2be2e803d9cd
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: -220491816079474195
-    second: BasicPlushies_0
+      213: 4050779959895437524
+    second: Incubator_0
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -126,65 +126,63 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: BasicPlushies_0
+      name: Incubator_0
       rect:
         serializedVersion: 2
-        x: 0
-        y: 96
-        width: 32
-        height: 32
+        x: 1
+        y: 28
+        width: 30
+        height: 36
       alignment: 9
-      pivot: {x: 0.5, y: 0.1875}
+      pivot: {x: 0.5, y: 0.11111111}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
-      outline:
-      - - {x: 11, y: -9}
-        - {x: 11, y: 8}
-        - {x: 4, y: 13}
-        - {x: -7, y: 13}
-        - {x: -12, y: 7}
-        - {x: -12, y: -1}
-        - {x: -10, y: -9}
-        - {x: -7, y: -12}
-        - {x: 6, y: -12}
+      outline: []
       physicsShape:
-      - - {x: 9.5, y: -6.5}
-        - {x: 9.5, y: -3.5}
-        - {x: 8.5, y: 1.5}
-        - {x: 8.5, y: 6.5}
-        - {x: 3.5, y: 10.5}
-        - {x: -2.5, y: 10.5}
-        - {x: -5.5, y: 9.5}
-        - {x: -9.5, y: 1.5}
-        - {x: -8.5, y: -4.5}
-        - {x: -1.5, y: -10.5}
-        - {x: 2.5, y: -10.5}
+      - - {x: 8, y: -11}
+        - {x: 11, y: -5}
+        - {x: 11, y: -1}
+        - {x: 4, y: 3}
+        - {x: -4, y: 3}
+        - {x: -11, y: -1}
+        - {x: -11, y: -5}
+        - {x: -8, y: -11}
+        - {x: -2, y: -14}
+        - {x: 2, y: -14}
       tessellationDetail: 0
       bones: []
-      spriteID: de1c3ba8cd7a0fcf0800000000000000
-      internalID: -220491816079474195
+      spriteID: 4d0b6dc59e2473830800000000000000
+      internalID: 4050779959895437524
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: BasicPlushies_1
+      name: Incubator_1
       rect:
         serializedVersion: 2
-        x: 32
-        y: 96
-        width: 32
-        height: 32
+        x: 36
+        y: 33
+        width: 24
+        height: 27
       alignment: 9
-      pivot: {x: 0.5, y: 0.1875}
+      pivot: {x: 0.5, y: 0.11111111}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
-      physicsShape: []
+      physicsShape:
+      - - {x: 9, y: -7.5}
+        - {x: 9, y: 4.5}
+        - {x: 3, y: 10.5}
+        - {x: -3, y: 10.5}
+        - {x: -9, y: 4.5}
+        - {x: -9, y: -7.5}
+        - {x: -4, y: -10.5}
+        - {x: 4, y: -10.5}
       tessellationDetail: 0
       bones: []
-      spriteID: 6afa1d51980ce9a4e9c87d864ba8ad17
-      internalID: -1225050283
+      spriteID: 20ab9596906e53345a06f8cf77fcc5b8
+      internalID: -1016535331
       vertices: []
       indices: 
       edges: []
@@ -193,7 +191,7 @@ TextureImporter:
     customData: 
     physicsShape: []
     bones: []
-    spriteID: c052905fc447d0e46abc31a5d1bdb112
+    spriteID: 601a8599e391bcc4cbb91ecbe5eb4ec7
     internalID: 0
     vertices: []
     indices: 
@@ -203,8 +201,8 @@ TextureImporter:
     spriteCustomMetadata:
       entries: []
     nameFileIdTable:
-      BasicPlushies_0: -220491816079474195
-      BasicPlushies_1: -1225050283
+      Incubator_0: 4050779959895437524
+      Incubator_1: -1016535331
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

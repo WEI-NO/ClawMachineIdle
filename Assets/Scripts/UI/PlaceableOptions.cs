@@ -14,6 +14,8 @@ public class PlaceableOptions : MonoBehaviour
     [SerializeField] private TextMeshProUGUI nameText;
     [SerializeField] private TextMeshProUGUI suffixText;
 
+    public Transform content;
+
     private IsometricBuilding lastSavedBuilding = null;
 
     private bool currentState = false;
@@ -43,11 +45,8 @@ public class PlaceableOptions : MonoBehaviour
 
     public void SetBuilding(IsometricBuilding b)
     {
-        //if (TouchController.Instance.EditMode)
-        //{
-        //    return;
-        //}
         if (b == lastSavedBuilding) return;
+        ClearOptions();
         if (!b)
         {
             // Hide
@@ -55,6 +54,15 @@ public class PlaceableOptions : MonoBehaviour
             currentState = false;
         } else
         {
+            if (b.GetComponent<OptionsCustomizer>() is OptionsCustomizer customizer)
+            {
+                foreach (var o in customizer.GetOptions())
+                {
+                    var newO = Instantiate(o, content);
+                    newO.Initialize(b);
+                }
+            }
+
             // Show
             anim.SetTrigger("Show");
             currentState = true;
@@ -84,37 +92,29 @@ public class PlaceableOptions : MonoBehaviour
         return null;
     }
 
+    private void ClearOptions()
+    {
+        foreach (Transform t in content)
+        {
+            Destroy(t.gameObject);
+        }
+    }
+
     #region Functionalities
 
     public void Info()
     {
-        if (GetCurrentBuilding() is var placeable)
-        {
-            // Perform function
-        }
+
     }
 
     public void ToStorage()
     {
-        if (GetCurrentBuilding() is var placeable)
-        {
-            // Perform function
-            if (MainDatabase.Instance.DB_Placeable.GetDataByID(placeable.BuildingID) is var data)
-            {
-                PlayerInventory.Instance.GiveItem(data, 1);
-                Destroy(placeable.gameObject);
-                SetBuilding(null);
-            }
-        }
+
     }
 
     public void Rotate()
     {
-        if (GetCurrentBuilding() is var placeable)
-        {
-            // Perform function
-            placeable.Flip();
-        }
+
     }
 
     #endregion functionalities
