@@ -185,7 +185,9 @@ TextureImporter:
     secondaryTextures: []
     spriteCustomMetadata:
       entries: []
-    nameFileIdTable: {}
+    nameFileIdTable:
+      BasicPlushies_0: -220491816079474195
+      BasicPlushies_1: 3835973098865405309
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
