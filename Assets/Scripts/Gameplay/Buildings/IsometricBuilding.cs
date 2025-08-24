@@ -131,7 +131,8 @@ public class IsometricBuilding : MonoBehaviour
                         }
                     }
                 }
-            } else
+            } 
+            else
             {
                 if (!ValidPlacement(targetPosition, blueprint.GridPosition, out List<IsometricCorner> directions))
                 {
@@ -194,24 +195,37 @@ public class IsometricBuilding : MonoBehaviour
                 }
             }
         }
+
+
+        // Auto flip wall objects when past a certain threshold
+        if (blueprint.IsWallObject)
+        {
+            int moveDir = blueprint.GridPosition.x - blueprint.LastGridPosition.x;
+
+            if (moveDir < 0)
+            {
+                if (blueprint.GridPosition.x - (blueprint.PixelDimension.x / 2) < 0)
+                {
+                    SetFlip(Orientation.Right);
+                }
+            }
+
+            if (moveDir > 0)
+            {
+
+                if (blueprint.GridPosition.x + (blueprint.PixelDimension.x / 2) > 0)
+                {
+                    SetFlip(Orientation.Left);
+                }
+            }
+        }
+
+
         // If it is not out of bound, apply the change
         IsometricGrid2D.Instance.GetWorldPosition(blueprint.GridPosition, out Vector2 wp, blueprint.IsWallObject);
         transform.position = wp;
 
         blueprint.LastGridPosition = blueprint.GridPosition;
-        
-
-        if (blueprint.IsWallObject)
-        {
-            if (blueprint.GridPosition.x < 0)
-            {
-                SetFlip(Orientation.Right);
-            } else if (blueprint.GridPosition.y > 0)
-            {
-                SetFlip(Orientation.Left);
-            }
-        }
-
     }
 
     #region Outline Control
@@ -656,3 +670,24 @@ public struct IsometricBlueprint
     #endregion flip
 
 }
+//if (blueprint.IsWallObject)
+//{
+//    if (blueprint.currentOrientation == Orientation.Right)
+//    {
+//        int flipTestPosition = blueprint.GridPosition.x + blueprint.PixelDimension.x;
+//        if (flipTestPosition > 0)
+//        {
+//            blueprint.GridPosition = new Vector2Int(flipTestPosition +  (blueprint.PixelDimension.x / 2), blueprint.GridPosition.y);
+//            SetFlip(Orientation.Left);
+//        }
+//    } 
+//    else // blueprint.currentOrientation == Orientation.Left
+//    {
+//        int flipTestPosition = blueprint.GridPosition.x - blueprint.PixelDimension.x;
+//        if (flipTestPosition < -1)
+//        {
+//            blueprint.GridPosition = new Vector2Int(flipTestPosition - (blueprint.PixelDimension.x / 2), blueprint.GridPosition.y);
+//            SetFlip(Orientation.Right);
+//        }
+//    }
+//}
