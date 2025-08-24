@@ -119,11 +119,6 @@ NavMeshSettings:
     debug:
       m_Flags: 0
   m_NavMeshData: {fileID: 0}
---- !u!1 &145286832 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 1894108624140407933, guid: c5259eb6f838aed4395bc43569397739, type: 3}
-  m_PrefabInstance: {fileID: 760636059}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1 &147302108
 GameObject:
   m_ObjectHideFlags: 0
@@ -389,30 +384,14 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 3725184112918842874, guid: c5259eb6f838aed4395bc43569397739, type: 3}
-      propertyPath: manualToggleObjects.Array.size
-      value: 5
+    - target: {fileID: 1623018461013867647, guid: c5259eb6f838aed4395bc43569397739, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: -88
       objectReference: {fileID: 0}
-    - target: {fileID: 3725184112918842874, guid: c5259eb6f838aed4395bc43569397739, type: 3}
-      propertyPath: 'manualToggleObjects.Array.data[0]'
-      value: 
-      objectReference: {fileID: 145286832}
-    - target: {fileID: 3725184112918842874, guid: c5259eb6f838aed4395bc43569397739, type: 3}
-      propertyPath: 'manualToggleObjects.Array.data[1]'
-      value: 
-      objectReference: {fileID: 1978876732}
-    - target: {fileID: 3725184112918842874, guid: c5259eb6f838aed4395bc43569397739, type: 3}
-      propertyPath: 'manualToggleObjects.Array.data[2]'
-      value: 
-      objectReference: {fileID: 1008827937}
-    - target: {fileID: 3725184112918842874, guid: c5259eb6f838aed4395bc43569397739, type: 3}
-      propertyPath: 'manualToggleObjects.Array.data[3]'
-      value: 
-      objectReference: {fileID: 1234192301}
-    - target: {fileID: 3725184112918842874, guid: c5259eb6f838aed4395bc43569397739, type: 3}
-      propertyPath: 'manualToggleObjects.Array.data[4]'
-      value: 
-      objectReference: {fileID: 1416743844}
+    - target: {fileID: 1797378874565742013, guid: c5259eb6f838aed4395bc43569397739, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 3954920298226682193, guid: c5259eb6f838aed4395bc43569397739, type: 3}
       propertyPath: m_Name
       value: Claw Machine Game
@@ -457,49 +436,13 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 6048544901448187414, guid: c5259eb6f838aed4395bc43569397739, type: 3}
-      propertyPath: m_IsActive
-      value: 1
+    - target: {fileID: 8528114656130970196, guid: c5259eb6f838aed4395bc43569397739, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: -340.17
       objectReference: {fileID: 0}
-    - target: {fileID: 6565194469826716579, guid: c5259eb6f838aed4395bc43569397739, type: 3}
-      propertyPath: m_LocalRotation.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 6565194469826716579, guid: c5259eb6f838aed4395bc43569397739, type: 3}
-      propertyPath: m_LocalRotation.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 6565194469826716579, guid: c5259eb6f838aed4395bc43569397739, type: 3}
-      propertyPath: m_LocalRotation.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 6804174958039780776, guid: c5259eb6f838aed4395bc43569397739, type: 3}
-      propertyPath: m_IsActive
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 7603658386178723343, guid: c5259eb6f838aed4395bc43569397739, type: 3}
-      propertyPath: m_text
-      value: Hatch
-      objectReference: {fileID: 0}
-    - target: {fileID: 8912369150332388212, guid: c5259eb6f838aed4395bc43569397739, type: 3}
-      propertyPath: m_text
-      value: Shop
-      objectReference: {fileID: 0}
-    - target: {fileID: 9068788017867436383, guid: c5259eb6f838aed4395bc43569397739, type: 3}
-      propertyPath: m_text
-      value: Collect.
-      objectReference: {fileID: 0}
-    - target: {fileID: 9169525887390840033, guid: c5259eb6f838aed4395bc43569397739, type: 3}
-      propertyPath: m_Colors.m_PressedColor.b
-      value: 0.5324365
-      objectReference: {fileID: 0}
-    - target: {fileID: 9169525887390840033, guid: c5259eb6f838aed4395bc43569397739, type: 3}
-      propertyPath: m_Colors.m_PressedColor.g
-      value: 0.52078146
-      objectReference: {fileID: 0}
-    - target: {fileID: 9169525887390840033, guid: c5259eb6f838aed4395bc43569397739, type: 3}
-      propertyPath: m_Colors.m_PressedColor.r
-      value: 0.7830189
+    - target: {fileID: 8528114656130970196, guid: c5259eb6f838aed4395bc43569397739, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: -88
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -581,11 +524,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 936592927}
   m_CullTransparentMesh: 1
---- !u!1 &1008827937 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 4286326509087410186, guid: c5259eb6f838aed4395bc43569397739, type: 3}
-  m_PrefabInstance: {fileID: 760636059}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1025429108
 GameObject:
   m_ObjectHideFlags: 0
@@ -798,16 +736,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1096099248}
   m_CullTransparentMesh: 1
---- !u!1 &1234192301 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 4072465743983249046, guid: c5259eb6f838aed4395bc43569397739, type: 3}
-  m_PrefabInstance: {fileID: 760636059}
-  m_PrefabAsset: {fileID: 0}
---- !u!1 &1416743844 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 3225721078053764771, guid: c5259eb6f838aed4395bc43569397739, type: 3}
-  m_PrefabInstance: {fileID: 760636059}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1515769050
 GameObject:
   m_ObjectHideFlags: 0
@@ -913,11 +841,6 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0, y: 0}
---- !u!1 &1978876732 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 8566829326247508104, guid: c5259eb6f838aed4395bc43569397739, type: 3}
-  m_PrefabInstance: {fileID: 760636059}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1 &2088065675
 GameObject:
   m_ObjectHideFlags: 0
