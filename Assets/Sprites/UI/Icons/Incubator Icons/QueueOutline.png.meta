@@ -1,13 +1,10 @@
 fileFormatVersion: 2
-guid: cb27d388fe4fb4a4788379bbd898d817
+guid: 2ff93119f884e8b488bebe97cade6ee5
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: -220491816079474195
-    second: BasicPlushies_0
-  - first:
-      213: 3835973098865405309
-    second: BasicPlushies_1
+      213: -4478074873146563233
+    second: QueueOutline_0
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -49,7 +46,7 @@ TextureImporter:
   nPOTScale: 0
   lightmap: 0
   compressionQuality: 50
-  spriteMode: 2
+  spriteMode: 1
   spriteExtrude: 1
   spriteMeshType: 1
   alignment: 0
@@ -129,13 +126,13 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: BasicPlushies_0
+      name: QueueOutline_0
       rect:
         serializedVersion: 2
-        x: 5
-        y: 101
-        width: 21
-        height: 23
+        x: 0
+        y: 0
+        width: 890
+        height: 212
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -144,30 +141,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: de1c3ba8cd7a0fcf0800000000000000
-      internalID: -220491816079474195
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: BasicPlushies_1
-      rect:
-        serializedVersion: 2
-        x: 38
-        y: 101
-        width: 20
-        height: 22
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: -1
-      bones: []
-      spriteID: d7da3d5a53d1c3530800000000000000
-      internalID: 3835973098865405309
+      spriteID: f552f74f0aeaad1c0800000000000000
+      internalID: -4478074873146563233
       vertices: []
       indices: 
       edges: []
@@ -176,7 +151,7 @@ TextureImporter:
     customData: 
     physicsShape: []
     bones: []
-    spriteID: 
+    spriteID: 5e97eb03825dee720800000000000000
     internalID: 0
     vertices: []
     indices: 
@@ -186,8 +161,7 @@ TextureImporter:
     spriteCustomMetadata:
       entries: []
     nameFileIdTable:
-      BasicPlushies_0: -220491816079474195
-      BasicPlushies_1: 3835973098865405309
+      QueueOutline_0: -4478074873146563233
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
