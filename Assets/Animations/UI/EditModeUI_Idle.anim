@@ -94,7 +94,7 @@ AnimationClip:
       m_PostInfinity: 2
       m_RotationOrder: 4
     attribute: m_IsActive
-    path: Edit Mode Exit Button
+    path: Edit Mode Sign/Edit Mode Exit Button
     classID: 1
     script: {fileID: 0}
     flags: 0
@@ -116,7 +116,7 @@ AnimationClip:
       isIntCurve: 0
       isSerializeReferenceCurve: 0
     - serializedVersion: 2
-      path: 1980959604
+      path: 3492725112
       attribute: 2086281974
       script: {fileID: 0}
       typeID: 1
@@ -232,7 +232,7 @@ AnimationClip:
       m_PostInfinity: 2
       m_RotationOrder: 4
     attribute: m_IsActive
-    path: Edit Mode Exit Button
+    path: Edit Mode Sign/Edit Mode Exit Button
     classID: 1
     script: {fileID: 0}
     flags: 0
