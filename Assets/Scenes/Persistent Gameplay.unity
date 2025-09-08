@@ -471,6 +471,10 @@ PrefabInstance:
       propertyPath: m_IsActive
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 3540221669962059537, guid: c5259eb6f838aed4395bc43569397739, type: 3}
+      propertyPath: m_fontColor32.rgba
+      value: 218103807
+      objectReference: {fileID: 0}
     - target: {fileID: 3954920298226682193, guid: c5259eb6f838aed4395bc43569397739, type: 3}
       propertyPath: m_Name
       value: Claw Machine Game
