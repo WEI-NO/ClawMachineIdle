@@ -467,10 +467,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: Claw Machine Game
       objectReference: {fileID: 0}
-    - target: {fileID: 4370185516148000398, guid: c5259eb6f838aed4395bc43569397739, type: 3}
-      propertyPath: m_IsActive
-      value: 1
-      objectReference: {fileID: 0}
     - target: {fileID: 4963145443782895663, guid: c5259eb6f838aed4395bc43569397739, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
@@ -514,77 +510,8 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents:
-    - targetCorrespondingSourceObject: {fileID: 4370185516148000398, guid: c5259eb6f838aed4395bc43569397739, type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 760636061}
-    - targetCorrespondingSourceObject: {fileID: 4370185516148000398, guid: c5259eb6f838aed4395bc43569397739, type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 760636066}
+    m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: c5259eb6f838aed4395bc43569397739, type: 3}
---- !u!1 &760636060 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 4370185516148000398, guid: c5259eb6f838aed4395bc43569397739, type: 3}
-  m_PrefabInstance: {fileID: 760636059}
-  m_PrefabAsset: {fileID: 0}
---- !u!114 &760636061
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 760636060}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 67c07c0e17cbf974f9691200fa453b1e, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  active: 0
-  manualToggleObjects:
-  - {fileID: 760636064}
-  - {fileID: 760636063}
-  - {fileID: 760636062}
-  startActive: 0
-  useAnimation: 1
-  enableTriggerName: Open
-  disableTriggerName: Close
---- !u!1 &760636062 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 840103248720813879, guid: c5259eb6f838aed4395bc43569397739, type: 3}
-  m_PrefabInstance: {fileID: 760636059}
-  m_PrefabAsset: {fileID: 0}
---- !u!1 &760636063 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 3291171244757859265, guid: c5259eb6f838aed4395bc43569397739, type: 3}
-  m_PrefabInstance: {fileID: 760636059}
-  m_PrefabAsset: {fileID: 0}
---- !u!1 &760636064 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 6274335661363102184, guid: c5259eb6f838aed4395bc43569397739, type: 3}
-  m_PrefabInstance: {fileID: 760636059}
-  m_PrefabAsset: {fileID: 0}
---- !u!95 &760636066
-Animator:
-  serializedVersion: 7
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 760636060}
-  m_Enabled: 1
-  m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: 09b8fe3fd1d354c4181b67cab09a5fe1, type: 2}
-  m_CullingMode: 0
-  m_UpdateMode: 0
-  m_ApplyRootMotion: 0
-  m_LinearVelocityBlending: 0
-  m_StabilizeFeet: 0
-  m_AnimatePhysics: 0
-  m_WarningMessage: 
-  m_HasTransformHierarchy: 1
-  m_AllowConstantClipSamplingOptimization: 1
-  m_KeepAnimatorStateOnDisable: 0
-  m_WriteDefaultValuesOnDisable: 0
 --- !u!1 &936592927
 GameObject:
   m_ObjectHideFlags: 0

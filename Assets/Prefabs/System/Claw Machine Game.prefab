@@ -10065,13 +10065,15 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 742789524461310892}
+  - component: {fileID: 7167640308132448929}
+  - component: {fileID: 8161110935761540223}
   m_Layer: 0
   m_Name: Incubator Display
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &742789524461310892
 RectTransform:
   m_ObjectHideFlags: 0
@@ -10094,6 +10096,49 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &7167640308132448929
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4370185516148000398}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 67c07c0e17cbf974f9691200fa453b1e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  active: 0
+  manualToggleObjects:
+  - {fileID: 6274335661363102184}
+  - {fileID: 3291171244757859265}
+  - {fileID: 840103248720813879}
+  startActive: 0
+  useAnimation: 1
+  enableTriggerName: Open
+  disableTriggerName: Close
+--- !u!95 &8161110935761540223
+Animator:
+  serializedVersion: 7
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4370185516148000398}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 09b8fe3fd1d354c4181b67cab09a5fe1, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_AnimatePhysics: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0
 --- !u!1 &4431208391505728328
 GameObject:
   m_ObjectHideFlags: 0
