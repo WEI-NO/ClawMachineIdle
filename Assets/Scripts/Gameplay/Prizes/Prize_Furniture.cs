@@ -11,6 +11,12 @@ public class Prize_Furniture : BasePrize
 
     public override void PrizeClaimFunction()
     {
-        base.PrizeClaimFunction();
+        if (EggPopup.Instance == null)
+        {
+            base.PrizeClaimFunction();
+        } else
+        {
+            EggPopup.Instance.StartView(this);
+        }
     }
 }

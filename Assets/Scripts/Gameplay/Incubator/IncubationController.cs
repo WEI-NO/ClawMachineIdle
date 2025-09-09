@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class IncubationController : MonoBehaviour
 {
+    public static IncubationController Instance;
+
     [Header("Incubation Properties")]
     public List<EggContainer> IncubationQueue = new List<EggContainer>();
     public int MaxQueued = 2;
@@ -15,6 +17,7 @@ public class IncubationController : MonoBehaviour
         //{
         //    Debug.LogWarning($"{gameObject.name}: Did not implement enough incubation Times.");
         //}
+        Initializer.SetInstance(this);
     }
 
     private void Start()
