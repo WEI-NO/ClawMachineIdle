@@ -39,6 +39,7 @@ public class EggPopup : MonoBehaviour
 
     public void SendToCollection()
     {
+
         // Animation
         if (anim)
         {
