@@ -164,7 +164,10 @@ MonoBehaviour:
   Reward: Ticket
   Quantity: 1
   RewardItem: {fileID: 0}
-  PrizeRarity: 3
+  ItemRarity: 0
+  isEgg: 0
+  effect: {fileID: 468250972416345833, guid: e51480518c2254143af77b6cbb0cd206, type: 3}
+  onUI: 0
 --- !u!61 &4180668345730299926
 BoxCollider2D:
   m_ObjectHideFlags: 0
