@@ -13,10 +13,11 @@ public class Prize_Furniture : BasePrize
     {
         if (EggPopup.Instance == null)
         {
-            base.PrizeClaimFunction();
+            DefaultPrizeClaim();
         } else
         {
             EggPopup.Instance.StartView(this);
+            PrizeClaimEffectSpawn();
         }
     }
 }

@@ -463,6 +463,26 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 2191045137233427554, guid: c5259eb6f838aed4395bc43569397739, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2209183816885523908, guid: c5259eb6f838aed4395bc43569397739, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2448877524331132456, guid: c5259eb6f838aed4395bc43569397739, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2772417397056724771, guid: c5259eb6f838aed4395bc43569397739, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3412350504413601504, guid: c5259eb6f838aed4395bc43569397739, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 3954920298226682193, guid: c5259eb6f838aed4395bc43569397739, type: 3}
       propertyPath: m_Name
       value: Claw Machine Game
@@ -507,8 +527,16 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 6960920669870515473, guid: c5259eb6f838aed4395bc43569397739, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 7167640308132448929, guid: c5259eb6f838aed4395bc43569397739, type: 3}
       propertyPath: startActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8134426363365592770, guid: c5259eb6f838aed4395bc43569397739, type: 3}
+      propertyPath: m_Color.a
       value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []

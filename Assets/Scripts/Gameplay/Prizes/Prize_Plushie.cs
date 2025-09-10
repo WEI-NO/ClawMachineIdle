@@ -11,11 +11,12 @@ public class Prize_Plushie : BasePrize
     {
         if (EggPopup.Instance == null)
         {
-            base.PrizeClaimFunction();
+            DefaultPrizeClaim();
         }
         else
         {
             EggPopup.Instance.StartView(this);
+            PrizeClaimEffectSpawn();
         }
     }
 }

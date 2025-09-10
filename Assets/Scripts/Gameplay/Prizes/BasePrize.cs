@@ -69,6 +69,28 @@ public class BasePrize : MonoBehaviour
     public void DefaultPrizeClaim()
     {
         PrizeClaimFunction();
+        PrizeClaimEffectSpawn();
+    }
+
+    public virtual void PrizeClaimEffectSpawn()
+    {
+        // Spawn Effect
+        if (effect)
+        {
+            if (onUI && PersistentCanvas.Instance != null)
+            {
+                // Convert world position to screen space
+                Vector3 screenPos = Camera.main.WorldToScreenPoint(transform.position);
+
+                // Instantiate effect under MainCanvas
+                GameObject uiEffect = Instantiate(effect, screenPos, Quaternion.identity, PersistentCanvas.Instance.transform);
+            }
+            else
+            {
+                // Spawn effect in world space
+                Instantiate(effect, transform.position, Quaternion.identity);
+            }
+        }
     }
 
     public virtual void PrizeClaimFunction()
@@ -76,29 +98,7 @@ public class BasePrize : MonoBehaviour
         if (RewardItem)
         {
             PlayerInventory.Instance.GiveItem(RewardItem, Quantity);
-
-            // Spawn Effect
-            if (effect)
-            {
-                if (onUI && PersistentCanvas.Instance != null)
-                {
-                    // Convert world position to screen space
-                    Vector3 screenPos = Camera.main.WorldToScreenPoint(transform.position);
-
-                    // Instantiate effect under MainCanvas
-                    GameObject uiEffect = Instantiate(effect, screenPos, Quaternion.identity, PersistentCanvas.Instance.transform);
-                }
-                else
-                {
-                    // Spawn effect in world space
-                    Instantiate(effect, transform.position, Quaternion.identity);
-                }
-            }
-
         }
-
-
-
     }
 
     
