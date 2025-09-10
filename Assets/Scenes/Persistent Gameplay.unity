@@ -119,6 +119,17 @@ NavMeshSettings:
     debug:
       m_Flags: 0
   m_NavMeshData: {fileID: 0}
+--- !u!114 &18550043 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 7167640308132448929, guid: c5259eb6f838aed4395bc43569397739, type: 3}
+  m_PrefabInstance: {fileID: 760636059}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 67c07c0e17cbf974f9691200fa453b1e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &147302108
 GameObject:
   m_ObjectHideFlags: 0
@@ -482,6 +493,34 @@ PrefabInstance:
     - target: {fileID: 3412350504413601504, guid: c5259eb6f838aed4395bc43569397739, type: 3}
       propertyPath: m_IsActive
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3416096400868829647, guid: c5259eb6f838aed4395bc43569397739, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3416096400868829647, guid: c5259eb6f838aed4395bc43569397739, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3416096400868829647, guid: c5259eb6f838aed4395bc43569397739, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 18550043}
+    - target: {fileID: 3416096400868829647, guid: c5259eb6f838aed4395bc43569397739, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_CallState
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 3416096400868829647, guid: c5259eb6f838aed4395bc43569397739, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: Toggle
+      objectReference: {fileID: 0}
+    - target: {fileID: 3416096400868829647, guid: c5259eb6f838aed4395bc43569397739, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
+      value: OpenableUI, Assembly-CSharp
+      objectReference: {fileID: 0}
+    - target: {fileID: 3416096400868829647, guid: c5259eb6f838aed4395bc43569397739, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
+      value: UnityEngine.Object, UnityEngine
       objectReference: {fileID: 0}
     - target: {fileID: 3954920298226682193, guid: c5259eb6f838aed4395bc43569397739, type: 3}
       propertyPath: m_Name
