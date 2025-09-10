@@ -9,7 +9,8 @@ public class EggPopup : MonoBehaviour
     [Header("References")]
     private Animator anim;
     [SerializeField] private Image prizeIcon;
-    private BasePrize currentPrize;
+    private BaseItem currentPrize;
+    private int prizeQuantity;
 
 
     private void Awake()
@@ -24,9 +25,10 @@ public class EggPopup : MonoBehaviour
     {
         if (prizeToClaim == null) return;
 
-        currentPrize = prizeToClaim;
-        Sprite prizeSprite = currentPrize.RewardItem.ItemIcon;
+        currentPrize = prizeToClaim.RewardItem;
+        Sprite prizeSprite = currentPrize.ItemIcon;
         prizeIcon.sprite = prizeSprite;
+        prizeQuantity = prizeToClaim.Quantity;
 
         // Animation
         if (anim)
@@ -42,6 +44,13 @@ public class EggPopup : MonoBehaviour
         {
             anim.SetTrigger("End");
         }
+
+        if (currentPrize == null)
+        {
+            return;
+        }
+
+        PlayerInventory.Instance.GiveItem(currentPrize, prizeQuantity);
     }
 
     public void AddToIncubator()
@@ -52,15 +61,12 @@ public class EggPopup : MonoBehaviour
             anim.SetTrigger("End");
         }
 
-        if (IncubationController.Instance == null || currentPrize == null)
+        if (currentPrize == null)
         {
-            print("null or currentPrize is null");
             return;
         }
 
-        IncubationController.Instance.AddToQueue(currentPrize.RewardItem);
-
-
+        IncubationController.Instance.AddToQueue(currentPrize);
     }
 
 }
