@@ -16,7 +16,7 @@ public class Prize_Furniture : BasePrize
             DefaultPrizeClaim();
         } else
         {
-            EggPopup.Instance.StartView(this);
+            EggPopup.Instance.AddPrize(this);
             PrizeClaimEffectSpawn();
         }
     }

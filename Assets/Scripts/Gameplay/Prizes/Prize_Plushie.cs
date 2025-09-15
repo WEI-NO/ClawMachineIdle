@@ -15,7 +15,7 @@ public class Prize_Plushie : BasePrize
         }
         else
         {
-            EggPopup.Instance.StartView(this);
+            EggPopup.Instance.AddPrize(this);
             PrizeClaimEffectSpawn();
         }
     }

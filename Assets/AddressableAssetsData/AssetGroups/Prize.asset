@@ -15,6 +15,12 @@ MonoBehaviour:
   m_GroupName: Prize
   m_GUID: d0e32573a5ecd874ea148a9f7fad1f5d
   m_SerializeEntries:
+  - m_GUID: 4746e2517e86a3c4fb160d92a15c1a7d
+    m_Address: prize_egg_plushie_forest
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - Prize
+    FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: 60afc69397f1f894d98cf0f38b2c1a66
     m_Address: prize_egg_furniture_forest
     m_ReadOnly: 0
