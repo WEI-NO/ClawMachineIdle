@@ -86,7 +86,7 @@ public class OpenableUI : MonoBehaviour
 
     public void Toggle_Off()
     {
-        if (active)
+        if (!active)
         {
             ManualToggle();
         }
