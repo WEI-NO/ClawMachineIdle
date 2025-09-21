@@ -9,6 +9,14 @@ public class Prize_Plushie : BasePrize
 
     public override void PrizeClaimFunction()
     {
-        base.PrizeClaimFunction();
+        if (EggPopup.Instance == null)
+        {
+            DefaultPrizeClaim();
+        }
+        else
+        {
+            EggPopup.Instance.AddPrize(this);
+            PrizeClaimEffectSpawn();
+        }
     }
 }

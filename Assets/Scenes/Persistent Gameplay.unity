@@ -463,6 +463,14 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 1885050043879811003, guid: c5259eb6f838aed4395bc43569397739, type: 3}
+      propertyPath: m_SizeDelta.y
+      value: -109.7845
+      objectReference: {fileID: 0}
+    - target: {fileID: 2978118465458350859, guid: c5259eb6f838aed4395bc43569397739, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: 49.999878
+      objectReference: {fileID: 0}
     - target: {fileID: 3954920298226682193, guid: c5259eb6f838aed4395bc43569397739, type: 3}
       propertyPath: m_Name
       value: Claw Machine Game

@@ -52,8 +52,8 @@ MonoBehaviour:
   RewardItem: {fileID: 0}
   ItemRarity: 0
   isEgg: 1
-  effect: {fileID: 0}
-  onUI: 1
+  effect: {fileID: 468250972416345833, guid: e51480518c2254143af77b6cbb0cd206, type: 3}
+  onUI: 0
 --- !u!212 &271272820954463492
 SpriteRenderer:
   m_ObjectHideFlags: 0

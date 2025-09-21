@@ -62,7 +62,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _coinAmount: 3
-  radialOffsetRange: {x: -25, y: 25}
+  radialOffsetRange: {x: -50, y: 50}
   coinDelayRange: {x: 0.2, y: 1}
   scaleSpeed: 5
   scaleTarget: 1.25

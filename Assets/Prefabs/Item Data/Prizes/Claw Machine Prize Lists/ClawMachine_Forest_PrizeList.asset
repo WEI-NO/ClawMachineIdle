@@ -14,16 +14,16 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   entries:
   - prize: {fileID: 11400000, guid: f406c1b1aef49d3489cc83e5b438ab6d, type: 2}
-    entry: 100
+    entry: 5
   - prize: {fileID: 11400000, guid: 15cb6e77d4c6173408b5233d332452de, type: 2}
     entry: 5
   - prize: {fileID: 11400000, guid: 25ea494b323eb264192a12f0de0512a3, type: 2}
-    entry: 10
+    entry: 20
   - prize: {fileID: 11400000, guid: dd2e5a2fbe14fd749aa878bc85e3cb33, type: 2}
-    entry: 10
+    entry: 20
   entryOdds:
-  - 0.8
-  - 0.04
-  - 0.08
-  - 0.08
+  - 0.6896552
+  - 0.03448276
+  - 0.13793103
+  - 0.13793103
   oddCalculated: 1

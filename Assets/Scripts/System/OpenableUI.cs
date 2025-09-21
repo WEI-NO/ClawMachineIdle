@@ -76,6 +76,22 @@ public class OpenableUI : MonoBehaviour
         }
     }
 
+    public void Toggle_On()
+    {
+        if (!active)
+        {
+            ManualToggle();
+        }
+    }
+
+    public void Toggle_Off()
+    {
+        if (!active)
+        {
+            ManualToggle();
+        }
+    }
+
     private void ManualToggle()
     {
         active = !active;

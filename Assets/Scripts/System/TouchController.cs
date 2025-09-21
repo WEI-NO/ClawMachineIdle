@@ -310,10 +310,18 @@ public class TouchController : MonoBehaviour
     {
         if (EditMode == enabled) return;
         EditMode = enabled;
+        if (enabled)
+        {
+            OnEditModeEnter?.Invoke();
+        } else
+        {
+            OnEditModeExit?.Invoke();
+        }
         //if (enabled)
         //{
         //    OnSelectedBuildingChange?.Invoke(null); // Deselect in edit mode
         //}
+        
         EditModeUI.Instance?.Toggle(EditMode);
     }
 

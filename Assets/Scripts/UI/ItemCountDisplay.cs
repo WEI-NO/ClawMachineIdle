@@ -1,3 +1,4 @@
+using System.Runtime.CompilerServices;
 using TMPro;
 using UnityEngine;
 
@@ -10,15 +11,32 @@ public class ItemCountDisplay : MonoBehaviour
     [Header("Display Properties")]
     [SerializeField] private string _itemName;
     [SerializeField] private ItemCategory _category;
+    [SerializeField] private bool shown = true;
+    public TouchController tc;
+    
 
     private void Awake()
     {
         anim = GetComponent<Animator>();
+        shown = true;
     }
 
     private void Update()
     {
         UpdateCountText();
+
+        if (TouchController.Instance != null && tc == null)
+        {
+            tc = TouchController.Instance;
+            tc.OnEditModeEnter += Hide;
+            tc.OnEditModeExit += Show;
+        }
+
+        if (TouchController.Instance != tc)
+        {
+            tc = null;
+        }
+
     }
 
     private void UpdateCountText()
@@ -36,5 +54,22 @@ public class ItemCountDisplay : MonoBehaviour
             anim.SetTrigger("Jump");
         }
     }
+
+    #region Show/Hide
+
+    public void Show()
+    {
+        anim.SetTrigger("Show");
+        shown = true;
+    }
+
+    public void Hide()
+    {
+        anim.SetTrigger("Hide");
+        shown = false;
+    }
+
+
+    #endregion show/hide
 
 }

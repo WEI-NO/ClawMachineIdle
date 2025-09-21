@@ -18,8 +18,8 @@ public class EditModeUI : MonoBehaviour
     {
         if (TouchController.Instance)
         {
-            TouchController.Instance.OnEditModeEnter += () => { Toggle(true); };
-            TouchController.Instance.OnEditModeExit += () => { Toggle(false); };
+            //TouchController.Instance.OnEditModeEnter += () => { Toggle(true); };
+            //TouchController.Instance.OnEditModeExit += () => { Toggle(false); };
         }
     }
 
