@@ -26,7 +26,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4679034283707852851, guid: 17599aeefc9e769499f6c023b1e27b27, type: 3}
       propertyPath: BuildingID
-      value: Dog Plushie
+      value: plushie001
       objectReference: {fileID: 0}
     - target: {fileID: 4679034283707852851, guid: 17599aeefc9e769499f6c023b1e27b27, type: 3}
       propertyPath: BuildingName
@@ -86,11 +86,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7436608727745405668, guid: 17599aeefc9e769499f6c023b1e27b27, type: 3}
       propertyPath: m_SpriteTilingProperty.pivot.x
-      value: 0.5
+      value: 0.52380955
       objectReference: {fileID: 0}
     - target: {fileID: 7436608727745405668, guid: 17599aeefc9e769499f6c023b1e27b27, type: 3}
       propertyPath: m_SpriteTilingProperty.pivot.y
-      value: 0.5
+      value: 0.04347826
       objectReference: {fileID: 0}
     - target: {fileID: 7436608727745405668, guid: 17599aeefc9e769499f6c023b1e27b27, type: 3}
       propertyPath: m_SpriteTilingProperty.newSize.x
@@ -102,11 +102,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7436608727745405668, guid: 17599aeefc9e769499f6c023b1e27b27, type: 3}
       propertyPath: m_SpriteTilingProperty.oldSize.x
-      value: 0.21
+      value: 0.65625
       objectReference: {fileID: 0}
     - target: {fileID: 7436608727745405668, guid: 17599aeefc9e769499f6c023b1e27b27, type: 3}
       propertyPath: m_SpriteTilingProperty.oldSize.y
-      value: 0.23
+      value: 0.71875
       objectReference: {fileID: 0}
     - target: {fileID: 7436608727745405668, guid: 17599aeefc9e769499f6c023b1e27b27, type: 3}
       propertyPath: m_Points.m_Paths.Array.data[0].Array.size

@@ -21,8 +21,9 @@ public abstract class BaseAssetDatabase<TData, TAsset> : ScriptableObject
     protected Dictionary<ItemRarity, List<TData>> rarityToData = new Dictionary<ItemRarity, List<TData>>();
 
     // --- ABSTRACT: Must provide a way to get ID, address, and rarity from TData ---
-    protected abstract string GetID(TData data);
+    protected abstract string GetName(TData data);
     protected abstract string GetAddress(TData data);
+    protected abstract string GetID(TData data);
     protected abstract ItemRarity GetRarity(TData data); // <-- Add this!
 
     // --- Initialization ---
@@ -76,7 +77,8 @@ public abstract class BaseAssetDatabase<TData, TAsset> : ScriptableObject
             yield break;
         }
 
-        string id = GetID(data);
+
+        string id = GetName(data);
 
         // Notify request
         OnAssetRequested(data);
@@ -87,6 +89,7 @@ public abstract class BaseAssetDatabase<TData, TAsset> : ScriptableObject
             onLoaded?.Invoke(cachedAsset);
             yield break;
         }
+
 
         // Load by address
         string address = GetAddress(data);
@@ -99,6 +102,7 @@ public abstract class BaseAssetDatabase<TData, TAsset> : ScriptableObject
 
         var handle = Addressables.LoadAssetAsync<GameObject>(address);
         yield return handle;
+
 
         if (handle.Status == AsyncOperationStatus.Succeeded)
         {

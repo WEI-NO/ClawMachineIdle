@@ -13,6 +13,8 @@ MonoBehaviour:
   m_Name: Ticket
   m_EditorClassIdentifier: 
   _itemName: Ticket
+  _itemAddress: 
+  _itemID: currency002
   _itemIcon: {fileID: -1292138795, guid: c40d573e674f5bd44a148f85a4208544, type: 3}
   _itemType: 0
   _itemRarity: 2

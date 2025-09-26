@@ -1,11 +1,7 @@
 using CustomLibrary.References;
-using JetBrains.Annotations;
 using System;
 using System.Collections.Generic;
-using System.IO;
-using System.Runtime.CompilerServices;
 using Unity.VisualScripting;
-using UnityEditor.Rendering;
 using UnityEngine;
 
 public enum Orientation
@@ -23,6 +19,9 @@ public class IsometricBuilding : MonoBehaviour
     public string BuildingName;
     public string Suffix;
     public string BuildingID;
+
+    [Header("Callbacks")]
+    public Action<IsometricBuilding> OnPlaceableDestroy;
 
     [Header("Building Properties")]
     public IsometricBlueprint blueprint;
@@ -256,6 +255,17 @@ public class IsometricBuilding : MonoBehaviour
 
     #endregion outline control
 
+    public void PlaceOnGridPosition(Vector2Int gridPos)
+    {
+        blueprint.TargetPosition = gridPos;
+        blueprint.GridPosition = gridPos;
+        // If it is not out of bound, apply the change
+        IsometricGrid2D.Instance.GetWorldPosition(blueprint.GridPosition, out Vector2 wp, blueprint.IsWallObject);
+        transform.position = wp;
+
+        blueprint.LastGridPosition = blueprint.GridPosition;
+    }
+
     public void SetSelected(bool state, bool isDragging)//, float outlineWidthPercentage = 1.0f)
     {
         if (state == selected) return;
@@ -444,6 +454,12 @@ public class IsometricBuilding : MonoBehaviour
             // Draw the sphere
             Gizmos.DrawSphere(worldPos, radius);
         }
+    }
+
+    public void DestroyPlaceable()
+    {
+        OnPlaceableDestroy?.Invoke(this);
+        Destroy(gameObject);
     }
 
     #region Rotation

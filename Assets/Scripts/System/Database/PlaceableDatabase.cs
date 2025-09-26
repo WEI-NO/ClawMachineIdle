@@ -12,7 +12,8 @@ public class PlaceableDatabase : BaseAssetDatabase<PlaceableItem, IsometricBuild
     public Dictionary<ItemRarity, List<PlaceableItem>> buildingsByRarity { get; private set; } = new();
 
     protected override string GetAddress(PlaceableItem data) => data.ItemAddress;
-    protected override string GetID(PlaceableItem data) => data.ItemName;
+    protected override string GetName(PlaceableItem data) => data.ItemName;
+    protected override string GetID(PlaceableItem data) => data.ItemID;
     protected override ItemRarity GetRarity(PlaceableItem data) => data.itemRarity;
 
     // --- Override OnEnable to partition data ---
@@ -79,4 +80,6 @@ public class PlaceableDatabase : BaseAssetDatabase<PlaceableItem, IsometricBuild
 
     public List<PlaceableItem> GetBuildingsByRarity(ItemRarity rarity)
         => buildingsByRarity.TryGetValue(rarity, out var list) ? list : null;
+
+
 }

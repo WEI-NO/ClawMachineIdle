@@ -14,6 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _itemName: Small Coin
   _itemAddress: prize_coin_small
+  _itemID: prize001
   _itemIcon: {fileID: 2582750977393768557, guid: c40d573e674f5bd44a148f85a4208544, type: 3}
   _itemType: 3
   _itemRarity: 0

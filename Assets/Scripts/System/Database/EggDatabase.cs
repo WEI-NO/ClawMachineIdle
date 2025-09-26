@@ -10,6 +10,11 @@ public class EggDatabase : BaseAssetDatabase<EggItem, object>
 
     protected override string GetID(EggItem data)
     {
+        return data.ItemID;
+    }
+
+    protected override string GetName(EggItem data)
+    {
         return data.ItemName;
     }
 
@@ -17,4 +22,5 @@ public class EggDatabase : BaseAssetDatabase<EggItem, object>
     {
         return data.itemRarity;
     }
+
 }

@@ -14,6 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _itemName: Ticket Prize
   _itemAddress: prize_ticket
+  _itemID: prize003
   _itemIcon: {fileID: -1292138795, guid: c40d573e674f5bd44a148f85a4208544, type: 3}
   _itemType: 3
   _itemRarity: 2
