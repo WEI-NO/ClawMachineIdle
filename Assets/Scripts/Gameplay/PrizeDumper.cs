@@ -38,6 +38,9 @@ public class PrizeDumper : MonoBehaviour
     [Header("Themes Properties")]
     [SerializeField] private List<SO_ClawMachinePrizeEntries> themedEntries;
 
+    [Header("Cost Properties")]
+    public bool isFree = false;
+
     private void Start()
     {
         if (CMT.Instance)
