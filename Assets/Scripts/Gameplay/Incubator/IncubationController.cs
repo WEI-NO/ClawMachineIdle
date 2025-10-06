@@ -9,7 +9,7 @@ public class IncubationController : MonoBehaviour
     [Header("Incubation Properties")]
     public List<EggContainer> IncubationQueue = new List<EggContainer>();
     public int MaxQueued = 2;
-    private int CurrentInQueue = 0;
+    public int CurrentInQueue = 0;
 
     private void Awake()
     {
@@ -54,6 +54,31 @@ public class IncubationController : MonoBehaviour
 
     #region Queue
 
+    public EggContainer GetFirstInQueue(bool excludeReady = true)
+    {
+        if (!HasQueue()) return null;
+        int index = 0;
+        bool found = false;
+        for (int i = 0; i < IncubationQueue.Count; i++)
+        {
+            if (i >= MaxQueued)
+            {
+                break;
+            }
+
+            if (!IncubationQueue[i].Done())
+            {
+                found = true;
+                index = i;
+            }
+
+        }
+
+        if (CurrentInQueue < 0 || CurrentInQueue >= IncubationQueue.Count) return null;
+
+        return IncubationQueue[index];
+    }
+
     public bool HasQueue()
     {
         return IncubationQueue.Count > 0;
@@ -70,6 +95,7 @@ public class IncubationController : MonoBehaviour
         {
             EggContainer container = new EggContainer(egg, 10.0f);
             IncubationQueue.Add(container);
+            SelectFirstInQueue();
         } else
         {
             Debug.LogWarning($"{gameObject.name}: Passed in a non EggItem item");
@@ -96,11 +122,12 @@ public class IncubationController : MonoBehaviour
                 break;
             }
 
-            if (!IncubationQueue[i].Done())
+            if (!IncubationQueue[i].Done()) 
             {
                 found = true;
                 CurrentInQueue = i;
             }
+
         }
         if (!found) CurrentInQueue = -1;
     }

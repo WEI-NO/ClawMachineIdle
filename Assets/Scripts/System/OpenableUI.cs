@@ -69,10 +69,12 @@ public class OpenableUI : MonoBehaviour
         if (active)
         {
             anim.SetTrigger(enableTriggerName);
+            ToggledOn();
         }
         else
         {
             anim.SetTrigger(disableTriggerName);
+            ToggledOff();
         }
     }
 
@@ -101,6 +103,7 @@ public class OpenableUI : MonoBehaviour
             {
                 g.SetActive(true);
             }
+            ToggledOn();
         }
         else
         {
@@ -108,6 +111,17 @@ public class OpenableUI : MonoBehaviour
             {
                 g.SetActive(false);
             }
+            ToggledOff();
         }
+    }
+
+    protected virtual void ToggledOn()
+    {
+
+    }
+
+    protected virtual void ToggledOff()
+    {
+
     }
 }
