@@ -54,27 +54,43 @@ public class IncubationController : MonoBehaviour
 
     #region Queue
 
-    public EggContainer GetFirstInQueue(bool excludeReady = true)
+    public int GetFirstInQueue_Index(bool excludeReady = true)
     {
-        if (!HasQueue()) return null;
-        int index = 0;
-        bool found = false;
-        for (int i = 0; i < IncubationQueue.Count; i++)
+        if (!HasQueue()) return -1;
+        int index = -1;
+        // Do not exclude ready eggs
+        if (!excludeReady)
         {
-            if (i >= MaxQueued)
+            for (int i = 0; i < IncubationQueue.Count; i++)
             {
-                break;
-            }
-
-            if (!IncubationQueue[i].Done())
-            {
-                found = true;
+                if (i >= MaxQueued)
+                {
+                    break;
+                }
                 index = i;
             }
-
         }
+        // Exclude ready eggs and just returnb the current in queue.
+        else
+        {
+            index = CurrentInQueue;
+        }
+        if (index < 0 || index >= IncubationQueue.Count) return -1;
 
-        if (CurrentInQueue < 0 || CurrentInQueue >= IncubationQueue.Count) return null;
+        return index;
+    }
+
+    public EggContainer GetFirstInQueue(bool excludeReady = true)
+    {
+        int index = GetFirstInQueue_Index(excludeReady);
+        if (index < 0 || index >= IncubationQueue.Count) return null;
+
+        return IncubationQueue[index];
+    }
+
+    public EggContainer GetEggFromQueue(int index)
+    {
+        if (index < 0 || index >= IncubationQueue.Count) return null;
 
         return IncubationQueue[index];
     }
