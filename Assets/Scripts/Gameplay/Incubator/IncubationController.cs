@@ -61,14 +61,7 @@ public class IncubationController : MonoBehaviour
         // Do not exclude ready eggs
         if (!excludeReady)
         {
-            for (int i = 0; i < IncubationQueue.Count; i++)
-            {
-                if (i >= MaxQueued)
-                {
-                    break;
-                }
-                index = i;
-            }
+            index = 0;
         }
         // Exclude ready eggs and just returnb the current in queue.
         else
@@ -133,7 +126,7 @@ public class IncubationController : MonoBehaviour
         bool found = false;
         for (int i = 0; i < IncubationQueue.Count; i++)
         {
-            if (i >= MaxQueued)
+            if (i > MaxQueued)
             {
                 break;
             }
@@ -142,6 +135,7 @@ public class IncubationController : MonoBehaviour
             {
                 found = true;
                 CurrentInQueue = i;
+                break;
             }
 
         }

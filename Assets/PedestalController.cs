@@ -20,5 +20,6 @@ public class PedestalController : MonoBehaviour
         PlayerInventory.Instance.GiveItem(prizeItem, 1);
         ItemPopup.Instance.AddItem(prizeItem);
         controller.RemoveAt(index);
+        pedestalAnim.ResetTrigger("Claim");
     }
 }

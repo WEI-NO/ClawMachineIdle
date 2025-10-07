@@ -39,7 +39,6 @@ public class ItemPopup : Base_ItemPopup<BaseItem>
             return;
         }
 
-        PlayerInventory.Instance.GiveItem(incomingItemList[incomingItemIndex], incomingQuantityList[incomingItemIndex]);
         incomingItemList.RemoveAt(incomingItemIndex);
         incomingQuantityList.RemoveAt(incomingItemIndex);
 
