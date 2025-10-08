@@ -48,7 +48,7 @@ TextureImporter:
   compressionQuality: 50
   spriteMode: 2
   spriteExtrude: 1
-  spriteMeshType: 1
+  spriteMeshType: 0
   alignment: 0
   spritePivot: {x: 0.5, y: 0.5}
   spritePixelsToUnits: 32
@@ -235,6 +235,28 @@ TextureImporter:
       indices: 
       edges: []
       weights: []
+    - serializedVersion: 2
+      name: MachineTable_Wood_5
+      rect:
+        serializedVersion: 2
+        x: 16
+        y: 448
+        width: 48
+        height: 48
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 2, y: 2, z: 2, w: 2}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: a367ab76f9765514dac03075510732d4
+      internalID: 914816833
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
     outline: []
     customData: 
     physicsShape: []
@@ -254,6 +276,7 @@ TextureImporter:
       MachineTable_Wood_2: -1091581859
       MachineTable_Wood_3: 464647664
       MachineTable_Wood_4: -604779829
+      MachineTable_Wood_5: 914816833
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
