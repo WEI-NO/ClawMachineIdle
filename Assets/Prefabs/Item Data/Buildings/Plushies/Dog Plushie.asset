@@ -14,6 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _itemName: Dog Plushie
   _itemAddress: plushie_basic_dog
+  _itemID: plushie001
   _itemIcon: {fileID: -220491816079474195, guid: cb27d388fe4fb4a4788379bbd898d817, type: 3}
   _itemType: 1
   _itemRarity: 1

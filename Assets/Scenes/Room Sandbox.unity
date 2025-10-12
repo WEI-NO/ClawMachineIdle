@@ -2691,7 +2691,7 @@ MonoBehaviour:
   PlaceableInformation: []
   StartingPlaceable_Debug:
   - machine001
-  - machine002
+  - plushie001
 --- !u!1 &1933048041
 GameObject:
   m_ObjectHideFlags: 0

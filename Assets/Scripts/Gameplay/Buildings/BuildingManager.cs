@@ -35,7 +35,7 @@ public class BuildingManager : MonoBehaviour
                 if (x)
                 {
                     newPlaceable.inWorldObject = Instantiate(x, transform.position, Quaternion.identity);
-                    newPlaceable.inWorldObject.PlaceOnGridPosition(new Vector2Int(10, 10));
+                    newPlaceable.inWorldObject.PlaceOnGridPosition(new Vector2Int(10, 50));
                     newPlaceable.inWorldObject.OnPlaceableDestroy += RemovePlaceable;
                     PlaceableInformation.Add(newPlaceable);
                 }
