@@ -11,6 +11,9 @@ public class BuildingManager : MonoBehaviour
     [Header("Containers")]
     public List<PlaceableInfo> PlaceableInformation = new List<PlaceableInfo>();
     public List<string> StartingPlaceable_Debug = new List<string>();
+    public Vector2Int PlaceablePositions_Debug;
+    public bool Add;
+
 
     private void Awake()
     {
@@ -19,13 +22,46 @@ public class BuildingManager : MonoBehaviour
 
     private void Start()
     {
-        foreach (var i in StartingPlaceable_Debug)
+        var roomData = SaveSystem.Load();
+        int positionLength = roomData.buildingGridPositions.Count;
+        int orientationLength = roomData.buildingOrientations.Count;
+        for (int i = 0; i < roomData.buildingIDs.Count; i++)
         {
-            AddPlaceable(i);
+            if (i >= positionLength || i < 0)
+            {
+                Debug.LogWarning($"Building Manager: Load Failed, data {i} does not have a corresponding position");
+                break;
+            }
+
+            if (i >= orientationLength)
+            {
+                Debug.LogWarning($"Building Manager: Load Failed, data {i} does not have a corresponding orientation");
+                break;
+            }
+
+            var pos = roomData.buildingGridPositions[i];
+            AddPlaceable(roomData.buildingIDs[i], new Vector2Int(pos.x, pos.y), roomData.buildingOrientations[i]);
+        }
+    }
+
+    private void Update()
+    {
+        if (Add)
+        {
+            foreach (var i in StartingPlaceable_Debug)
+            {
+                AddPlaceable(i, PlaceablePositions_Debug, Orientation.Right);
+            }
+            Add = false;
         }
     }
 
     public void AddPlaceable(string buildingID)
+    {
+        AddPlaceable(buildingID, new Vector2Int(0, 0), Orientation.Right);
+    }
+
+    public void AddPlaceable(string buildingID, Vector2Int gridPosition, Orientation orientation)
     {
         PlaceableInfo newPlaceable = new PlaceableInfo(buildingID);
         if (newPlaceable != null)
@@ -35,7 +71,9 @@ public class BuildingManager : MonoBehaviour
                 if (x)
                 {
                     newPlaceable.inWorldObject = Instantiate(x, transform.position, Quaternion.identity);
-                    newPlaceable.inWorldObject.PlaceOnGridPosition(new Vector2Int(10, 50));
+                    newPlaceable.inWorldObject.SetFlip(orientation);
+                    newPlaceable.inWorldObject.transform.SetParent(transform, true);
+                    newPlaceable.inWorldObject.PlaceOnGridPosition(gridPosition);
                     newPlaceable.inWorldObject.OnPlaceableDestroy += RemovePlaceable;
                     PlaceableInformation.Add(newPlaceable);
                 }
@@ -52,6 +90,25 @@ public class BuildingManager : MonoBehaviour
         }
     }
 
+
+    private void OnDisable()
+    {
+        SaveSystem.SaveRoom(PlaceableInformation);
+    }
+
+    private void OnApplicationPause(bool pause)
+    {
+        if (pause)
+        {
+            SaveSystem.SaveRoom(PlaceableInformation);
+        }
+    }
+
+    #region Save/Load
+
+
+
+    #endregion save/load
 }
 
 [System.Serializable]
@@ -90,18 +147,5 @@ public class PlaceableInfo
             });
         }
         yield return null;
-    }
-
-    public void SaveData()
-    {
-        if (inWorldObject != null)
-        {
-            pixelPosition = inWorldObject.blueprint.GridPosition;
-        }
-    }
-
-    public bool Validate()
-    {
-        return inWorldObject != null;
     }
 }

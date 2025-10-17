@@ -96,9 +96,9 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5476298681317299208}
+  - component: {fileID: 5142257587062284179}
   - component: {fileID: 6757884080611761468}
   - component: {fileID: 877366788651066923}
-  - component: {fileID: 5142257587062284179}
   m_Layer: 6
   m_Name: Prize_Coin_Small
   m_TagString: Prize
@@ -122,6 +122,26 @@ Transform:
   - {fileID: 6231932404261115290}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &5142257587062284179
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4826204483616148250}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 05fc24a8d7ff15c4d9e1ea3e3c5d9eb3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Reward: prize001
+  Quantity: 1
+  RewardItem: {fileID: 0}
+  ItemRarity: 0
+  isEgg: 0
+  effect: {fileID: 8157593398542675758, guid: 63bc9e25ce2fb164797c846f133c1777, type: 3}
+  onUI: 1
+  quantityRange: {x: 5, y: 10}
 --- !u!50 &6757884080611761468
 Rigidbody2D:
   serializedVersion: 5
@@ -185,23 +205,3 @@ CircleCollider2D:
   m_CompositeOrder: 0
   m_Offset: {x: 0, y: 0}
   m_Radius: 0.25
---- !u!114 &5142257587062284179
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4826204483616148250}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 05fc24a8d7ff15c4d9e1ea3e3c5d9eb3, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  Reward: Coin
-  Quantity: 1
-  RewardItem: {fileID: 0}
-  ItemRarity: 0
-  isEgg: 0
-  effect: {fileID: 8157593398542675758, guid: 63bc9e25ce2fb164797c846f133c1777, type: 3}
-  onUI: 1
-  quantityRange: {x: 5, y: 10}

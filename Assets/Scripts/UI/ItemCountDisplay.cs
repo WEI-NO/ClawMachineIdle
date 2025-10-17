@@ -9,7 +9,7 @@ public class ItemCountDisplay : MonoBehaviour
     [SerializeField] private Animator anim;
 
     [Header("Display Properties")]
-    [SerializeField] private string _itemName;
+    [SerializeField] private string _itemID;
     [SerializeField] private ItemCategory _category;
     [SerializeField] private bool shown = true;
     public TouchController tc;
@@ -43,7 +43,7 @@ public class ItemCountDisplay : MonoBehaviour
     {
         if (!_countText || PlayerInventory.Instance == null) return;
 
-        var itemCount = PlayerInventory.Instance.GetItemCount(_itemName, _category);
+        var itemCount = PlayerInventory.Instance.GetItemCount(_itemID, _category);
         _countText.text = $"{itemCount}";
     }
 

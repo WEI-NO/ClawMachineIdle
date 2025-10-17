@@ -55,7 +55,7 @@ public abstract class BaseAssetDatabase<TData, TAsset> : ScriptableObject
     }
 
     // --- Data Lookup ---
-    public TData GetDataByID(string id)
+    public virtual TData GetDataByID(string id)
     {
         idToData.TryGetValue(id, out var data);
         return data;
@@ -78,7 +78,7 @@ public abstract class BaseAssetDatabase<TData, TAsset> : ScriptableObject
         }
 
 
-        string id = GetName(data);
+        string id = GetID(data);
 
         // Notify request
         OnAssetRequested(data);
