@@ -90,7 +90,7 @@ public class SceneHandler : MonoBehaviour
         //    _scenesLoading.Add(SceneManager.LoadSceneAsync(_persistentGameplay, LoadSceneMode.Additive));
         //}
 
-        // Load the target scene additively
+        // Load_Room the target scene additively
         if (!SceneManager.GetSceneByName(_sceneToLoad).isLoaded)
         {
             _scenesLoading.Add(SceneManager.LoadSceneAsync(_sceneToLoad, LoadSceneMode.Additive));

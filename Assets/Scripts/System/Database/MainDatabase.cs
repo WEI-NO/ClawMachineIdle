@@ -23,4 +23,20 @@ public class MainDatabase : MonoBehaviour
         Initializer.SetInstance(this);
     }
 
+    public BaseItem FindItem(string id)
+    {
+        BaseItem data = placeableDatabase.GetDataByID(id);
+        if (data != null) return data;
+
+        data = prizeDatabase.GetDataByID(id);
+        if (data != null) return data;
+
+        data = currencyDatabase.GetDataByID(id);
+        if (data != null) return data;
+
+        data = eggDatabase.GetDataByID(id);
+        if (data != null) return data;
+
+        return null;
+    }
 }

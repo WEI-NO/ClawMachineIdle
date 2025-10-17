@@ -7590,11 +7590,11 @@ RectTransform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 2071874298881707233}
-  - {fileID: 5892077916453249935}
-  - {fileID: 3647591295643468812}
   - {fileID: 5659266400862742004}
+  - {fileID: 5892077916453249935}
   - {fileID: 2837038964155296388}
   - {fileID: 5927077259696278055}
+  - {fileID: 3647591295643468812}
   - {fileID: 3296929681440647807}
   - {fileID: 3751519625244428363}
   - {fileID: 1399663746796170674}
@@ -18981,7 +18981,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _countText: {fileID: 8495564847757752649}
   anim: {fileID: 0}
-  _itemID: 
+  _itemID: currency001
   _category: 0
   shown: 1
   tc: {fileID: 0}
@@ -20286,7 +20286,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _countText: {fileID: 429008692167214737}
   anim: {fileID: 0}
-  _itemID: 
+  _itemID: currency002
   _category: 0
   shown: 1
   tc: {fileID: 0}

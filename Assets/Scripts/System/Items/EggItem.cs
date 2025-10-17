@@ -4,4 +4,5 @@ using UnityEngine;
 public class EggItem : BaseItem
 {
     public SO_EggPrizeEntries lootTable;
+    public float hatchTime_s = 300.0f;
 }

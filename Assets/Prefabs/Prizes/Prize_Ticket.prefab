@@ -134,7 +134,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: abdadf74ab8e7d24ca95510f0ce819dc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Reward: prize003
+  Reward: currency002
   Quantity: 1
   RewardItem: {fileID: 0}
   ItemRarity: 0

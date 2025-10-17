@@ -30,6 +30,9 @@ public class PrizeDumper : MonoBehaviour
     [SerializeField] private float minAngle = -45f;          // In degrees, left-down
     [SerializeField] private float maxAngle = 45f;           // In degrees, right-down
 
+    [Header("Components")]
+    public List<Collider2D> physicalColliders = new List<Collider2D>();
+
     [Header("Prize Properties")]
     [SerializeField] private SO_ClawMachinePrizeEntries currentPrizeEntry;
     public Vector2Int DropAmountRange = new Vector2Int(15, 20);
@@ -75,6 +78,12 @@ public class PrizeDumper : MonoBehaviour
     {
         craneStick.SetActive(false);
 
+        foreach (var c in physicalColliders)
+        {
+            if (c == null) continue;
+            c.isTrigger = true;
+        }
+
         if (refreshingUI)
         {
             refreshingUI.Activate();
@@ -90,6 +99,12 @@ public class PrizeDumper : MonoBehaviour
         yield return new WaitForSeconds(1.0f);
 
         craneStick.SetActive(true);
+
+        foreach (var c in physicalColliders)
+        {
+            if (c == null) continue;
+            c.isTrigger = false;
+        }
 
         if (refreshingUI)
         {

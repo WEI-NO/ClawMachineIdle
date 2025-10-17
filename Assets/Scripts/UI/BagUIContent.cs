@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 public enum BagCategory
@@ -25,6 +26,14 @@ public class BagUIContent : MonoBehaviour
         if (inventory)
         {
             inventory.OnBackpackModified += OnNewItemAdded;
+
+            List<InventoryItem> allItems = inventory.Backpack.SelectMany(dict => dict.Values).ToList();
+
+            foreach (var item in allItems)
+            {
+                OnNewItemAdded(item);
+            }
+
         }
     }
 

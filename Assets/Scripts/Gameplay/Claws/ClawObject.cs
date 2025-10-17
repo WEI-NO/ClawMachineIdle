@@ -72,17 +72,6 @@ public class ClawObject : MonoBehaviour
         }
 
         upwardSpeed = Mathf.Clamp(upwardSpeedRange.y - totalMultiplier, upwardSpeedRange.x, upwardSpeedRange.y);
-        //if (Input.GetKey(KeyCode.UpArrow))
-        //{
-        //    targetY += Time.deltaTime * verticalStrength;
-        //}
-
-        //if (Input.GetKey(KeyCode.DownArrow))
-        //{
-        //    targetY -= Time.deltaTime * verticalStrength;
-        //}
-
-        //targetY = Mathf.Clamp(targetY, yLimits.x, yLimits.y);
     }
 
     private void FixedUpdate()

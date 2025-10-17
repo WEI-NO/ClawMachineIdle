@@ -22,7 +22,7 @@ public class BuildingManager : MonoBehaviour
 
     private void Start()
     {
-        var roomData = SaveSystem.Load();
+        var roomData = SaveSystem.Load_Room();
         int positionLength = roomData.buildingGridPositions.Count;
         int orientationLength = roomData.buildingOrientations.Count;
         for (int i = 0; i < roomData.buildingIDs.Count; i++)

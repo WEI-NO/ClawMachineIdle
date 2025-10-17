@@ -7,7 +7,7 @@ using UnityEngine.AddressableAssets;
 using UnityEngine.ResourceManagement.AsyncOperations;
 
 public abstract class BaseAssetDatabase<TData, TAsset> : ScriptableObject 
-    where TData : ScriptableObject
+    where TData : BaseItem
     where TAsset : class
 {
     [Header("All Data Entries")]
@@ -91,7 +91,7 @@ public abstract class BaseAssetDatabase<TData, TAsset> : ScriptableObject
         }
 
 
-        // Load by address
+        // Load_Room by address
         string address = GetAddress(data);
         if (string.IsNullOrEmpty(address))
         {

@@ -22,7 +22,7 @@ public class IncubationController : MonoBehaviour
 
     private void Start()
     {
-        PlayerInventory.Instance.OnBackpackModified += NewEggAdded;
+        //PlayerInventory.Instance.OnBackpackModified += NewEggAdded;
         CurrentInQueue = -1;
     }
 
@@ -100,9 +100,9 @@ public class IncubationController : MonoBehaviour
 
     public void AddToQueue(BaseItem egg)
     {
-        if (egg is EggItem)
+        if (egg is EggItem eggItem)
         {
-            EggContainer container = new EggContainer(egg, 10.0f);
+            EggContainer container = new EggContainer(egg, eggItem.hatchTime_s);
             IncubationQueue.Add(container);
             SelectFirstInQueue();
         } else

@@ -1,6 +1,7 @@
 using CustomLibrary.References;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 public class InventoryItem
@@ -40,6 +41,17 @@ public class PlayerInventory : MonoBehaviour
         for (int i = 0; i < ItemCategory.Count.ToInt(); i++)
         {
             Backpack.Add(new Dictionary<string, InventoryItem>());
+        }
+
+        var data = SaveSystem.Load_Inventory();
+        if (data != null && data.Validate())
+        {
+            for (int i = 0; i < data.itemIDs.Count; i++)
+            {
+                var id = data.itemIDs[i]; var quantity = data.itemQuantities[i];
+
+                GiveItem(id, quantity);
+            }
         }
     }
 
@@ -102,6 +114,15 @@ public class PlayerInventory : MonoBehaviour
 
     }
 
+    public void GiveItem(string itemID, int quantity)
+    {
+        var item = MainDatabase.Instance.FindItem(itemID);
+
+        if (item == null) return;
+
+        GiveItem(item, quantity);
+    }
+
     public void GiveItem(BaseItem item, int quantity)
     {
         var bp = GetBackpack(item);
@@ -139,6 +160,25 @@ public class PlayerInventory : MonoBehaviour
             }
         }
         print(result);
+    }
+
+    private void OnDisable()
+    {
+        Save();
+    }
+
+    private void OnApplicationPause(bool pause)
+    {
+        if (pause) Save();
+    }
+
+    private void Save()
+    {
+        List<InventoryItem> allItems = Backpack
+            .SelectMany(dict => dict.Values)
+            .ToList();
+
+        SaveSystem.SaveInventory(allItems);
     }
 
     #endregion backpack

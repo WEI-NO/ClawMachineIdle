@@ -4901,6 +4901,10 @@ MonoBehaviour:
   prizeDumpForce: 5
   minAngle: -135
   maxAngle: -45
+  physicalColliders:
+  - {fileID: 2005189675}
+  - {fileID: 2073351866}
+  - {fileID: 464833319}
   currentPrizeEntry: {fileID: 0}
   DropAmountRange: {x: 25, y: 30}
   DropAmountInterval: 2

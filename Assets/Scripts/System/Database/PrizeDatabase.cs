@@ -73,7 +73,7 @@ public class PrizeDatabase : BaseAssetDatabase<PrizeItem, BasePrize>
 //        Prizes.Add(new List<BasePrize>());
 //    }
 
-//    // Load all BasePrize assets with the "Prize" label
+//    // Load_Room all BasePrize assets with the "Prize" label
 //    AsyncOperationHandle<IList<GameObject>> handle = Addressables.LoadAssetsAsync<GameObject>("Prize", null);
 
 //    await handle.Task; // Await for completion
