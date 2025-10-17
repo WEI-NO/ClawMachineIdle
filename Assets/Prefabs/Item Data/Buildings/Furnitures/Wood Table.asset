@@ -14,6 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _itemName: Wood Table
   _itemAddress: table_wood
+  _itemID: table001
   _itemIcon: {fileID: -6384648435560891406, guid: 9493f10b51f8e2a4aaa81bf35c6ba8fb, type: 3}
   _itemType: 1
   _itemRarity: 0

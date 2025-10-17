@@ -10,7 +10,7 @@ public class OptionButton_ToStorage : BaseOptionButton
             if (MainDatabase.Instance.DB_Placeable.GetDataByID(placeable.BuildingID) is var data)
             {
                 PlayerInventory.Instance.GiveItem(data, 1);
-                Destroy(placeable.gameObject);
+                placeable.DestroyPlaceable();
                 PlaceableOptions.Instance.SetBuilding(null);
             }
         }

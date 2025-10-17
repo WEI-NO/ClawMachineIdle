@@ -47,7 +47,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cb03fa48bc602d543b5821791df4b660, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Reward: Forest Furniture Egg
+  Reward: egg001
   Quantity: 1
   RewardItem: {fileID: 0}
   ItemRarity: 0

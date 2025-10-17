@@ -18,7 +18,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4679034283707852851, guid: 17599aeefc9e769499f6c023b1e27b27, type: 3}
       propertyPath: BuildingID
-      value: Wood Window
+      value: window001
       objectReference: {fileID: 0}
     - target: {fileID: 4679034283707852851, guid: 17599aeefc9e769499f6c023b1e27b27, type: 3}
       propertyPath: BuildingName

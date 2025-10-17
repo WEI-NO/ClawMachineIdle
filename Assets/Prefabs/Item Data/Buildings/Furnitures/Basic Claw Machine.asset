@@ -14,7 +14,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _itemName: Basic Claw Machine
   _itemAddress: clawmachine_basic
+  _itemID: machine001
   _itemIcon: {fileID: -1052032896534559463, guid: c9e2d9d9b1a246148b5abfbf4c2feebc, type: 3}
   _itemType: 1
   _itemRarity: 2
   ItemDescription: 
+  isPlushie: 0

@@ -96,8 +96,8 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 337631074228845619}
-  - component: {fileID: 287423430081688061}
   - component: {fileID: 2674651418113782604}
+  - component: {fileID: 287423430081688061}
   - component: {fileID: 4180668345730299926}
   m_Layer: 6
   m_Name: Prize_Ticket
@@ -122,6 +122,25 @@ Transform:
   - {fileID: 6821645298787721739}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &2674651418113782604
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4525340828121385959}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: abdadf74ab8e7d24ca95510f0ce819dc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Reward: prize003
+  Quantity: 1
+  RewardItem: {fileID: 0}
+  ItemRarity: 0
+  isEgg: 0
+  effect: {fileID: 468250972416345833, guid: e51480518c2254143af77b6cbb0cd206, type: 3}
+  onUI: 0
 --- !u!50 &287423430081688061
 Rigidbody2D:
   serializedVersion: 5
@@ -149,25 +168,6 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 0
---- !u!114 &2674651418113782604
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4525340828121385959}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: abdadf74ab8e7d24ca95510f0ce819dc, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  Reward: Ticket
-  Quantity: 1
-  RewardItem: {fileID: 0}
-  ItemRarity: 0
-  isEgg: 0
-  effect: {fileID: 468250972416345833, guid: e51480518c2254143af77b6cbb0cd206, type: 3}
-  onUI: 0
 --- !u!61 &4180668345730299926
 BoxCollider2D:
   m_ObjectHideFlags: 0

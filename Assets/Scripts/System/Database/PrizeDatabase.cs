@@ -11,7 +11,7 @@ using CustomLibrary.References;
 [CreateAssetMenu(fileName ="PrizeDatabase", menuName ="Bubble Claw/Database/PrizeDatabase")]
 public class PrizeDatabase : BaseAssetDatabase<PrizeItem, BasePrize>
 {
-    protected override string GetID(PrizeItem data)
+    protected override string GetName(PrizeItem data)
     {
         return data.ItemName;
     }
@@ -24,6 +24,11 @@ public class PrizeDatabase : BaseAssetDatabase<PrizeItem, BasePrize>
     protected override ItemRarity GetRarity(PrizeItem data)
     {
         return data.itemRarity;
+    }
+
+    protected override string GetID(PrizeItem data)
+    {
+        return data.ItemID;
     }
 }   
 

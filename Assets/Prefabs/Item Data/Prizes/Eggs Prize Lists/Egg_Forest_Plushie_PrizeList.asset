@@ -16,7 +16,7 @@ MonoBehaviour:
   - prize: {fileID: 11400000, guid: da72e1b93ff06864db5329c09e17bd76, type: 2}
     entry: 10
   - prize: {fileID: 11400000, guid: ed04d242618527149a0c465511ae2c0c, type: 2}
-    entry: 1
+    entry: 20
   entryOdds:
   - 1
   oddCalculated: 1

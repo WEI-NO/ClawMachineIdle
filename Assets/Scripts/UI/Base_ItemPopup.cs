@@ -24,6 +24,7 @@ public abstract class Base_ItemPopup<T> : MonoBehaviour
     protected void Awake()
     {
         OnAwake();
+
         anim = GetComponent<Animator>();
     }
 

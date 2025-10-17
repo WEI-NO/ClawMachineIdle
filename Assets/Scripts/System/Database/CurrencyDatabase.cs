@@ -10,6 +10,11 @@ public class CurrencyDatabase : BaseAssetDatabase<BaseItem, object>
 
     protected override string GetID(BaseItem data)
     {
+        return data.ItemID;
+    }
+
+    protected override string GetName(BaseItem data)
+    {
         return data.ItemName;
     }
 

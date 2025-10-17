@@ -47,7 +47,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9f5b8e7d91aac764eb2876b313b619b2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Reward: Forest Plushie Egg
+  Reward: egg002
   Quantity: 1
   RewardItem: {fileID: 0}
   ItemRarity: 0

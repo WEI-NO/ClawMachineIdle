@@ -6,13 +6,13 @@ using UnityEngine;
 public class InventoryItem
 {
     public BaseItem item;
-    public string itemName;
+    public string ItemID;
     public int quantity;
 
-    public InventoryItem(BaseItem item, string itemName, int quantity)
+    public InventoryItem(BaseItem item, string id, int quantity)
     {
         this.item = item;
-        this.itemName = itemName;
+        this.ItemID = id;
         this.quantity = quantity;
     }
 }
@@ -49,7 +49,7 @@ public class PlayerInventory : MonoBehaviour
 
         if (HasItem(item, quantity))
         {
-            bp[item.ItemName].quantity -= quantity;
+            bp[item.ItemID].quantity -= quantity;
             return true;
         } else
         {
@@ -63,16 +63,16 @@ public class PlayerInventory : MonoBehaviour
 
         if (bp == null) return false;
 
-        if (bp.ContainsKey(item.ItemName))
+        if (bp.ContainsKey(item.ItemID))
         {
-            return quantity <= bp[item.ItemName].quantity;
+            return quantity <= bp[item.ItemID].quantity;
         } else
         {
             return false;
         }
     }
 
-    public int GetItemCount(string itemName, ItemCategory category = ItemCategory.None)
+    public int GetItemCount(string id, ItemCategory category = ItemCategory.None)
     {
         int totalCount = 0;
 
@@ -80,9 +80,9 @@ public class PlayerInventory : MonoBehaviour
         {
             // Specific category search
             var bp = Backpack[category.ToInt()];
-            if (bp.ContainsKey(itemName))
+            if (bp.ContainsKey(id))
             {
-                return bp[itemName].quantity;
+                return bp[id].quantity;
             }
         }
         else
@@ -91,9 +91,9 @@ public class PlayerInventory : MonoBehaviour
             for (int i = 0; i < ItemCategory.Count.ToInt(); i++)
             {
                 var bp = Backpack[i];
-                if (bp.ContainsKey(itemName))
+                if (bp.ContainsKey(id))
                 {
-                    totalCount += bp[itemName].quantity;
+                    totalCount += bp[id].quantity;
                 }
             }
         }
@@ -108,17 +108,17 @@ public class PlayerInventory : MonoBehaviour
 
         if (bp == null) return;
 
-        if (bp.ContainsKey(item.ItemName))
+        if (bp.ContainsKey(item.ItemID))
         {
-            bp[item.ItemName].quantity += quantity;
+            bp[item.ItemID].quantity += quantity;
         }
         else
         {
-            InventoryItem newItem = new InventoryItem(item, item.ItemName, quantity);
-            bp.Add(item.ItemName, newItem);
+            InventoryItem newItem = new InventoryItem(item, item.ItemID, quantity);
+            bp.Add(item.ItemID, newItem);
         }
 
-        OnBackpackModified?.Invoke(bp[item.ItemName]);
+        OnBackpackModified?.Invoke(bp[item.ItemID]);
     }
 
     private Dictionary<string, InventoryItem> GetBackpack(BaseItem item)

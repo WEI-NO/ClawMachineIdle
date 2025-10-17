@@ -14,6 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _itemName: Forest Plushie Egg
   _itemAddress: prize_egg_plushie_forest
+  _itemID: prize005
   _itemIcon: {fileID: 9080076636406384814, guid: 9a2caf48dc4675e499bf901b7bfbfad2, type: 3}
   _itemType: 3
   _itemRarity: 0

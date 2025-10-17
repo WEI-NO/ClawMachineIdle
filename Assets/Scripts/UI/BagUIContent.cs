@@ -30,8 +30,8 @@ public class BagUIContent : MonoBehaviour
 
     private void OnNewItemAdded(InventoryItem newItem)
     {
-        string key = newItem.itemName;
-        if (addedItems.ContainsKey(newItem.itemName))
+        string key = newItem.ItemID;
+        if (addedItems.ContainsKey(newItem.ItemID))
         {
             // If already added.
             // Update
@@ -42,7 +42,7 @@ public class BagUIContent : MonoBehaviour
             var slot = Instantiate(this.slot) as BagItemSlot;
             slot.transform.SetParent(contentTransform, false);
             slot.SetItem(newItem);
-            addedItems.Add(newItem.itemName, slot);
+            addedItems.Add(newItem.ItemID, slot);
         }
     }
 

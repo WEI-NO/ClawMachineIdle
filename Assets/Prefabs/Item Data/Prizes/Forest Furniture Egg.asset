@@ -14,6 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _itemName: Forest Furniture Egg
   _itemAddress: prize_egg_furniture_forest
+  _itemID: prize004
   _itemIcon: {fileID: 1415699010, guid: 9a2caf48dc4675e499bf901b7bfbfad2, type: 3}
   _itemType: 3
   _itemRarity: 0

@@ -14,6 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _itemName: Big Coin
   _itemAddress: prize_coin_big
+  _itemID: prize002
   _itemIcon: {fileID: -8122986736136797187, guid: ef22d0d24c0554e4d8cc1e80ce2d4169, type: 3}
   _itemType: 3
   _itemRarity: 1

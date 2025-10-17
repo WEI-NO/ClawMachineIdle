@@ -17,7 +17,7 @@ public class BagItemSlot : MonoBehaviour
     {
         if (this.heldItem != null)
         {
-            if (heldItem.itemName == this.heldItem.itemName)
+            if (heldItem.ItemID == this.heldItem.ItemID)
             {
                 // Udpate count if the same heldItem;
                 UpdateSlotDisplay();
