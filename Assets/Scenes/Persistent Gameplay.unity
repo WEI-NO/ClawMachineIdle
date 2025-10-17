@@ -481,7 +481,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 840103248720813879, guid: c5259eb6f838aed4395bc43569397739, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 1222576404954666800, guid: c5259eb6f838aed4395bc43569397739, type: 3}
       propertyPath: m_Sprite
@@ -490,6 +490,10 @@ PrefabInstance:
     - target: {fileID: 1369556826113040651, guid: c5259eb6f838aed4395bc43569397739, type: 3}
       propertyPath: m_IsActive
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1797378874565742013, guid: c5259eb6f838aed4395bc43569397739, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2863351695652166440, guid: c5259eb6f838aed4395bc43569397739, type: 3}
       propertyPath: MaxQueued
@@ -519,6 +523,10 @@ PrefabInstance:
       propertyPath: m_Sprite
       value: 
       objectReference: {fileID: 21300000, guid: 068af97a410c5fb47aef174c5fbdfe87, type: 3}
+    - target: {fileID: 4370185516148000398, guid: c5259eb6f838aed4395bc43569397739, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 4963145443782895663, guid: c5259eb6f838aed4395bc43569397739, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
