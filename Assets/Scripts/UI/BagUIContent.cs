@@ -44,7 +44,15 @@ public class BagUIContent : MonoBehaviour
         {
             // If already added.
             // Update
-            addedItems[key].UpdateSlotDisplay();
+            if (newItem.quantity <= 0)
+            {
+                Destroy(addedItems[key].gameObject);
+                addedItems.Remove(key);
+                
+            } else
+            {
+                addedItems[key].UpdateSlotDisplay();
+            }
         } else
         {
             // If it doesn't exist, Add it

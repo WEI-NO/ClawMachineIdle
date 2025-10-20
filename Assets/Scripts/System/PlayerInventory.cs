@@ -31,10 +31,33 @@ public class PlayerInventory : MonoBehaviour
 
         BackpackInitialize();
 
-        OnBackpackModified += (i) => { PrintBackpack(); };
+        OnBackpackModified += (i) => { PrintBackpack(); Clean();  };
     }
 
     #region Backpack
+
+    private void Clean()
+    {
+        // Loop through each dictionary in the Backpack list
+        foreach (var dict in Backpack)
+        {
+            // Collect all keys that should be removed
+            var keysToRemove = new List<string>();
+
+            foreach (var pair in dict)
+            {
+                InventoryItem item = pair.Value;
+
+                // Handle null or destroyed references
+                if (item == null || item.Equals(null) || item.quantity <= 0)
+                    keysToRemove.Add(pair.Key);
+            }
+
+            // Remove them safely after iteration
+            foreach (var key in keysToRemove)
+                dict.Remove(key);
+        }
+    }
 
     private void BackpackInitialize()
     {
@@ -62,6 +85,7 @@ public class PlayerInventory : MonoBehaviour
         if (HasItem(item, quantity))
         {
             bp[item.ItemID].quantity -= quantity;
+            OnBackpackModified?.Invoke(bp[item.ItemID]);
             return true;
         } else
         {
@@ -116,6 +140,7 @@ public class PlayerInventory : MonoBehaviour
 
     public void GiveItem(string itemID, int quantity)
     {
+        if (quantity == 0) return;
         var item = MainDatabase.Instance.FindItem(itemID);
 
         if (item == null) return;
@@ -125,6 +150,8 @@ public class PlayerInventory : MonoBehaviour
 
     public void GiveItem(BaseItem item, int quantity)
     {
+        if (quantity == 0) return;
+
         var bp = GetBackpack(item);
 
         if (bp == null) return;
@@ -142,11 +169,16 @@ public class PlayerInventory : MonoBehaviour
         OnBackpackModified?.Invoke(bp[item.ItemID]);
     }
 
-    private Dictionary<string, InventoryItem> GetBackpack(BaseItem item)
+    public Dictionary<string, InventoryItem> GetBackpack(BaseItem item)
     {
         if (!item) return null;
 
-        return Backpack[item.ItemType.ToInt()];
+        return GetBackpack(item.ItemType);
+    }
+
+    public Dictionary<string, InventoryItem> GetBackpack(ItemCategory category)
+    {
+        return Backpack[category.ToInt()];
     }
 
     private void PrintBackpack()
