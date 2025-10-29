@@ -23,7 +23,8 @@ public class SceneHandler : MonoBehaviour
     private List<AsyncOperation> _scenesLoading = new List<AsyncOperation>();
     private Coroutine _sceneSwitchProcess = null;
 
-    public Action OnSceneLoaded;
+    public Action<SceneField> OnSceneLoaded;
+    public Action<SceneField> OnSceneChanged;
 
     private void Awake()
     {
@@ -142,11 +143,13 @@ public class SceneHandler : MonoBehaviour
 
         LoadingScreen.Instance.RemoveLoad();
         _sceneSwitchProcess = null;
-        OnSceneLoaded?.Invoke();
+        
+        OnSceneLoaded?.Invoke(scene);
+        OnSceneChanged?.Invoke(scene);
         OnSceneLoaded = null;
     }
 
-    public void ListenForSceneChange(Action action)
+    public void ListenForSceneChange(Action<SceneField> action)
     {
         OnSceneLoaded += action;
     }

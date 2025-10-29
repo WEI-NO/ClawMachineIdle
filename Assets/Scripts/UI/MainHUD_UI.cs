@@ -41,7 +41,7 @@ public class MainHUD_UI : MonoBehaviour
                 }
             }
 
-            sceneHandler.OnSceneLoaded += () => ToggleState(true);
+            sceneHandler.OnSceneLoaded += (s) => ToggleState(true);
         }
     }
 
@@ -54,7 +54,7 @@ public class MainHUD_UI : MonoBehaviour
 
         GoToScene(alternatingScenes[sceneIndex]);
         inTransition = true;
-        SceneHandler.Instance.ListenForSceneChange(() => { inTransition = false; });
+        SceneHandler.Instance.ListenForSceneChange((s) => { inTransition = false; });
     }
 
     private void GoToScene(SceneField scene)

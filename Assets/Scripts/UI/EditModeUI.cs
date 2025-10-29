@@ -7,6 +7,7 @@ public class EditModeUI : MonoBehaviour
     public static EditModeUI Instance;
 
     private Animator anim;
+    
 
     private void Awake()
     {
