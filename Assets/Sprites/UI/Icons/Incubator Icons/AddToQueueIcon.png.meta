@@ -1,10 +1,10 @@
 fileFormatVersion: 2
-guid: 2ff93119f884e8b488bebe97cade6ee5
+guid: 133da5fbfab9df84c8aa1dff359411a9
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: -4478074873146563233
-    second: QueueOutline_0
+      213: 4066119586866298324
+    second: AddToQueueIcon_0
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -126,13 +126,13 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: QueueOutline_0
+      name: AddToQueueIcon_0
       rect:
         serializedVersion: 2
         x: 0
         y: 0
-        width: 890
-        height: 212
+        width: 136
+        height: 136
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -141,8 +141,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: f552f74f0aeaad1c0800000000000000
-      internalID: -4478074873146563233
+      spriteID: 4dd7c659832cd6830800000000000000
+      internalID: 4066119586866298324
       vertices: []
       indices: 
       edges: []
@@ -161,7 +161,7 @@ TextureImporter:
     spriteCustomMetadata:
       entries: []
     nameFileIdTable:
-      QueueOutline_0: -4478074873146563233
+      AddToQueueIcon_0: 4066119586866298324
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
