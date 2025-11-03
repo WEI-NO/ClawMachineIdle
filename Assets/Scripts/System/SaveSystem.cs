@@ -46,7 +46,7 @@ public class SaveSystem
         {
                 Debug.LogError($"Save Syste: {e}");
         }
-
+        Vector2 j = new();
         return false;
     }
 

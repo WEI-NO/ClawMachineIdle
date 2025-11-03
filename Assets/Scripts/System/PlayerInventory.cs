@@ -3,6 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
+using UnityEngine.XR;
 
 public class InventoryItem
 {
@@ -80,6 +81,8 @@ public class PlayerInventory : MonoBehaviour
 
     public bool UseItem(BaseItem item, int quantity)
     {
+        if (quantity == 0) return true;
+
         var bp = GetBackpack(item);
 
         if (HasItem(item, quantity))
@@ -95,6 +98,8 @@ public class PlayerInventory : MonoBehaviour
 
     public bool HasItem(BaseItem item, int quantity)
     {
+        if (quantity == 0) return true;
+
         var bp = GetBackpack(item);
 
         if (bp == null) return false;
@@ -106,6 +111,44 @@ public class PlayerInventory : MonoBehaviour
         {
             return false;
         }
+    }
+
+    public bool UseItem(string id, int amount)
+    {
+        if (amount == 0) return true;
+        if (HasItem(id, amount))
+        {
+            // Search across all categories
+            for (int i = 0; i < ItemCategory.Count.ToInt(); i++)
+            {
+                var bp = Backpack[i];
+                if (bp.ContainsKey(id))
+                {
+                    bp[id].quantity -= amount;
+                    return true;
+                }
+            }
+        }
+
+        return false;
+    }
+
+    public bool HasItem(string id, int amount)
+    {
+        if (amount == 0) return true;
+        int totalCount = 0;
+
+        // Search across all categories
+        for (int i = 0; i < ItemCategory.Count.ToInt(); i++)
+        {
+            var bp = Backpack[i];
+            if (bp.ContainsKey(id))
+            {
+                totalCount += bp[id].quantity;
+            }
+        }
+
+        return totalCount >= amount;
     }
 
     public int GetItemCount(string id, ItemCategory category = ItemCategory.None)

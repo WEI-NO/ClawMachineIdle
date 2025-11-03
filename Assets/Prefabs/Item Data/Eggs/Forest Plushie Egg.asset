@@ -20,3 +20,4 @@ MonoBehaviour:
   _itemRarity: 0
   ItemDescription: 
   lootTable: {fileID: 11400000, guid: 65c71d3caa3483945b9b41b3cbded771, type: 2}
+  hatchTime_s: 30

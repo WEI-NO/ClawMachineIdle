@@ -3,13 +3,13 @@ using UnityEngine.EventSystems;
 
 public abstract class InGameButton : MonoBehaviour, IPointerDownHandler, IPointerUpHandler, IDragHandler
 {
-    private Animator animator;
+    protected Animator animator;
 
     [Header("Animator Triggers")]
     public string downTrigger = "Pressed";
     public string startDownTrigger = "Down";
 
-    private void Awake()
+    protected void Awake()
     {
         animator = GetComponent<Animator>();
     }
