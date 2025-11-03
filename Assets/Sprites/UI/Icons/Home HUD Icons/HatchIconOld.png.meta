@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: b00cab202d163b044b2fa58b91920afa
+guid: 4e6cd1b6b3a145a4384056c4bdd2b0e1
 TextureImporter:
   internalIDToNameTable:
   - first:
@@ -129,7 +129,7 @@ TextureImporter:
       name: HatchIcon_0
       rect:
         serializedVersion: 2
-        x: 0
+        x: 1
         y: 0
         width: 129
         height: 122

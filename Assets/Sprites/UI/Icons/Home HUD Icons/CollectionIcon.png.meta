@@ -1,10 +1,10 @@
 fileFormatVersion: 2
-guid: b00cab202d163b044b2fa58b91920afa
+guid: 8d7ba5e045a63674d907d3aa1ab6559a
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: -2693970212569001583
-    second: HatchIcon_0
+      213: 6662181830258958317
+    second: CollectionIcon_0
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -126,13 +126,13 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: HatchIcon_0
+      name: CollectionIcon_0
       rect:
         serializedVersion: 2
         x: 0
         y: 0
-        width: 129
-        height: 122
+        width: 80
+        height: 103
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -141,8 +141,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 191575c6d581d9ad0800000000000000
-      internalID: -2693970212569001583
+      spriteID: def95ada313d47c50800000000000000
+      internalID: 6662181830258958317
       vertices: []
       indices: 
       edges: []
@@ -161,7 +161,7 @@ TextureImporter:
     spriteCustomMetadata:
       entries: []
     nameFileIdTable:
-      HatchIcon_0: -2693970212569001583
+      CollectionIcon_0: 6662181830258958317
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
