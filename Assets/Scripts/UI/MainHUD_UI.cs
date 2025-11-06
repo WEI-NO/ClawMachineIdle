@@ -2,8 +2,10 @@ using CustomLibrary.References;
 using NUnit.Framework;
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class MainHUD_UI : MonoBehaviour
 {
@@ -20,7 +22,13 @@ public class MainHUD_UI : MonoBehaviour
     [SerializeField] private float animationSpeed = 1.0f;
     private Coroutine movingCoroutine = null;
     private bool currentState = true;
-    
+    public Image homeButton;
+    public TextMeshProUGUI mainButtonText;
+    public string homeToClawText;
+    public string clawToHomeText;
+    public Sprite homeToClawSprite;
+    public Sprite clawToHomeSprite;
+
 
     private void Awake()
     {
@@ -40,9 +48,7 @@ public class MainHUD_UI : MonoBehaviour
                     sceneIndex = i;
                 }
             }
-
-            sceneHandler.OnSceneLoaded += (s) => ToggleState(true);
-        }
+            }
     }
 
     #region Home Button
@@ -55,6 +61,22 @@ public class MainHUD_UI : MonoBehaviour
         GoToScene(alternatingScenes[sceneIndex]);
         inTransition = true;
         SceneHandler.Instance.ListenForSceneChange((s) => { inTransition = false; });
+
+        sceneHandler.OnSceneLoaded += (SceneField s) =>
+        {
+            ToggleState(true);
+            if (s.SceneName == "Claw")
+            {
+                mainButtonText.text = clawToHomeText;
+                homeButton.sprite = clawToHomeSprite;
+            }
+            else if (s.SceneName == "Room")
+            {
+                mainButtonText.text = homeToClawText;
+                homeButton.sprite = homeToClawSprite;
+            }
+        };
+
     }
 
     private void GoToScene(SceneField scene)
