@@ -1110,8 +1110,8 @@ RectTransform:
   m_Children: []
   m_Father: {fileID: 1613593142}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 0, y: 0}
+  m_AnchorMin: {x: 0, y: 0.8}
+  m_AnchorMax: {x: 1, y: 1}
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 20, y: 20}
   m_Pivot: {x: 0.5, y: 0.5}
@@ -1601,8 +1601,12 @@ PrefabInstance:
       value: -170
       objectReference: {fileID: 0}
     - target: {fileID: 8429683143663713972, guid: c5259eb6f838aed4395bc43569397739, type: 3}
+      propertyPath: m_Name
+      value: QueueListPanel
+      objectReference: {fileID: 0}
+    - target: {fileID: 8429683143663713972, guid: c5259eb6f838aed4395bc43569397739, type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects:
