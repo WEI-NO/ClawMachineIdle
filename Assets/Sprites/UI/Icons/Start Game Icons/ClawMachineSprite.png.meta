@@ -1,10 +1,10 @@
 fileFormatVersion: 2
-guid: 6d9107f2d5d734f438bde197044d51e6
+guid: da4dffcbca1176b40893ea0ca25f8f2d
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: -8577527157582875683
-    second: Rectangle 547_0
+      213: -1902205562263697895
+    second: ClawMachineSprite_0
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -126,13 +126,13 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: Rectangle 547_0
+      name: ClawMachineSprite_0
       rect:
         serializedVersion: 2
         x: 1
-        y: 0
-        width: 1560
-        height: 3376
+        y: 2
+        width: 623
+        height: 1748
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -141,8 +141,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: dd3b101fe7086f880800000000000000
-      internalID: -8577527157582875683
+      spriteID: 91600839e120a95e0800000000000000
+      internalID: -1902205562263697895
       vertices: []
       indices: 
       edges: []
@@ -161,7 +161,7 @@ TextureImporter:
     spriteCustomMetadata:
       entries: []
     nameFileIdTable:
-      Rectangle 547_0: -8577527157582875683
+      ClawMachineSprite_0: -1902205562263697895
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
