@@ -1,4 +1,5 @@
 using CustomLibrary.References;
+using Mono.Cecil.Cil;
 using NUnit.Framework.Internal.Commands;
 using System;
 using System.Collections;
@@ -40,7 +41,12 @@ public class ClawObject : MonoBehaviour
     public bool downSequence = false;
 
 
-    
+    [Header("Stamina Properties")]
+    public GameObject repairEffectPrefab;
+    public float MaxStaminaPerRefresh = 100;
+    public float CurrentStamina = 0;
+    public float StaminaPerGrab = 5;
+    public Action<float> OnStaminaChange;
 
     private void Awake()
     {
@@ -83,6 +89,11 @@ public class ClawObject : MonoBehaviour
     {
         if (currentSequence == null)
         {
+            if (!UseStamina())
+            {
+                return;
+            }
+
             currentSequence = StartCoroutine(GrabSequence());
             OnGrabSequenceStart?.Invoke();
         }
@@ -145,26 +156,32 @@ public class ClawObject : MonoBehaviour
     private void HeightUpdate()
     {
         heightMoving = CraneStickController.Instance.isMoving;
-        //if (!selfHinge) return;
-
-        //var c_anchor = selfHinge.connectedAnchor;
-        //float currentY = c_anchor.y;
-
-        //if (Mathf.Abs(targetY - currentY) <= 0.01f)
-        //{
-        //    c_anchor.y = targetY;
-        //    heightVelocity = 0f;
-        //    heightMoving = false;
-        //}
-        //else
-        //{
-        //    c_anchor.y = Mathf.SmoothDamp(currentY, targetY, ref heightVelocity, 0.35f, verticalStrength);
-        //    heightMoving = true;
-        //}
-
-        //c_anchor.y = Mathf.Clamp(c_anchor.y, yLimits.x, yLimits.y);
-        //print(c_anchor.y);
-        //selfHinge.connectedAnchor = c_anchor;
     }
 
+
+    #region Stamina
+
+    public void RefreshStamina()
+    {
+        CurrentStamina = MaxStaminaPerRefresh;
+        OnStaminaChange?.Invoke(CurrentStamina);
+    }
+    public bool HasStamina()
+    {
+        return CurrentStamina >= StaminaPerGrab;
+    }
+
+    public bool UseStamina()
+    {
+        if (!HasStamina())
+        {
+            return false;
+        }
+
+        CurrentStamina -= StaminaPerGrab;
+        OnStaminaChange?.Invoke(CurrentStamina);
+        return true;
+    }
+
+    #endregion stamina
 }

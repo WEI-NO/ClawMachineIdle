@@ -36,6 +36,12 @@ public class EggPopup : Base_ItemPopup<BasePrize>
 
     public override void Function_Two()
     {
+        if (IncubationController.Instance.MaxQueueSpace())
+        {
+            ErrorDisplayController.AddMessage("Queue is full!");
+            return;
+        }
+
         // Animation
         if (anim)
         {

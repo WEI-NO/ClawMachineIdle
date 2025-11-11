@@ -7,9 +7,8 @@ public class RefreshButton : InGameButton
     public PrizeDumper prizeDumper;
     public TextMeshProUGUI costText;
 
-    protected void Awake()
+    protected override void OnAwake()
     {
-        base.Awake();
         costText.text = $"{ClawMachineGameplay.Instance.CurrentCost()}";
     }
 
@@ -26,6 +25,11 @@ public class RefreshButton : InGameButton
 
     protected override void ButtonFunction()
     {
+        if (animator.GetBool("Disabled"))
+        {
+            return;
+        }
+
         int refreshCost = ClawMachineGameplay.Instance.CurrentCost();
         string coinID = "currency001";
         if (PlayerInventory.Instance.UseItem(coinID, refreshCost))

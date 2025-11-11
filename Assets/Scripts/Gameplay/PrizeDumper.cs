@@ -11,6 +11,7 @@ using CMT = ClawMachineThemeController;
 public class PrizeDumper : MonoBehaviour
 {
     [SerializeField] private CraneStickController craneStick;
+    [SerializeField] private ClawObject clawBody;
 
     public bool InSequence = false;
 
@@ -43,6 +44,11 @@ public class PrizeDumper : MonoBehaviour
 
     [Header("Cost Properties")]
     public bool isFree = false;
+
+    [Header("Stamina Visuals")]
+    public float repairEffectDelay = 2.0f;
+    public GameObject repairEffectPrefab;
+    public Transform repairEffectParent;
 
     private void Start()
     {
@@ -100,6 +106,8 @@ public class PrizeDumper : MonoBehaviour
 
         craneStick.SetActive(true);
 
+        clawBody.RefreshStamina();
+
         foreach (var c in physicalColliders)
         {
             if (c == null) continue;
@@ -112,6 +120,11 @@ public class PrizeDumper : MonoBehaviour
         }
 
         InSequence = false;
+
+        yield return new WaitForSeconds(repairEffectDelay);
+
+        var e = Instantiate(repairEffectPrefab, repairEffectParent);
+        e.transform.localPosition = Vector3.zero;
     }
     // Deletes existing prizes
     private IEnumerator DeleteAllPrize()

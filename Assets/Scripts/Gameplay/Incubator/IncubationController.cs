@@ -97,9 +97,15 @@ public class IncubationController : MonoBehaviour
     {
         return IncubationQueue.Count;
     }
+    
+    public bool MaxQueueSpace()
+    {
+        return IncubationQueue.Count - 1 >= MaxQueued;
+    }
 
     public void AddToQueue(BaseItem egg)
     {
+        if (MaxQueueSpace()) return;
         if (egg is EggItem eggItem)
         {
             EggContainer container = new EggContainer(egg, eggItem.hatchTime_s);

@@ -238,6 +238,50 @@ TextureImporter:
       indices: 
       edges: []
       weights: []
+    - serializedVersion: 2
+      name: Joystick_5
+      rect:
+        serializedVersion: 2
+        x: 80
+        y: 75
+        width: 16
+        height: 5
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 36fc4caa0c0c3414488348b53096d4eb
+      internalID: -26748528
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Joystick_6
+      rect:
+        serializedVersion: 2
+        x: 81
+        y: 71
+        width: 14
+        height: 3
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 052e5a84ecef9a5458d2656a5f38f097
+      internalID: -1698286446
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
     outline: []
     customData: 
     physicsShape: []
@@ -257,6 +301,8 @@ TextureImporter:
       Joystick_2: 210015367
       Joystick_3: -1637977974
       Joystick_4: -1938581609
+      Joystick_5: -26748528
+      Joystick_6: -1698286446
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
