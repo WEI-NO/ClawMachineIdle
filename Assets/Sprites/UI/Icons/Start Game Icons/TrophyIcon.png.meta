@@ -1,10 +1,10 @@
 fileFormatVersion: 2
-guid: 6d9107f2d5d734f438bde197044d51e6
+guid: 8583c1982ae129e4b85d08f05a68a3ba
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: -8577527157582875683
-    second: Rectangle 547_0
+      213: -8116845798535481512
+    second: TrophyIcon_0
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -126,13 +126,13 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: Rectangle 547_0
+      name: TrophyIcon_0
       rect:
         serializedVersion: 2
-        x: 1
-        y: 0
-        width: 1560
-        height: 3376
+        x: 2
+        y: 2
+        width: 110
+        height: 116
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -141,8 +141,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: dd3b101fe7086f880800000000000000
-      internalID: -8577527157582875683
+      spriteID: 857bba940cb2b5f80800000000000000
+      internalID: -8116845798535481512
       vertices: []
       indices: 
       edges: []
@@ -161,7 +161,7 @@ TextureImporter:
     spriteCustomMetadata:
       entries: []
     nameFileIdTable:
-      Rectangle 547_0: -8577527157582875683
+      TrophyIcon_0: -8116845798535481512
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
