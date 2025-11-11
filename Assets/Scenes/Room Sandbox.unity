@@ -1761,8 +1761,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: -100}
-  m_SizeDelta: {x: 200, y: 200}
+  m_AnchoredPosition: {x: 0, y: -57.3}
+  m_SizeDelta: {x: 240, y: 248}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1063998745
 MonoBehaviour:
@@ -1840,7 +1840,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: f15ca97a25295c749b130bf3022b2bb1, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 64c54a609d2ed3741900e05f78b29d88, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -3801,7 +3801,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 2375988694174024064, guid: 13a9c4ab109509c4383fbdfd42cf25c7, type: 3}
       propertyPath: m_Name
-      value: Furtniture
+      value: Furniture
       objectReference: {fileID: 0}
     - target: {fileID: 2944818593824942436, guid: 13a9c4ab109509c4383fbdfd42cf25c7, type: 3}
       propertyPath: m_Pivot.x
