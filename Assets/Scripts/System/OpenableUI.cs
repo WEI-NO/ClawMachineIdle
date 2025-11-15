@@ -80,18 +80,35 @@ public class OpenableUI : MonoBehaviour
 
     public void Toggle_On()
     {
-        if (!active)
+        active = true;
+        if (useAnimation)
         {
-            ManualToggle();
+            anim.SetTrigger(enableTriggerName);
+        } else
+        {
+            foreach (GameObject g in manualToggleObjects)
+            {
+                g.SetActive(true);
+            }
         }
+        ToggledOn();
     }
 
     public void Toggle_Off()
     {
-        if (!active)
+        active = false;
+        if (useAnimation)
         {
-            ManualToggle();
+            anim.SetTrigger(disableTriggerName);
         }
+        else
+        {
+            foreach (GameObject g in manualToggleObjects)
+            {
+                g.SetActive(false);
+            }
+        }
+        ToggledOff();
     }
 
     private void ManualToggle()

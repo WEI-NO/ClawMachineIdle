@@ -11,11 +11,15 @@ public class InventoryItem
     public string ItemID;
     public int quantity;
 
+    public string InstanceID { get; private set; }
+
     public InventoryItem(BaseItem item, string id, int quantity)
     {
         this.item = item;
         this.ItemID = id;
         this.quantity = quantity;
+
+        this.InstanceID = System.Guid.NewGuid().ToString();
     }
 }
 

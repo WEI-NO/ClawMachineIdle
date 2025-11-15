@@ -103,6 +103,11 @@ public class IncubationController : MonoBehaviour
         return IncubationQueue.Count - 1 >= MaxQueued;
     }
 
+    public int GetAvailableSlots()
+    {
+        return (MaxQueued + 1) - IncubationQueue.Count;
+    }
+
     public void AddToQueue(BaseItem egg)
     {
         if (MaxQueueSpace()) return;
