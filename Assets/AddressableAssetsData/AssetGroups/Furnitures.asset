@@ -27,6 +27,12 @@ MonoBehaviour:
     m_SerializedLabels:
     - Furniture
     FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: acdb06a4c43a2f54195cf7b1127f6c80
+    m_Address: wooden_seat
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - Furniture
+    FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: dd9707b0b407a484f9a1305af49145fc
     m_Address: table_wood
     m_ReadOnly: 0

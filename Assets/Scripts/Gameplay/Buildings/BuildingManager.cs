@@ -127,6 +127,10 @@ public class PlaceableInfo
         assetLoaded = false;
         if (MainDatabase.Instance.DB_Placeable.GetDataByID(buildingID) is var data)
         {
+            if (data == null)
+            {
+                Debug.LogWarning($"Can not find placeable: {buildingID}");
+            }
             objectData = data;
         }
     }

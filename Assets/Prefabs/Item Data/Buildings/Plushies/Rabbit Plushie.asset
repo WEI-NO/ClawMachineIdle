@@ -1,0 +1,22 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3d429aea0ecbe93479bd9110b7f83641, type: 3}
+  m_Name: Rabbit Plushie
+  m_EditorClassIdentifier: 
+  _itemName: Forest Rabbit Plushie
+  _itemAddress: plushie_forest_rabbit
+  _itemID: plushie004
+  _itemIcon: {fileID: 1454517705, guid: cb27d388fe4fb4a4788379bbd898d817, type: 3}
+  _itemType: 1
+  _itemRarity: 1
+  ItemDescription: 
+  isPlushie: 1

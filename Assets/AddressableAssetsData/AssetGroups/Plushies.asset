@@ -15,8 +15,20 @@ MonoBehaviour:
   m_GroupName: Plushies
   m_GUID: eeefa979b2bd7364d9cfb379d620f8c0
   m_SerializeEntries:
+  - m_GUID: 27d5ec0d1291e4940ad95aae17768469
+    m_Address: plushie_forest_squirrel
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - Plushie
+    FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: 5bb815ed12fb60b47982e18039c658ec
     m_Address: plushie_tuxedo_cat
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - Plushie
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: e9ee3777c7299b5418e5c23616b8f216
+    m_Address: plushie_forest_rabbit
     m_ReadOnly: 0
     m_SerializedLabels:
     - Plushie
