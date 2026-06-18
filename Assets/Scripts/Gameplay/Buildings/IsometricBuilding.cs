@@ -340,8 +340,7 @@ public class IsometricBuilding : MonoBehaviour
 
     public bool ValidPlacement(Vector2Int coord, Vector2Int current, out List<IsometricCorner> directions)
     {
-        Vector2Int direction = coord - current;
-        //direction = new Vector2Int(direction.x != 0 ? direction.x / Mathf.Abs(direction.x) : 0, direction.y != 0 ? direction.y / Mathf.Abs(direction.y) : 0);
+        Vector2Int direction = coord - current; // Direction to the coordinate
         directions = new List<IsometricCorner>();
         List<Vector2Int> testPoints = new List<Vector2Int>();
 
@@ -383,7 +382,6 @@ public class IsometricBuilding : MonoBehaviour
             testPoints.Add(blueprint.GetCornerPosition(IsometricCorner.Right_B));
             directions.Add(IsometricCorner.Bottom_L);
         }
-
         bool outOfBound = false;
         foreach (var point in testPoints)
         {
@@ -394,7 +392,6 @@ public class IsometricBuilding : MonoBehaviour
                 break;
             }
         }
-
         return !outOfBound;
     }
 
