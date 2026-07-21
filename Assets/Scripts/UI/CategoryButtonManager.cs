@@ -80,7 +80,7 @@ public class CategoryButtonManager : MonoBehaviour
 
     private void SetCategoryName(int categoryIndex)
     {
-        string categoryName = "Filter: ";
+        string categoryName = "";
         switch (categoryIndex)
         {
             case 0:
