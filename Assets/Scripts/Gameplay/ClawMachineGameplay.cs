@@ -1,4 +1,5 @@
 using CustomLibrary.References;
+using NUnit.Framework.Interfaces;
 using TMPro;
 using UnityEngine;
 
@@ -6,14 +7,16 @@ public class ClawMachineGameplay : MonoBehaviour
 {
     public static ClawMachineGameplay Instance;
 
-    [Header("Refresh")]
-    public int baseRefreshCost;
-    public int refreshCostInterval = 50;
-    public int currentStep = 0;
-    public int maxRefreshCost;
+    public int baseCost = 100;
+
+    [Header("Grab Settings")]
+    public bool freeGrab = true;
+    
+
 
     [Header("UI")]
-    public TextMeshProUGUI costText;
+    public TextMeshProUGUI refreshCostText;
+    public TextMeshProUGUI grabCostText;
 
     [SerializeField] ClawObject clawBody;
     [SerializeField] PrizeDumper prizeDumper;
@@ -26,34 +29,56 @@ public class ClawMachineGameplay : MonoBehaviour
     private void Start()
     {
         clawBody = ClawObject.Instance;
-    }
+            UpdateText();
 
-    public void IncrementCost()
-    {
-        currentStep++;
-    }
-
-    public int CurrentCost()
-    {
-        return Mathf.Clamp(baseRefreshCost + currentStep * refreshCostInterval, baseRefreshCost, maxRefreshCost);
     }
 
     public void StartGrabSequence()
     {
         if (clawBody == null) return;
 
-        clawBody.StartGrabSequence();
+        if (clawBody.InGrabSequence() || prizeDumper.InSequence)
+            return;
+
+        string coinID = "currency001";
+        if (freeGrab)
+        {
+            grabCostText.text = $"Free";
+            clawBody.StartGrabSequence();
+            freeGrab = false;
+        }
+        else if (PlayerInventory.Instance.UseItem(coinID, baseCost))
+        {
+            clawBody.StartGrabSequence();
+        }
+        UpdateText();
     }
 
     public void StartRefreshSequence()
     {
-        int refreshCost = CurrentCost();
+        if (prizeDumper.InSequence || clawBody.InGrabSequence())
+            return;
+
         string coinID = "currency001";
-        if (PlayerInventory.Instance.UseItem(coinID, refreshCost))
+        if (PlayerInventory.Instance.UseItem(coinID, baseCost))
         {
-            IncrementCost();
-            costText.text = $"{CurrentCost()}";
             prizeDumper.StartRefreshPrize();
+            freeGrab = true;
         }
+        UpdateText();
+    }
+
+    public void UpdateText()
+    {
+        if (freeGrab)
+        {
+            grabCostText.text = "Free";
+        } else
+        {
+            grabCostText.text = $"{baseCost}";
+        }
+
+        refreshCostText.text = $"{baseCost}";
+
     }
 }

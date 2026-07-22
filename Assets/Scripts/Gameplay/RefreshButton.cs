@@ -9,7 +9,7 @@ public class RefreshButton : InGameButton
 
     protected override void OnAwake()
     {
-        costText.text = $"{ClawMachineGameplay.Instance.CurrentCost()}";
+        costText.text = $"{ClawMachineGameplay.Instance.baseCost}";
     }
 
     private void Update()
@@ -30,12 +30,11 @@ public class RefreshButton : InGameButton
             return;
         }
 
-        int refreshCost = ClawMachineGameplay.Instance.CurrentCost();
+        int refreshCost = ClawMachineGameplay.Instance.baseCost;
         string coinID = "currency001";
         if (PlayerInventory.Instance.UseItem(coinID, refreshCost))
         {
-            ClawMachineGameplay.Instance.IncrementCost();
-            costText.text = $"{ClawMachineGameplay.Instance.CurrentCost()}";
+            costText.text = $"{ClawMachineGameplay.Instance.baseCost}";
             prizeDumper.StartRefreshPrize();
         } else
         {

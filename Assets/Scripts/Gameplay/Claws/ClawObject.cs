@@ -85,15 +85,15 @@ public class ClawObject : MonoBehaviour
         HeightUpdate();
     }
 
+    public bool InGrabSequence()
+    {
+        return currentSequence != null;
+    }
+
     public void StartGrabSequence()
     {
         if (currentSequence == null)
         {
-            if (!UseStamina())
-            {
-                return;
-            }
-
             currentSequence = StartCoroutine(GrabSequence());
             OnGrabSequenceStart?.Invoke();
         }
