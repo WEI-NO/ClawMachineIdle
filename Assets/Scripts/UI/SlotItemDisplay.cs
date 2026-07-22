@@ -18,6 +18,8 @@ public class SlotItemDisplay : MonoBehaviour
     [SerializeField] private string defaultDescription;
     [SerializeField] private int defaultCountText;
 
+    private const float normalizedIconSize = 16.0f;
+
     private void Awake()
     {
         Initializer.SetInstance(this);
@@ -30,15 +32,38 @@ public class SlotItemDisplay : MonoBehaviour
         descriptionText.text = i ? i.ItemDescription : defaultDescription;
         itemTitle.text = i ? i.ItemName : defaultTitle;
         countText.text = i ? item.quantity.ToString() : defaultCountText.ToString();
-        itemIcon.sprite = i ? i.ItemIcon : null;
+
         if (i)
+            SetSprite(itemIcon, i.ItemIcon, normalizedIconSize);
+        else
+            SetSprite(null, null);
+        //itemIcon.sprite = i ? i.ItemIcon : null;
+        //if (i)
+        //{
+        //    itemIcon.color = new Color(1f, 1f, 1f, 1f);
+        //   itemIcon.rectTransform.sizeDelta = new Vector2(i.ItemIcon.rect.width, i.ItemIcon.rect.height);
+        //} else
+        //{
+        //    itemIcon.color = new Color(1f, 1f, 1f, 0f);
+        //}
+    }
+
+    public void SetSprite(Image img, Sprite sprite, float normalizedScale = normalizedIconSize)
+    {
+        if (img == null || sprite == null)
         {
-            itemIcon.color = new Color(1f, 1f, 1f, 1f);
-           itemIcon.rectTransform.sizeDelta = new Vector2(i.ItemIcon.rect.width, i.ItemIcon.rect.height);
-        } else
-        {
-            itemIcon.color = new Color(1f, 1f, 1f, 0f);
+            if (img) img.color = new Color(img.color.r, img.color.g, img.color.b, 0.0f);
+            return;
         }
+
+        var spriteDimension = new Vector2(sprite.rect.width, sprite.rect.height);
+        var ratio = spriteDimension.y / spriteDimension.x;
+        var w = normalizedScale;
+        var h = w * ratio;
+
+        img.sprite = sprite;
+        img.rectTransform.sizeDelta = new Vector2(w, h);
+        img.color = new Color(img.color.r, img.color.g, img.color.b, 1.0f);
     }
 
 }

@@ -114,9 +114,9 @@ public class ClawObject : MonoBehaviour
         //targetY = yLimits.x;
         CraneStickController.Instance.SetTargetY(CraneStickController.Instance.grabY);
         CraneStickController.Instance.SetVerticalSpeed(downwardSpeed);
-        heightMoving = true;
-        rb.angularDamping = sequenceAngularDamp;
         rb.gravityScale = sequenceGravity;
+        rb.angularDamping = sequenceAngularDamp;
+        heightMoving = true;
 
         yield return null;
         while (heightMoving)

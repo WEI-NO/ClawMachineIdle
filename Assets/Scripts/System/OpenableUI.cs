@@ -4,6 +4,18 @@ using UnityEngine;
 
 public class OpenableUI : MonoBehaviour
 {
+    private int openableUI_id;
+
+    public void SetOpenableUI_id(int id)
+    {
+        openableUI_id = id;
+    }
+
+    public int GetOpenableUI_id()
+    {
+        return openableUI_id;
+    }
+
     #region Base Class
     protected virtual void OnAwake() { }
     protected virtual void OnEnabled() { }
@@ -69,6 +81,7 @@ public class OpenableUI : MonoBehaviour
         if (active)
         {
             anim.SetTrigger(enableTriggerName);
+            PersistentCanvas.Instance.TriggerOpen(this);
             ToggledOn();
         }
         else
@@ -96,6 +109,7 @@ public class OpenableUI : MonoBehaviour
 
     public void Toggle_Off()
     {
+        if (!active) return;
         active = false;
         if (useAnimation)
         {
@@ -120,6 +134,7 @@ public class OpenableUI : MonoBehaviour
             {
                 g.SetActive(true);
             }
+            PersistentCanvas.Instance.TriggerOpen(this);
             ToggledOn();
         }
         else

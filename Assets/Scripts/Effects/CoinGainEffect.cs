@@ -23,6 +23,7 @@ public class CoinGainEffect : MonoBehaviour
 
     [SerializeField] private GameObject original;
 
+    private Coroutine coinScaleSequence = null;
 
     private void Start()
     {
@@ -44,7 +45,7 @@ public class CoinGainEffect : MonoBehaviour
             float xOffset = Random.Range(radialOffsetRange.x, radialOffsetRange.y);
             float yOffset = Random.Range(radialOffsetRange.x, radialOffsetRange.y);
             coin.anchoredPosition += new Vector2(xOffset, yOffset);
-            StartCoroutine(CoinScaleSequence(coin, 0, scaleTarget));
+            coinScaleSequence = StartCoroutine(CoinScaleSequence(coin, 0, scaleTarget));
             StartCoroutine(CoinMoveSequence(coin, moveSpeed));
         }
         yield return null;
@@ -116,6 +117,10 @@ public class CoinGainEffect : MonoBehaviour
         PersistentCanvas.Instance.coinDisplay.TriggerJump();
         yield return null;
         Destroy(target.gameObject);
+        if (coinScaleSequence != null)
+        {
+            StopCoroutine(coinScaleSequence);
+        }
     }
 
 
