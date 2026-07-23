@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using System.Runtime.CompilerServices;
 using UnityEngine;
@@ -15,6 +16,9 @@ public class OpenableUI : MonoBehaviour
     {
         return openableUI_id;
     }
+
+    public Action OnUIOpen;
+    public Action OnUIClose;
 
     #region Base Class
     protected virtual void OnAwake() { }
@@ -82,11 +86,13 @@ public class OpenableUI : MonoBehaviour
         {
             anim.SetTrigger(enableTriggerName);
             PersistentCanvas.Instance.TriggerOpen(this);
+            OnUIOpen?.Invoke();
             ToggledOn();
         }
         else
         {
             anim.SetTrigger(disableTriggerName);
+            OnUIClose?.Invoke();
             ToggledOff();
         }
     }
@@ -104,6 +110,7 @@ public class OpenableUI : MonoBehaviour
                 g.SetActive(true);
             }
         }
+        OnUIOpen?.Invoke();
         ToggledOn();
     }
 
@@ -122,6 +129,7 @@ public class OpenableUI : MonoBehaviour
                 g.SetActive(false);
             }
         }
+        OnUIClose?.Invoke();
         ToggledOff();
     }
 
@@ -135,6 +143,7 @@ public class OpenableUI : MonoBehaviour
                 g.SetActive(true);
             }
             PersistentCanvas.Instance.TriggerOpen(this);
+            OnUIOpen?.Invoke();
             ToggledOn();
         }
         else
@@ -143,6 +152,7 @@ public class OpenableUI : MonoBehaviour
             {
                 g.SetActive(false);
             }
+            OnUIClose?.Invoke();
             ToggledOff();
         }
     }

@@ -2,120 +2,129 @@ using System;
 using UnityEngine;
 using UnityEngine.EventSystems;
 
-public class JoystickTouchController : MonoBehaviour, IPointerDownHandler, IPointerUpHandler, IDragHandler
+public class JoystickTouchController : MonoBehaviour,
+    IPointerDownHandler,
+    IPointerUpHandler,
+    IDragHandler
 {
     public Action<float> OnJoystickProgressUpdate;
 
     [Header("Touch Properties")]
     public bool isTouched;
+
     [Header("Control Properties")]
-    public float maxRotateAngle = 45f;
-    public float rotateStrength = 10.0f;
-    public Vector2 lastMousePosition;
-    public float resetStrength = 1.0f;
-    public Transform target;
+    [SerializeField] private float maxRotateAngle = 45f;
+
+    [Tooltip("How much of the screen width must be dragged to move through the full joystick range.")]
+    [SerializeField] private float dragScreenPercentage = 0.25f;
+
+    [Tooltip("Degrees per second while returning to the center.")]
+    [SerializeField] private float resetSpeed = 180f;
+
+    [SerializeField] private Transform target;
 
     private Animator animator;
 
-    [Header("Animator Triggers")]
-    public string downTrigger = "Pressed";
-    public string startDownTrigger = "Down";
+    [Header("Animator Parameters")]
+    [SerializeField] private string downTrigger = "Pressed";
+    [SerializeField] private string startDownTrigger = "Down";
 
-    public void Awake()
+    private void Awake()
     {
-        if (!target) target = transform;
+        if (target == null)
+            target = transform;
 
         animator = GetComponent<Animator>();
-
     }
 
     private void Update()
     {
-        if (CraneStickController.Instance)
-        {
-            float zAngle = target.eulerAngles.z;
+        if (!isTouched)
+            ResetPosition();
 
-            // Normalize to [-180, 180]
-            if (zAngle > 180f)
-                zAngle -= 360f;
-
-            // Normalize to range [-1, 1]
-            float progress = Mathf.Clamp(zAngle / maxRotateAngle, -1f, 1f);
-
-            // Pass in progress to the crane controller
-            CraneStickController.Instance.SimulateXInput(-progress);
-        }
+        SendJoystickInput();
     }
 
     public void OnDrag(PointerEventData eventData)
     {
-        Vector2 latestTouchPos = eventData.position;
-        float xDiff = latestTouchPos.x - lastMousePosition.x;
+        if (Screen.width <= 0)
+            return;
 
-        Vector3 currAngle = target.eulerAngles;
+        float currentAngle = GetSignedZAngle();
 
-        // Convert from 0–360 to -180–180
-        float zAngle = currAngle.z;
-        if (zAngle > 180f) zAngle -= 360f;
+        // Convert the pointer movement into a percentage of the screen width.
+        float requiredDragDistance =
+            Mathf.Max(1f, Screen.width * dragScreenPercentage);
 
-        // Rotate based on drag amount
-        zAngle -= rotateStrength * xDiff * Time.deltaTime;
+        float angleDelta =
+            eventData.delta.x / requiredDragDistance *
+            maxRotateAngle * 2f;
 
-        // Clamp within desired range
-        zAngle = Mathf.Clamp(zAngle, -maxRotateAngle, maxRotateAngle);
+        currentAngle -= angleDelta;
+        currentAngle = Mathf.Clamp(
+            currentAngle,
+            -maxRotateAngle,
+            maxRotateAngle
+        );
 
-        // Convert back to 0–360 before applying
-        if (zAngle < 0f) zAngle += 360f;
-
-        currAngle.z = zAngle;
-        target.eulerAngles = currAngle;
-
-        lastMousePosition = latestTouchPos;
+        SetZAngle(currentAngle);
     }
 
     public void OnPointerDown(PointerEventData eventData)
     {
-        lastMousePosition = eventData.position;
         isTouched = true;
-        animator.SetBool(downTrigger, true);
-        animator.SetTrigger(startDownTrigger);
+
+        if (animator != null)
+        {
+            animator.SetBool(downTrigger, true);
+            animator.SetTrigger(startDownTrigger);
+        }
     }
 
     public void OnPointerUp(PointerEventData eventData)
     {
         isTouched = false;
-        animator.SetBool(downTrigger, false);
+
+        if (animator != null)
+            animator.SetBool(downTrigger, false);
     }
 
-    void FixedUpdate()
+    private void ResetPosition()
     {
-        float zAngle = target.eulerAngles.z;
+        float currentAngle = GetSignedZAngle();
 
-        // Normalize to [-180, 180]
-        if (zAngle > 180f)
-            zAngle -= 360f;
+        currentAngle = Mathf.MoveTowards(
+            currentAngle,
+            0f,
+            resetSpeed * Time.deltaTime
+        );
 
-        // Calculate progress in range [-1, 1]
-        float progress = Mathf.Clamp(zAngle / maxRotateAngle, -1f, 1f);
+        SetZAngle(currentAngle);
+    }
+
+    private void SendJoystickInput()
+    {
+        float progress = Mathf.Clamp(
+            GetSignedZAngle() / maxRotateAngle,
+            -1f,
+            1f
+        );
+
         OnJoystickProgressUpdate?.Invoke(progress);
 
-        ResetPositionUpdate();
+        if (CraneStickController.Instance != null)
+            CraneStickController.Instance.SimulateXInput(-progress);
     }
 
-    private void ResetPositionUpdate()
+    private float GetSignedZAngle()
     {
-        if (isTouched) return;
+        return Mathf.DeltaAngle(0f, target.eulerAngles.z);
+    }
 
-        Vector3 currAngle = target.eulerAngles;
-
-        // Smoothly move Z angle toward 0 using ResetStrength (degrees per second)
-        currAngle.z = Mathf.LerpAngle(currAngle.z, 0f, resetStrength * Time.deltaTime);
-
-        if (currAngle.z < 0.01f)
-        {
-            currAngle.z = 0f;
-        }
-
-        target.eulerAngles = currAngle;
+    private void SetZAngle(float angle)
+    {
+        Vector3 eulerAngles = target.eulerAngles;
+        eulerAngles.z = angle;
+        target.eulerAngles = eulerAngles;
     }
 }

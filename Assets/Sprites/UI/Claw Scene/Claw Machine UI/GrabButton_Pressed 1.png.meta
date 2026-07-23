@@ -1,16 +1,16 @@
 fileFormatVersion: 2
-guid: a2dcb806ea8c6a8498a1cfd416c17e8a
+guid: fcb853ffd1306e24ea31ff88a38af79a
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: -1300116232340087034
-    second: CurrencyBG 1_0
+      213: -2116768739688341830
+    second: GrabButton_Pressed 1_0
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
     mipMapMode: 0
     enableMipMap: 0
-    sRGBTexture: 1
+    sRGBTexture: 0
     linearTexture: 0
     fadeOut: 0
     borderMipMap: 0
@@ -100,13 +100,13 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: CurrencyBG 1_0
+      name: GrabButton_Pressed 1_0
       rect:
         serializedVersion: 2
         x: 0
         y: 0
-        width: 184
-        height: 64
+        width: 160
+        height: 161
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -115,8 +115,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 60f56accc2f05fde0800000000000000
-      internalID: -1300116232340087034
+      spriteID: abe993fdb0abf92e0800000000000000
+      internalID: -2116768739688341830
       vertices: []
       indices: 
       edges: []
@@ -135,7 +135,7 @@ TextureImporter:
     spriteCustomMetadata:
       entries: []
     nameFileIdTable:
-      CurrencyBG 1_0: -1300116232340087034
+      GrabButton_Pressed 1_0: -2116768739688341830
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

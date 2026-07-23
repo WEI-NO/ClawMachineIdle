@@ -1,10 +1,10 @@
 fileFormatVersion: 2
-guid: fcb66b40eab240047b18e7b4a64b1033
+guid: 60742994c1770114e8b7ae151e6f4c14
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: 7898049890347936799
-    second: RefreshButton_0
+      213: -8802291870551904980
+    second: RefreshButton 1_0
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -96,43 +96,17 @@ TextureImporter:
     ignorePlatformSupport: 0
     androidETC2FallbackOverride: 0
     forceMaximumCompressionQuality_BC6H_BC7: 0
-  - serializedVersion: 4
-    buildTarget: Android
-    maxTextureSize: 2048
-    resizeAlgorithm: 0
-    textureFormat: -1
-    textureCompression: 1
-    compressionQuality: 50
-    crunchedCompression: 0
-    allowsAlphaSplitting: 0
-    overridden: 0
-    ignorePlatformSupport: 0
-    androidETC2FallbackOverride: 0
-    forceMaximumCompressionQuality_BC6H_BC7: 0
-  - serializedVersion: 4
-    buildTarget: iOS
-    maxTextureSize: 2048
-    resizeAlgorithm: 0
-    textureFormat: -1
-    textureCompression: 1
-    compressionQuality: 50
-    crunchedCompression: 0
-    allowsAlphaSplitting: 0
-    overridden: 0
-    ignorePlatformSupport: 0
-    androidETC2FallbackOverride: 0
-    forceMaximumCompressionQuality_BC6H_BC7: 0
   spriteSheet:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: RefreshButton_0
+      name: RefreshButton 1_0
       rect:
         serializedVersion: 2
         x: 0
         y: 0
-        width: 40
-        height: 44
+        width: 160
+        height: 176
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -141,8 +115,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: f1c608497828b9d60800000000000000
-      internalID: 7898049890347936799
+      spriteID: c2de1762e2af7d580800000000000000
+      internalID: -8802291870551904980
       vertices: []
       indices: 
       edges: []
@@ -161,7 +135,7 @@ TextureImporter:
     spriteCustomMetadata:
       entries: []
     nameFileIdTable:
-      RefreshButton_0: 7898049890347936799
+      RefreshButton 1_0: -8802291870551904980
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

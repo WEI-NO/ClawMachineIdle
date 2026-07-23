@@ -1,10 +1,10 @@
 fileFormatVersion: 2
-guid: 47e69410de3b1374b8eab2109fbf63cc
+guid: a89581c458e66434bb53719a313b7b4a
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: 2125108845252678556
-    second: Button Background_0
+      213: -1488217992947562661
+    second: Button Background (2)_0
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -96,43 +96,17 @@ TextureImporter:
     ignorePlatformSupport: 0
     androidETC2FallbackOverride: 0
     forceMaximumCompressionQuality_BC6H_BC7: 0
-  - serializedVersion: 4
-    buildTarget: Android
-    maxTextureSize: 2048
-    resizeAlgorithm: 0
-    textureFormat: -1
-    textureCompression: 1
-    compressionQuality: 50
-    crunchedCompression: 0
-    allowsAlphaSplitting: 0
-    overridden: 0
-    ignorePlatformSupport: 0
-    androidETC2FallbackOverride: 0
-    forceMaximumCompressionQuality_BC6H_BC7: 0
-  - serializedVersion: 4
-    buildTarget: iOS
-    maxTextureSize: 2048
-    resizeAlgorithm: 0
-    textureFormat: -1
-    textureCompression: 1
-    compressionQuality: 50
-    crunchedCompression: 0
-    allowsAlphaSplitting: 0
-    overridden: 0
-    ignorePlatformSupport: 0
-    androidETC2FallbackOverride: 0
-    forceMaximumCompressionQuality_BC6H_BC7: 0
   spriteSheet:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: Button Background_0
+      name: Button Background (2)_0
       rect:
         serializedVersion: 2
         x: 0
         y: 0
-        width: 55
-        height: 56
+        width: 220
+        height: 224
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -141,8 +115,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: c9393564c37ed7d10800000000000000
-      internalID: 2125108845252678556
+      spriteID: b57040ece99c85be0800000000000000
+      internalID: -1488217992947562661
       vertices: []
       indices: 
       edges: []
@@ -161,7 +135,7 @@ TextureImporter:
     spriteCustomMetadata:
       entries: []
     nameFileIdTable:
-      Button Background_0: 2125108845252678556
+      Button Background (2)_0: -1488217992947562661
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

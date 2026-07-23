@@ -69,7 +69,12 @@ public class BagItemSlot : MonoBehaviour
 
     public void OnClick()
     {
-        SlotItemDisplay.Instance.DisplayItem(heldItem);
+        BagUIContent.Instance.SelectSlot(this);
+    }
+
+    public InventoryItem GetHeldItem()
+    {
+        return heldItem;
     }
 
     public BaseItem GetItem()

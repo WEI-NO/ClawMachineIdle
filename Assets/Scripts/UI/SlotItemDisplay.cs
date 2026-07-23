@@ -1,4 +1,5 @@
 using CustomLibrary.References;
+using System;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
@@ -23,10 +24,13 @@ public class SlotItemDisplay : MonoBehaviour
     private void Awake()
     {
         Initializer.SetInstance(this);
-        DisplayItem(null);
     }
 
-    public void DisplayItem(InventoryItem item)
+    private void Start()
+    {
+    }
+
+    public void DisplayItem(InventoryItem item, BagItemSlot slot)
     {
         var i = item != null ? item.item : null;
         descriptionText.text = i ? i.ItemDescription : defaultDescription;
@@ -37,15 +41,6 @@ public class SlotItemDisplay : MonoBehaviour
             SetSprite(itemIcon, i.ItemIcon, normalizedIconSize);
         else
             SetSprite(null, null);
-        //itemIcon.sprite = i ? i.ItemIcon : null;
-        //if (i)
-        //{
-        //    itemIcon.color = new Color(1f, 1f, 1f, 1f);
-        //   itemIcon.rectTransform.sizeDelta = new Vector2(i.ItemIcon.rect.width, i.ItemIcon.rect.height);
-        //} else
-        //{
-        //    itemIcon.color = new Color(1f, 1f, 1f, 0f);
-        //}
     }
 
     public void SetSprite(Image img, Sprite sprite, float normalizedScale = normalizedIconSize)

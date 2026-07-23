@@ -1,10 +1,10 @@
 fileFormatVersion: 2
-guid: a2dcb806ea8c6a8498a1cfd416c17e8a
+guid: 02bf6c299a54e8541b9aef695ea78048
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: -1300116232340087034
-    second: CurrencyBG 1_0
+      213: -3962317904070199298
+    second: RefreshButton_Pressed_0
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -100,13 +100,13 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: CurrencyBG 1_0
+      name: RefreshButton_Pressed_0
       rect:
         serializedVersion: 2
         x: 0
         y: 0
-        width: 184
-        height: 64
+        width: 160
+        height: 161
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -115,8 +115,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 60f56accc2f05fde0800000000000000
-      internalID: -1300116232340087034
+      spriteID: ef7b9b80cd40309c0800000000000000
+      internalID: -3962317904070199298
       vertices: []
       indices: 
       edges: []
@@ -135,7 +135,7 @@ TextureImporter:
     spriteCustomMetadata:
       entries: []
     nameFileIdTable:
-      CurrencyBG 1_0: -1300116232340087034
+      RefreshButton_Pressed_0: -3962317904070199298
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

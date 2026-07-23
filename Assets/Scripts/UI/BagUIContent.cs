@@ -1,3 +1,4 @@
+using CustomLibrary.References;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
@@ -13,16 +14,38 @@ public enum BagCategory
 
 public class BagUIContent : MonoBehaviour
 {
-    [SerializeField] private PlayerInventory inventory;
+    public static BagUIContent Instance;
 
-    [SerializeField] private BagItemSlot slot;
-    [SerializeField] private Transform contentTransform;
+    [SerializeField] BagUI bagUI;
+    [SerializeField] PlayerInventory inventory;
+    SlotItemDisplay slotItemDisplay;
+
+    [SerializeField] BagItemSlot slot;
+    [SerializeField] BagItemSlot currentSlot;
+    [SerializeField] Transform contentTransform;
 
     private Dictionary<string, BagItemSlot> addedItems = new Dictionary<string, BagItemSlot>();
+    [SerializeField] GameObject bottomPanel;
+
+    private BagItemSlot currentDisplayedItem = null;
+
+    private void Awake()
+    {
+        Initializer.SetInstance(this);
+    }
 
     private void Start()
     {
+        slotItemDisplay = SlotItemDisplay.Instance;
         inventory = PlayerInventory.Instance;
+
+        bagUI.OnUIClose += () => { print("Hello"); bottomPanel.SetActive(false); };
+        bagUI.OnUIOpen += () => {
+            SelectSlot(currentDisplayedItem);
+            if (currentDisplayedItem)
+                bottomPanel.SetActive(true); 
+        };
+
         if (inventory)
         {
             inventory.OnBackpackModified += OnNewItemAdded;
@@ -33,8 +56,11 @@ public class BagUIContent : MonoBehaviour
             {
                 OnNewItemAdded(item);
             }
-
         }
+    }
+
+    private void Update()
+    {
     }
 
     private void OnNewItemAdded(InventoryItem newItem)
@@ -53,6 +79,12 @@ public class BagUIContent : MonoBehaviour
             {
                 addedItems[key].UpdateSlotDisplay();
             }
+
+            if (currentDisplayedItem != null && newItem.ItemID == currentDisplayedItem.GetHeldItem().ItemID)
+            {
+                SelectSlot(currentDisplayedItem);
+            }
+
         } else
         {
             // If it doesn't exist, Add it
@@ -61,6 +93,7 @@ public class BagUIContent : MonoBehaviour
             slot.SetItem(newItem);
             addedItems.Add(newItem.ItemID, slot);
         }
+
     }
 
     public void ShowCategory(BagCategory category)
@@ -116,4 +149,17 @@ public class BagUIContent : MonoBehaviour
 
     }
 
+    public void SelectSlot(BagItemSlot slot)
+    {
+        if (slot == null)
+        {
+            currentDisplayedItem = null;
+            bottomPanel.SetActive(false);
+            return;
+        }
+
+        SlotItemDisplay.Instance.DisplayItem(slot.GetHeldItem(), slot);
+        currentDisplayedItem = slot;
+        bottomPanel.SetActive(true);
+    }
 }
