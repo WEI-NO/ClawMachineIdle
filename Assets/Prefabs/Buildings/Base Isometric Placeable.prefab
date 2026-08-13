@@ -159,6 +159,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   sr: {fileID: 0}
   centerOffset: 0
+  showPivotGizmo: 0
 --- !u!114 &2953505182060188223
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -234,12 +235,13 @@ MonoBehaviour:
     IsWallObject: 0
   GridVisual:
   - {fileID: 0}
-  shader:
-  - {fileID: 0}
-  maxWidth: 5
+  shaders: []
+  maxWidth: 2
   selectedOutlineWidth: 1
-  draggingOutlineWidth: 0.25
+  draggingOutlineWidth: 0.5
   selected: 0
+  validTint: {r: 1, g: 1, b: 1, a: 1}
+  overlapTint: {r: 1, g: 0.55, b: 0.55, a: 1}
 --- !u!95 &6149423026579850021
 Animator:
   serializedVersion: 7

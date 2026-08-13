@@ -66,7 +66,8 @@ public class CoinGainEffect : MonoBehaviour
             yield return null;
         }
 
-        transform.localScale = new Vector2(endScale, endScale);
+        if (transform != null)
+            transform.localScale = new Vector2(endScale, endScale);
     }
 
     IEnumerator CoinMoveSequence(RectTransform transform, float moveSpeed = 5f)

@@ -179,7 +179,10 @@ public class TouchController : MonoBehaviour
                 SetEditMode(true);
 
                 if (targetBuilding)
+                {
                     targetBuilding.SetOutline(true, 0.5f);
+                    targetBuilding.SetDragging(true);
+                }
             }
         }
 
@@ -232,7 +235,7 @@ public class TouchController : MonoBehaviour
             {
                 isDragging = false;
                 targetBuilding.SetTargetPosition(targetBuilding.blueprint.GridPosition);
-
+                targetBuilding.SetDragging(false);
             }
         }
 

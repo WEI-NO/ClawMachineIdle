@@ -79,6 +79,11 @@ public class JoystickTouchController : MonoBehaviour,
             animator.SetBool(downTrigger, true);
             animator.SetTrigger(startDownTrigger);
         }
+
+        if (TopHUDAlphaController.Instance)
+        {
+            TopHUDAlphaController.Instance.DisableAlpha();
+        }
     }
 
     public void OnPointerUp(PointerEventData eventData)
@@ -87,6 +92,11 @@ public class JoystickTouchController : MonoBehaviour,
 
         if (animator != null)
             animator.SetBool(downTrigger, false);
+
+        if (TopHUDAlphaController.Instance)
+        {
+            TopHUDAlphaController.Instance.EnableAlpha();
+        }
     }
 
     private void ResetPosition()
